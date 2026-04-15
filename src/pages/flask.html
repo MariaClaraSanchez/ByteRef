@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Flask Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link active" href="#"              data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ FLASK ══ -->
+      <section class="tech-section" id="flask" data-tech="Flask">
+        <div class="section-head" data-toggle="flask">
+          <div class="sh-left">
+            <span class="tech-icon">🧪</span>
+            <h2>Flask <em>microframework web Python</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">python</span><span class="tag">web</span><span class="tag">api</span>
+            <button class="collapse-btn" aria-label="colapsar">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🚀 Setup Básico</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar Flask</td><td class="code"><code>pip install flask</code><button type="button" class="cp" data-c="pip install flask">⧉</button></td></tr>
+                <tr><td class="desc">App mínimo</td><td class="code"><code>from flask import Flask<br>app = Flask(__name__)<br>@app.route('/')<br>def hello():<br>&nbsp;&nbsp;return 'Hello World!'<br>if __name__ == '__main__':<br>&nbsp;&nbsp;app.run()</code><button type="button" class="cp" data-c="from flask import Flask
+app = Flask(__name__)
+@app.route('/')
+def hello():
+    return 'Hello World!'
+if __name__ == '__main__':
+    app.run()">⧉</button></td></tr>
+                <tr><td class="desc">Executar em modo debug</td><td class="code"><code>export FLASK_ENV=development<br>flask run</code><button type="button" class="cp" data-c="export FLASK_ENV=development
+flask run">⧉</button></td></tr>
+                <tr><td class="desc">Configurar host/porta</td><td class="code"><code>app.run(host='0.0.0.0', port=5000, debug=True)</code><button type="button" class="cp" data-c="app.run(host='0.0.0.0', port=5000, debug=True)">⧉</button></td></tr>
+                <tr><td class="desc">Blueprint básico</td><td class="code"><code>from flask import Blueprint<br>bp = Blueprint('api', __name__)<br>@bp.route('/health')<br>def health():<br>&nbsp;&nbsp;return {'status': 'ok'}</code><button type="button" class="cp" data-c="from flask import Blueprint
+bp = Blueprint('api', __name__)
+@bp.route('/health')
+def health():
+    return {'status': 'ok'}">⧉</button></td></tr>
+                <tr><td class="desc">Registrar blueprint</td><td class="code"><code>from routes.api import bp<br>app.register_blueprint(bp, url_prefix='/api')</code><button type="button" class="cp" data-c="from routes.api import bp
+app.register_blueprint(bp, url_prefix='/api')">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📡 Rotas & Métodos HTTP</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Rota com parâmetro</td><td class="code"><code>@app.route('/user/&lt;int:user_id&gt;')<br>def get_user(user_id):<br>&nbsp;&nbsp;return f'User {user_id}'</code><button type="button" class="cp" data-c="@app.route('/user/<int:user_id>')
+def get_user(user_id):
+    return f'User {user_id}'">⧉</button></td></tr>
+                <tr><td class="desc">Rota POST com JSON</td><td class="code"><code>from flask import request, jsonify<br>@app.route('/api/data', methods=['POST'])<br>def create_data():<br>&nbsp;&nbsp;data = request.get_json()<br>&nbsp;&nbsp;return jsonify({'id': 1, **data})</code><button type="button" class="cp" data-c="from flask import request, jsonify
+@app.route('/api/data', methods=['POST'])
+def create_data():
+    data = request.get_json()
+    return jsonify({'id': 1, **data})">⧉</button></td></tr>
+                <tr><td class="desc">Upload de arquivo</td><td class="code"><code>@app.route('/upload', methods=['POST'])<br>def upload_file():<br>&nbsp;&nbsp;file = request.files['file']<br>&nbsp;&nbsp;file.save(f'uploads/{file.filename}')<br>&nbsp;&nbsp;return 'File uploaded'</code><button type="button" class="cp" data-c="@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    file.save(f'uploads/{file.filename}')
+    return 'File uploaded'">⧉</button></td></tr>
+                <tr><td class="desc">Redirecionamento</td><td class="code"><code>from flask import redirect, url_for<br>@app.route('/old-url')<br>def old_url():<br>&nbsp;&nbsp;return redirect(url_for('new_url'))</code><button type="button" class="cp" data-c="from flask import redirect, url_for
+@app.route('/old-url')
+def old_url():
+    return redirect(url_for('new_url'))">⧉</button></td></tr>
+                <tr><td class="desc">Página 404 customizada</td><td class="code"><code>@app.errorhandler(404)<br>def not_found(error):<br>&nbsp;&nbsp;return 'Página não encontrada', 404</code><button type="button" class="cp" data-c="@app.errorhandler(404)
+def not_found(error):
+    return 'Página não encontrada', 404">⧉</button></td></tr>
+                <tr><td class="desc">Middleware básico</td><td class="code"><code>@app.before_request<br>def before_request():<br>&nbsp;&nbsp;print('Antes da requisição')</code><button type="button" class="cp" data-c="@app.before_request
+def before_request():
+    print('Antes da requisição')">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🗄️ Banco de Dados</div>
+              <table class="cmd-table">
+                <tr><td class="desc">SQLAlchemy setup</td><td class="code"><code>from flask_sqlalchemy import SQLAlchemy<br>app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'<br>db = SQLAlchemy(app)</code><button type="button" class="cp" data-c="from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+db = SQLAlchemy(app)">⧉</button></td></tr>
+                <tr><td class="desc">Modelo User</td><td class="code"><code>class User(db.Model):<br>&nbsp;&nbsp;id = db.Column(db.Integer, primary_key=True)<br>&nbsp;&nbsp;name = db.Column(db.String(80), nullable=False)<br>&nbsp;&nbsp;email = db.Column(db.String(120), unique=True)</code><button type="button" class="cp" data-c="class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(120), unique=True)">⧉</button></td></tr>
+                <tr><td class="desc">Criar tabelas</td><td class="code"><code>with app.app_context():<br>&nbsp;&nbsp;db.create_all()</code><button type="button" class="cp" data-c="with app.app_context():
+    db.create_all()">⧉</button></td></tr>
+                <tr><td class="desc">Inserir registro</td><td class="code"><code>user = User(name='João', email='joao@email.com')<br>db.session.add(user)<br>db.session.commit()</code><button type="button" class="cp" data-c="user = User(name='João', email='joao@email.com')
+db.session.add(user)
+db.session.commit()">⧉</button></td></tr>
+                <tr><td class="desc">Consultar registros</td><td class="code"><code>users = User.query.all()<br>user = User.query.filter_by(email='joao@email.com').first()</code><button type="button" class="cp" data-c="users = User.query.all()
+user = User.query.filter_by(email='joao@email.com').first()">⧉</button></td></tr>
+                <tr><td class="desc">Flask-Migrate</td><td class="code"><code>flask db init<br>flask db migrate -m "Initial migration"<br>flask db upgrade</code><button type="button" class="cp" data-c="flask db init
+flask db migrate -m 'Initial migration'
+flask db upgrade">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔐 Autenticação & Segurança</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Flask-Login setup</td><td class="code"><code>from flask_login import LoginManager, UserMixin, login_user<br>login_manager = LoginManager(app)</code><button type="button" class="cp" data-c="from flask_login import LoginManager, UserMixin, login_user
+login_manager = LoginManager(app)">⧉</button></td></tr>
+                <tr><td class="desc">Classe User com Login</td><td class="code"><code>class User(UserMixin, db.Model):<br>&nbsp;&nbsp;def get_id(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;return str(self.id)</code><button type="button" class="cp" data-c="class User(UserMixin, db.Model):
+    def get_id(self):
+        return str(self.id)">⧉</button></td></tr>
+                <tr><td class="desc">JWT com Flask-JWT-Extended</td><td class="code"><code>from flask_jwt_extended import JWTManager, create_access_token<br>app.config['JWT_SECRET_KEY'] = 'super-secret'<br>jwt = JWTManager(app)<br>token = create_access_token(identity=user.id)</code><button type="button" class="cp" data-c="from flask_jwt_extended import JWTManager, create_access_token
+app.config['JWT_SECRET_KEY'] = 'super-secret'
+jwt = JWTManager(app)
+token = create_access_token(identity=user.id)">⧉</button></td></tr>
+                <tr><td class="desc">CORS setup</td><td class="code"><code>from flask_cors import CORS<br>CORS(app, origins=['http://localhost:3000'])</code><button type="button" class="cp" data-c="from flask_cors import CORS
+CORS(app, origins=['http://localhost:3000'])">⧉</button></td></tr>
+                <tr><td class="desc">Rate limiting</td><td class="code"><code>from flask_limiter import Limiter<br>limiter = Limiter(app, key_func=lambda: request.remote_addr)<br>@app.route('/api')<br>@limiter.limit('10 per minute')<br>def api(): pass</code><button type="button" class="cp" data-c="from flask_limiter import Limiter
+limiter = Limiter(app, key_func=lambda: request.remote_addr)
+@app.route('/api')
+@limiter.limit('10 per minute')
+def api(): pass">⧉</button></td></tr>
+                <tr><td class="desc">Validar entrada com WTForms</td><td class="code"><code>from wtforms import Form, StringField, validators<br>class ContactForm(Form):<br>&nbsp;&nbsp;name = StringField('Name', [validators.Length(min=1, max=25)])</code><button type="button" class="cp" data-c="from wtforms import Form, StringField, validators
+class ContactForm(Form):
+    name = StringField('Name', [validators.Length(min=1, max=25)])">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🧪 Testes & Deploy</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Teste básico com pytest</td><td class="code"><code>def test_home(client):<br>&nbsp;&nbsp;response = client.get('/')<br>&nbsp;&nbsp;assert response.status_code == 200</code><button type="button" class="cp" data-c="def test_home(client):
+    response = client.get('/')
+    assert response.status_code == 200">⧉</button></td></tr>
+                <tr><td class="desc">Fixture para app de teste</td><td class="code"><code>@pytest.fixture<br>def client():<br>&nbsp;&nbsp;app.config['TESTING'] = True<br>&nbsp;&nbsp;return app.test_client()</code><button type="button" class="cp" data-c="@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+    return app.test_client()">⧉</button></td></tr>
+                <tr><td class="desc">Deploy com Gunicorn</td><td class="code"><code>gunicorn --bind 0.0.0.0:8000 wsgi:app</code><button type="button" class="cp" data-c="gunicorn --bind 0.0.0.0:8000 wsgi:app">⧉</button></td></tr>
+                <tr><td class="desc">Dockerfile básico</td><td class="code"><code>FROM python:3.9-slim<br>COPY . /app<br>WORKDIR /app<br>RUN pip install -r requirements.txt<br>EXPOSE 5000<br>CMD ["flask", "run", "--host=0.0.0.0"]</code><button type="button" class="cp" data-c="FROM python:3.9-slim
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD ['flask', 'run', '--host=0.0.0.0']">⧉</button></td></tr>
+                <tr><td class="desc">Configuração por ambiente</td><td class="code"><code>class Config:<br>&nbsp;&nbsp;DEBUG = False<br>class DevelopmentConfig(Config):<br>&nbsp;&nbsp;DEBUG = True<br>app.config.from_object('config.DevelopmentConfig')</code><button type="button" class="cp" data-c="class Config:
+    DEBUG = False
+class DevelopmentConfig(Config):
+    DEBUG = True
+app.config.from_object('config.DevelopmentConfig')">⧉</button></td></tr>
+                <tr><td class="desc">Logging básico</td><td class="code"><code>import logging<br>logging.basicConfig(level=logging.INFO)<br>app.logger.info('App started')</code><button type="button" class="cp" data-c="import logging
+logging.basicConfig(level=logging.INFO)
+app.logger.info('App started')">⧉</button></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+
+  </div><!-- /main-wrap -->
+</div><!-- /app-shell -->
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

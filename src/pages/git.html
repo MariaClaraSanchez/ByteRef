@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Git / GitHub Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link" href="./gcp.html" data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link" href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link" href="./docker.html" data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link" href="./bash.html" data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link" href="./flask.html" data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link" href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link" href="./mysql.html" data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link" href="./redis.html" data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link active" href="#" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link" href="./poetry.html" data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link" href="./pandas.html" data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <section class="tech-section" id="git" data-tech="Git">
+        <div class="section-head" data-toggle="git">
+          <div class="sh-left">
+            <span class="tech-icon">🐙</span>
+            <h2>Git / GitHub <em>version control & código</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">git</span><span class="tag">github</span><span class="tag">merge</span>
+            <button class="collapse-btn">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🧭 Commits & Branches</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Status atual</td><td class="code"><code>git status</code><button type="button" class="cp" data-c="git status">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar todos</td><td class="code"><code>git add .</code><button type="button" class="cp" data-c="git add .">⧉</button></td></tr>
+                <tr><td class="desc">Commit rápido</td><td class="code"><code>git commit -m "mensagem"</code><button type="button" class="cp" data-c="git commit -m \"mensagem\"">⧉</button></td></tr>
+                <tr><td class="desc">Listar branches</td><td class="code"><code>git branch --all</code><button type="button" class="cp" data-c="git branch --all">⧉</button></td></tr>
+                <tr><td class="desc">Nova branch</td><td class="code"><code>git checkout -b feature/x</code><button type="button" class="cp" data-c="git checkout -b feature/x">⧉</button></td></tr>
+                <tr><td class="desc">Voltar para main</td><td class="code"><code>git checkout main</code><button type="button" class="cp" data-c="git checkout main">⧉</button></td></tr>
+                <tr><td class="desc">Mesclar branch</td><td class="code"><code>git merge feature/x</code><button type="button" class="cp" data-c="git merge feature/x">⧉</button></td></tr>
+                <tr><td class="desc">Rebase em main</td><td class="code"><code>git rebase main</code><button type="button" class="cp" data-c="git rebase main">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🌐 Remotes & Pull Requests</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Adicionar remote</td><td class="code"><code>git remote add origin git@github.com:USER/REPO.git</code><button type="button" class="cp" data-c="git remote add origin git@github.com:USER/REPO.git">⧉</button></td></tr>
+                <tr><td class="desc">Enviar branch</td><td class="code"><code>git push -u origin main</code><button type="button" class="cp" data-c="git push -u origin main">⧉</button></td></tr>
+                <tr><td class="desc">Puxar atualizações</td><td class="code"><code>git pull origin main</code><button type="button" class="cp" data-c="git pull origin main">⧉</button></td></tr>
+                <tr><td class="desc">Buscar tudo</td><td class="code"><code>git fetch --all</code><button type="button" class="cp" data-c="git fetch --all">⧉</button></td></tr>
+                <tr><td class="desc">Clonar repositório</td><td class="code"><code>git clone git@github.com:USER/REPO.git</code><button type="button" class="cp" data-c="git clone git@github.com:USER/REPO.git">⧉</button></td></tr>
+                <tr><td class="desc">Remotes remotos</td><td class="code"><code>git branch -r</code><button type="button" class="cp" data-c="git branch -r">⧉</button></td></tr>
+                <tr><td class="desc">Deletar branch remota</td><td class="code"><code>git push origin --delete feature/x</code><button type="button" class="cp" data-c="git push origin --delete feature/x">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block ref-block--wide">
+              <div class="ref-block-title">⚠️ GitHub / Fixes</div>
+              <table class="cmd-table err-table">
+                <tr><td class="err-label">Reset suave</td><td class="err-fix"><code>git reset --soft HEAD~1</code></td></tr>
+                <tr><td class="err-label">Reset completo</td><td class="err-fix"><code>git reset --hard HEAD~1</code></td></tr>
+                <tr><td class="err-label">Remover do stage</td><td class="err-fix"><code>git restore --staged arquivo.txt</code></td></tr>
+                <tr><td class="err-label">Descartar alterações</td><td class="err-fix"><code>git checkout -- arquivo.txt</code></td></tr>
+                <tr><td class="err-label">Ver histórico compacto</td><td class="err-fix"><code>git log --oneline --graph --all</code></td></tr>
+                <tr><td class="err-label">Guardar alterações</td><td class="err-fix"><code>git stash push -m "work-in-progress"</code></td></tr>
+                <tr><td class="err-label">Restaurar stash</td><td class="err-fix"><code>git stash pop</code></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Docker Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link" href="./gcp.html" data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link" href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link active" href="#" data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link" href="./bash.html" data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link" href="./flask.html" data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link" href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link" href="./mysql.html" data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link" href="./redis.html" data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link" href="./poetry.html" data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link" href="./pandas.html" data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <section class="tech-section" id="docker" data-tech="Docker">
+        <div class="section-head" data-toggle="docker">
+          <div class="sh-left">
+            <span class="tech-icon">🐳</span>
+            <h2>Docker <em>containers & registry</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">docker</span><span class="tag">build</span><span class="tag">run</span>
+            <button class="collapse-btn">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🏗️ Build & Run</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Build imagem</td><td class="code"><code>docker build -t minha-app:1.0 .</code><button type="button" class="cp" data-c="docker build -t minha-app:1.0 .">⧉</button></td></tr>
+                <tr><td class="desc">Run container</td><td class="code"><code>docker run -d -p 8080:8080 --name app minha-app:1.0</code><button type="button" class="cp" data-c="docker run -d -p 8080:8080 --name app minha-app:1.0">⧉</button></td></tr>
+                <tr><td class="desc">Run com env vars</td><td class="code"><code>docker run -e DB_URL=postgres://... minha-app</code><button type="button" class="cp" data-c="docker run -e DB_URL=postgres://... minha-app">⧉</button></td></tr>
+                <tr><td class="desc">Run interativo (debug)</td><td class="code"><code>docker run -it --rm ubuntu bash</code><button type="button" class="cp" data-c="docker run -it --rm ubuntu bash">⧉</button></td></tr>
+                <tr><td class="desc">Entrar em container rodando</td><td class="code"><code>docker exec -it app bash</code><button type="button" class="cp" data-c="docker exec -it app bash">⧉</button></td></tr>
+                <tr><td class="desc">Logs do container</td><td class="code"><code>docker logs -f app</code><button type="button" class="cp" data-c="docker logs -f app">⧉</button></td></tr>
+                <tr><td class="desc">Parar container</td><td class="code"><code>docker stop app</code><button type="button" class="cp" data-c="docker stop app">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📦 Registry & Images</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Login no registry</td><td class="code"><code>docker login gcr.io</code><button type="button" class="cp" data-c="docker login gcr.io">⧉</button></td></tr>
+                <tr><td class="desc">Push imagem</td><td class="code"><code>docker push gcr.io/PROJETO/minha-app:1.0</code><button type="button" class="cp" data-c="docker push gcr.io/PROJETO/minha-app:1.0">⧉</button></td></tr>
+                <tr><td class="desc">Pull imagem</td><td class="code"><code>docker pull nginx:alpine</code><button type="button" class="cp" data-c="docker pull nginx:alpine">⧉</button></td></tr>
+                <tr><td class="desc">Listar imagens locais</td><td class="code"><code>docker images</code><button type="button" class="cp" data-c="docker images">⧉</button></td></tr>
+                <tr><td class="desc">Remover imagem</td><td class="code"><code>docker rmi minha-app:1.0</code><button type="button" class="cp" data-c="docker rmi minha-app:1.0">⧉</button></td></tr>
+                <tr><td class="desc">Tag para registry</td><td class="code"><code>docker tag minha-app:1.0 gcr.io/PROJETO/minha-app:1.0</code><button type="button" class="cp" data-c="docker tag minha-app:1.0 gcr.io/PROJETO/minha-app:1.0">⧉</button></td></tr>
+                <tr><td class="desc">Buscar imagens</td><td class="code"><code>docker search nginx</code><button type="button" class="cp" data-c="docker search nginx">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🧹 Limpeza & Volumes</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Listar containers</td><td class="code"><code>docker ps -a</code><button type="button" class="cp" data-c="docker ps -a">⧉</button></td></tr>
+                <tr><td class="desc">Remover container parado</td><td class="code"><code>docker rm app</code><button type="button" class="cp" data-c="docker rm app">⧉</button></td></tr>
+                <tr><td class="desc">Remover todos os parados</td><td class="code"><code>docker container prune</code><button type="button" class="cp" data-c="docker container prune">⧉</button></td></tr>
+                <tr><td class="desc">Limpar imagens não usadas</td><td class="code"><code>docker image prune</code><button type="button" class="cp" data-c="docker image prune">⧉</button></td></tr>
+                <tr><td class="desc">Criar volume</td><td class="code"><code>docker volume create meu-volume</code><button type="button" class="cp" data-c="docker volume create meu-volume">⧉</button></td></tr>
+                <tr><td class="desc">Mount volume</td><td class="code"><code>docker run -v meu-volume:/data minha-app</code><button type="button" class="cp" data-c="docker run -v meu-volume:/data minha-app">⧉</button></td></tr>
+                <tr><td class="desc">Bind mount (host)</td><td class="code"><code>docker run -v /host/path:/container/path minha-app</code><button type="button" class="cp" data-c="docker run -v /host/path:/container/path minha-app">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🐙 Docker Compose</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Subir serviços</td><td class="code"><code>docker-compose up -d</code><button type="button" class="cp" data-c="docker-compose up -d">⧉</button></td></tr>
+                <tr><td class="desc">Parar serviços</td><td class="code"><code>docker-compose down</code><button type="button" class="cp" data-c="docker-compose down">⧉</button></td></tr>
+                <tr><td class="desc">Ver logs</td><td class="code"><code>docker-compose logs -f</code><button type="button" class="cp" data-c="docker-compose logs -f">⧉</button></td></tr>
+                <tr><td class="desc">Rebuild e subir</td><td class="code"><code>docker-compose up --build</code><button type="button" class="cp" data-c="docker-compose up --build">⧉</button></td></tr>
+                <tr><td class="desc">Escalar serviço</td><td class="code"><code>docker-compose up -d --scale web=3</code><button type="button" class="cp" data-c="docker-compose up -d --scale web=3">⧉</button></td></tr>
+                <tr><td class="desc">Executar comando</td><td class="code"><code>docker-compose exec web bash</code><button type="button" class="cp" data-c="docker-compose exec web bash">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block ref-block--wide">
+              <div class="ref-block-title">🚨 Erros Frequentes & Fixes</div>
+              <table class="cmd-table err-table">
+                <tr><td class="err-label">Cannot connect to the Docker daemon</td><td class="err-fix">Docker não está rodando. Inicie: <code>sudo systemctl start docker</code> ou no macOS: abra Docker Desktop.</td></tr>
+                <tr><td class="err-label">Permission denied</td><td class="err-fix">Adicione seu usuário ao grupo docker: <code>sudo usermod -aG docker $USER</code> e faça logout/login.</td></tr>
+                <tr><td class="err-label">Port already in use</td><td class="err-fix">Mude a porta do host: <code>docker run -p 8081:8080 ...</code> ou pare o processo usando a porta: <code>sudo lsof -i :8080</code>.</td></tr>
+                <tr><td class="err-label">No space left on device</td><td class="err-fix">Limpe containers/imagens: <code>docker system prune -a</code>. Verifique espaço: <code>df -h</code>.</td></tr>
+                <tr><td class="err-label">exec user process caused "no such file or directory"</td><td class="err-fix">Problema de line endings no Windows. Use <code>dos2unix</code> no Dockerfile ou clone com <code>git config core.autocrlf false</code>.</td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

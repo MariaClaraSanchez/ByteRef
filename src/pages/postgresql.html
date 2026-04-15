@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — PostgreSQL Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link active" href="#"              data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ POSTGRESQL ══ -->
+      <section class="tech-section" id="postgresql" data-tech="PostgreSQL">
+        <div class="section-head" data-toggle="postgresql">
+          <div class="sh-left">
+            <span class="tech-icon">🐘</span>
+            <h2>PostgreSQL <em>banco de dados avançado</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">sql</span><span class="tag">database</span><span class="tag">postgres</span>
+            <button class="collapse-btn" aria-label="colapsar">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🚀 Conexão & Setup</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Conectar ao banco</td><td class="code"><code>psql -h localhost -U postgres -d mydb</code><button type="button" class="cp" data-c="psql -h localhost -U postgres -d mydb">⧉</button></td></tr>
+                <tr><td class="desc">Criar banco de dados</td><td class="code"><code>createdb -U postgres mydb</code><button type="button" class="cp" data-c="createdb -U postgres mydb">⧉</button></td></tr>
+                <tr><td class="desc">Listar bancos</td><td class="code"><code>psql -U postgres -l</code><button type="button" class="cp" data-c="psql -U postgres -l">⧉</button></td></tr>
+                <tr><td class="desc">Criar usuário</td><td class="code"><code>createuser -U postgres --createdb myuser</code><button type="button" class="cp" data-c="createuser -U postgres --createdb myuser">⧉</button></td></tr>
+                <tr><td class="desc">Alterar senha</td><td class="code"><code>psql -U postgres -c "ALTER USER myuser PASSWORD 'newpass';"</code><button type="button" class="cp" data-c="psql -U postgres -c 'ALTER USER myuser PASSWORD \'newpass\';'">⧉</button></td></tr>
+                <tr><td class="desc">Ver versão</td><td class="code"><code>psql --version</code><button type="button" class="cp" data-c="psql --version">⧉</button></td></tr>
+                <tr><td class="desc">Iniciar serviço</td><td class="code"><code>sudo systemctl start postgresql</code><button type="button" class="cp" data-c="sudo systemctl start postgresql">⧉</button></td></tr>
+                <tr><td class="desc">Status do serviço</td><td class="code"><code>sudo systemctl status postgresql</code><button type="button" class="cp" data-c="sudo systemctl status postgresql">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📋 DDL - Estrutura</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Criar tabela</td><td class="code"><code>CREATE TABLE users (<br>&nbsp;&nbsp;id SERIAL PRIMARY KEY,<br>&nbsp;&nbsp;name VARCHAR(100) NOT NULL,<br>&nbsp;&nbsp;email VARCHAR(255) UNIQUE,<br>&nbsp;&nbsp;created_at TIMESTAMP DEFAULT NOW()<br>);</code><button type="button" class="cp" data-c="CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar coluna</td><td class="code"><code>ALTER TABLE users ADD COLUMN age INTEGER;</code><button type="button" class="cp" data-c="ALTER TABLE users ADD COLUMN age INTEGER;">⧉</button></td></tr>
+                <tr><td class="desc">Criar índice</td><td class="code"><code>CREATE INDEX idx_users_email ON users(email);</code><button type="button" class="cp" data-c="CREATE INDEX idx_users_email ON users(email);">⧉</button></td></tr>
+                <tr><td class="desc">Criar foreign key</td><td class="code"><code>ALTER TABLE posts ADD CONSTRAINT fk_user<br>&nbsp;&nbsp;FOREIGN KEY (user_id) REFERENCES users(id);</code><button type="button" class="cp" data-c="ALTER TABLE posts ADD CONSTRAINT fk_user
+    FOREIGN KEY (user_id) REFERENCES users(id);">⧉</button></td></tr>
+                <tr><td class="desc">Criar view</td><td class="code"><code>CREATE VIEW active_users AS<br>SELECT * FROM users WHERE active = true;</code><button type="button" class="cp" data-c="CREATE VIEW active_users AS
+SELECT * FROM users WHERE active = true;">⧉</button></td></tr>
+                <tr><td class="desc">Sequence customizada</td><td class="code"><code>CREATE SEQUENCE user_id_seq<br>&nbsp;&nbsp;START 1000 INCREMENT 1;</code><button type="button" class="cp" data-c="CREATE SEQUENCE user_id_seq
+    START 1000 INCREMENT 1;">⧉</button></td></tr>
+                <tr><td class="desc">Enum type</td><td class="code"><code>CREATE TYPE status AS ENUM ('active', 'inactive', 'banned');</code><button type="button" class="cp" data-c="CREATE TYPE status AS ENUM ('active', 'inactive', 'banned');">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔍 Consultas Avançadas</div>
+              <table class="cmd-table">
+                <tr><td class="desc">JOIN com agregação</td><td class="code"><code>SELECT u.name, COUNT(p.id) as posts<br>FROM users u<br>LEFT JOIN posts p ON u.id = p.user_id<br>GROUP BY u.id, u.name<br>HAVING COUNT(p.id) > 0;</code><button type="button" class="cp" data-c="SELECT u.name, COUNT(p.id) as posts
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+GROUP BY u.id, u.name
+HAVING COUNT(p.id) > 0;">⧉</button></td></tr>
+                <tr><td class="desc">Window functions</td><td class="code"><code>SELECT name, salary,<br>&nbsp;&nbsp;RANK() OVER (ORDER BY salary DESC) as rank<br>FROM employees;</code><button type="button" class="cp" data-c="SELECT name, salary,
+    RANK() OVER (ORDER BY salary DESC) as rank
+FROM employees;">⧉</button></td></tr>
+                <tr><td class="desc">Common Table Expression</td><td class="code"><code>WITH monthly_sales AS (<br>&nbsp;&nbsp;SELECT DATE_TRUNC('month', created_at) as month,<br>&nbsp;&nbsp;&nbsp;&nbsp;SUM(amount) as total<br>&nbsp;&nbsp;FROM orders GROUP BY 1<br>)<br>SELECT * FROM monthly_sales;</code><button type="button" class="cp" data-c="WITH monthly_sales AS (
+    SELECT DATE_TRUNC('month', created_at) as month,
+        SUM(amount) as total
+    FROM orders GROUP BY 1
+)
+SELECT * FROM monthly_sales;">⧉</button></td></tr>
+                <tr><td class="desc">Full-text search</td><td class="code"><code>SELECT * FROM articles<br>WHERE to_tsvector('english', content) @@<br>&nbsp;&nbsp;to_tsquery('english', 'database & query');</code><button type="button" class="cp" data-c="SELECT * FROM articles
+WHERE to_tsvector('english', content) @@
+    to_tsquery('english', 'database & query');">⧉</button></td></tr>
+                <tr><td class="desc">JSON operations</td><td class="code"><code>SELECT data->>'name' as name,<br>&nbsp;&nbsp;data->'address'->>'city' as city<br>FROM users WHERE data @> '{"active": true}';</code><button type="button" class="cp" data-c="SELECT data->>'name' as name,
+    data->'address'->>'city' as city
+FROM users WHERE data @> '{\"active\": true}';">⧉</button></td></tr>
+                <tr><td class="desc">Array operations</td><td class="code"><code>SELECT * FROM posts<br>WHERE tags && ARRAY['python', 'flask'];</code><button type="button" class="cp" data-c="SELECT * FROM posts
+WHERE tags && ARRAY['python', 'flask'];">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">⚡ Performance & Otimização</div>
+              <table class="cmd-table">
+                <tr><td class="desc">EXPLAIN ANALYZE</td><td class="code"><code>EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'test@example.com';</code><button type="button" class="cp" data-c="EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'test@example.com';">⧉</button></td></tr>
+                <tr><td class="desc">Ver índices</td><td class="code"><code>SELECT * FROM pg_indexes WHERE tablename = 'users';</code><button type="button" class="cp" data-c="SELECT * FROM pg_indexes WHERE tablename = 'users';">⧉</button></td></tr>
+                <tr><td class="desc">Vacuum analyze</td><td class="code"><code>VACUUM ANALYZE users;</code><button type="button" class="cp" data-c="VACUUM ANALYZE users;">⧉</button></td></tr>
+                <tr><td class="desc">Ver locks</td><td class="code"><code>SELECT * FROM pg_locks WHERE NOT granted;</code><button type="button" class="cp" data-c="SELECT * FROM pg_locks WHERE NOT granted;">⧉</button></td></tr>
+                <tr><td class="desc">Ver conexões ativas</td><td class="code"><code>SELECT * FROM pg_stat_activity;</code><button type="button" class="cp" data-c="SELECT * FROM pg_stat_activity;">⧉</button></td></tr>
+                <tr><td class="desc">Cache hit ratio</td><td class="code"><code>SELECT sum(blks_hit)*100/sum(blks_hit+blks_read) as cache_hit_ratio FROM pg_stat_database;</code><button type="button" class="cp" data-c="SELECT sum(blks_hit)*100/sum(blks_hit+blks_read) as cache_hit_ratio FROM pg_stat_database;">⧉</button></td></tr>
+                <tr><td class="desc">Tamanho das tabelas</td><td class="code"><code>SELECT schemaname, tablename,<br>&nbsp;&nbsp;pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename))<br>FROM pg_tables ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;</code><button type="button" class="cp" data-c="SELECT schemaname, tablename,
+    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename))
+FROM pg_tables ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔄 Backup & Restore</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Backup completo</td><td class="code"><code>pg_dump -U postgres -h localhost mydb > backup.sql</code><button type="button" class="cp" data-c="pg_dump -U postgres -h localhost mydb > backup.sql">⧉</button></td></tr>
+                <tr><td class="desc">Backup comprimido</td><td class="code"><code>pg_dump -U postgres -Fc mydb > backup.dump</code><button type="button" class="cp" data-c="pg_dump -U postgres -Fc mydb > backup.dump">⧉</button></td></tr>
+                <tr><td class="desc">Restore de SQL</td><td class="code"><code>psql -U postgres -d mydb < backup.sql</code><button type="button" class="cp" data-c="psql -U postgres -d mydb < backup.sql">⧉</button></td></tr>
+                <tr><td class="desc">Restore de dump</td><td class="code"><code>pg_restore -U postgres -d mydb backup.dump</code><button type="button" class="cp" data-c="pg_restore -U postgres -d mydb backup.dump">⧉</button></td></tr>
+                <tr><td class="desc">Backup remoto</td><td class="code"><code>pg_dump -h remote.host -U user -d mydb | gzip > backup.sql.gz</code><button type="button" class="cp" data-c="pg_dump -h remote.host -U user -d mydb | gzip > backup.sql.gz">⧉</button></td></tr>
+                <tr><td class="desc">pg_basebackup</td><td class="code"><code>pg_basebackup -U postgres -D /backup/basebackup -Ft -z</code><button type="button" class="cp" data-c="pg_basebackup -U postgres -D /backup/basebackup -Ft -z">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔧 Administração</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Ver configurações</td><td class="code"><code>SHOW ALL;</code><button type="button" class="cp" data-c="SHOW ALL;">⧉</button></td></tr>
+                <tr><td class="desc">Alterar configuração</td><td class="code"><code>ALTER SYSTEM SET shared_buffers = '256MB';</code><button type="button" class="cp" data-c="ALTER SYSTEM SET shared_buffers = '256MB';">⧉</button></td></tr>
+                <tr><td class="desc">Reload config</td><td class="code"><code>SELECT pg_reload_conf();</code><button type="button" class="cp" data-c="SELECT pg_reload_conf();">⧉</button></td></tr>
+                <tr><td class="desc">Ver logs</td><td class="code"><code>tail -f /var/log/postgresql/postgresql-13-main.log</code><button type="button" class="cp" data-c="tail -f /var/log/postgresql/postgresql-13-main.log">⧉</button></td></tr>
+                <tr><td class="desc">Ver tamanho do banco</td><td class="code"><code>SELECT pg_size_pretty(pg_database_size('mydb'));</code><button type="button" class="cp" data-c="SELECT pg_size_pretty(pg_database_size('mydb'));">⧉</button></td></tr>
+                <tr><td class="desc">Listar extensões</td><td class="code"><code>SELECT * FROM pg_extension;</code><button type="button" class="cp" data-c="SELECT * FROM pg_extension;">⧉</button></td></tr>
+                <tr><td class="desc">Instalar extensão</td><td class="code"><code>CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</code><button type="button" class="cp" data-c="CREATE EXTENSION IF NOT EXISTS 'uuid-ossp';">⧉</button></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+
+  </div><!-- /main-wrap -->
+</div><!-- /app-shell -->
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

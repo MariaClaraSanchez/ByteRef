@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — CLI / Bash Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link active" href="#"              data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ BASH / CLI ══ -->
+      <section class="tech-section" id="bash" data-tech="CLI Bash">
+        <div class="section-head" data-toggle="bash">
+          <div class="sh-left">
+            <span class="tech-icon">💻</span>
+            <h2>CLI / Bash <em>produtividade no terminal</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">bash</span><span class="tag">grep</span><span class="tag">ssh</span>
+            <button class="collapse-btn" aria-label="colapsar">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔎 Busca & Texto</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Busca recursiva em arquivos</td><td class="code"><code>grep -rn "termo" ./src --include="*.py"</code><button type="button" class="cp" data-c='grep -rn "termo" ./src --include="*.py"'>⧉</button></td></tr>
+                <tr><td class="desc">Busca case-insensitive</td><td class="code"><code>grep -ri "erro" ./logs/</code><button type="button" class="cp" data-c='grep -ri "erro" ./logs/'>⧉</button></td></tr>
+                <tr><td class="desc">Encontrar arquivo por nome</td><td class="code"><code>find . -name "*.log" -mtime -7</code><button type="button" class="cp" data-c="find . -name '*.log' -mtime -7">⧉</button></td></tr>
+                <tr><td class="desc">Substituir texto em arquivo</td><td class="code"><code>sed -i 's/antigo/novo/g' arquivo.txt</code><button type="button" class="cp" data-c="sed -i 's/antigo/novo/g' arquivo.txt">⧉</button></td></tr>
+                <tr><td class="desc">Contar linhas / palavras</td><td class="code"><code>wc -l arquivo.txt</code><button type="button" class="cp" data-c="wc -l arquivo.txt">⧉</button></td></tr>
+                <tr><td class="desc">Ver últimas N linhas de log</td><td class="code"><code>tail -f /var/log/app.log</code><button type="button" class="cp" data-c="tail -f /var/log/app.log">⧉</button></td></tr>
+                <tr><td class="desc">Filtrar log por erro</td><td class="code"><code>tail -f app.log | grep -i "error\|exception"</code><button type="button" class="cp" data-c='tail -f app.log | grep -i "error\|exception"'>⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🌐 Rede & Processos</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Ver portas abertas</td><td class="code"><code>netstat -tlnp | grep LISTEN</code><button type="button" class="cp" data-c="netstat -tlnp | grep LISTEN">⧉</button></td></tr>
+                <tr><td class="desc">Testar conectividade</td><td class="code"><code>ping -c 4 google.com</code><button type="button" class="cp" data-c="ping -c 4 google.com">⧉</button></td></tr>
+                <tr><td class="desc">Download de arquivo</td><td class="code"><code>wget https://example.com/file.zip</code><button type="button" class="cp" data-c="wget https://example.com/file.zip">⧉</button></td></tr>
+                <tr><td class="desc">Ver processos rodando</td><td class="code"><code>ps aux | grep python</code><button type="button" class="cp" data-c="ps aux | grep python">⧉</button></td></tr>
+                <tr><td class="desc">Matar processo por PID</td><td class="code"><code>kill -9 12345</code><button type="button" class="cp" data-c="kill -9 12345">⧉</button></td></tr>
+                <tr><td class="desc">Ver uso de CPU/memória</td><td class="code"><code>top -p 12345</code><button type="button" class="cp" data-c="top -p 12345">⧉</button></td></tr>
+                <tr><td class="desc">Ver espaço em disco</td><td class="code"><code>df -h</code><button type="button" class="cp" data-c="df -h">⧉</button></td></tr>
+                <tr><td class="desc">Ver tamanho de pastas</td><td class="code"><code>du -sh *</code><button type="button" class="cp" data-c="du -sh *">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔒 SSH & Transferência</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Conectar via SSH</td><td class="code"><code>ssh -i ~/.ssh/chave.pem user@servidor</code><button type="button" class="cp" data-c="ssh -i ~/.ssh/chave.pem user@servidor">⧉</button></td></tr>
+                <tr><td class="desc">SSH com port forwarding</td><td class="code"><code>ssh -L 5432:localhost:5432 user@servidor</code><button type="button" class="cp" data-c="ssh -L 5432:localhost:5432 user@servidor">⧉</button></td></tr>
+                <tr><td class="desc">Copiar arquivo para servidor</td><td class="code"><code>scp -i chave.pem arquivo.tar.gz user@servidor:~/</code><button type="button" class="cp" data-c="scp -i chave.pem arquivo.tar.gz user@servidor:~/">⧉</button></td></tr>
+                <tr><td class="desc">Gerar chave SSH</td><td class="code"><code>ssh-keygen -t ed25519 -C "email@exemplo.com"</code><button type="button" class="cp" data-c='ssh-keygen -t ed25519 -C "email@exemplo.com"'>⧉</button></td></tr>
+                <tr><td class="desc">Compactar pasta</td><td class="code"><code>tar -czf backup.tar.gz ./pasta/</code><button type="button" class="cp" data-c="tar -czf backup.tar.gz ./pasta/">⧉</button></td></tr>
+                <tr><td class="desc">Descompactar .tar.gz</td><td class="code"><code>tar -xzf backup.tar.gz -C ./destino/</code><button type="button" class="cp" data-c="tar -xzf backup.tar.gz -C ./destino/">⧉</button></td></tr>
+                <tr><td class="desc">Executar em background</td><td class="code"><code>nohup ./script.sh > output.log 2>&1 &</code><button type="button" class="cp" data-c="nohup ./script.sh > output.log 2>&1 &">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">⚡ Produtividade Shell</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Busca no histórico</td><td class="code"><code>Ctrl+R</code><button type="button" class="cp" data-c="Ctrl+R">⧉</button></td></tr>
+                <tr><td class="desc">Repetir último comando como root</td><td class="code"><code>sudo !!</code><button type="button" class="cp" data-c="sudo !!">⧉</button></td></tr>
+                <tr><td class="desc">Ir para diretório anterior</td><td class="code"><code>cd -</code><button type="button" class="cp" data-c="cd -">⧉</button></td></tr>
+                <tr><td class="desc">Exportar variável</td><td class="code"><code>export DATABASE_URL="postgresql://user:pass@host/db"</code><button type="button" class="cp" data-c='export DATABASE_URL="postgresql://user:pass@host/db"'>⧉</button></td></tr>
+                <tr><td class="desc">Carregar .env no shell</td><td class="code"><code>export $(grep -v '^#' .env | xargs)</code><button type="button" class="cp" data-c="export $(grep -v '^#' .env | xargs)">⧉</button></td></tr>
+                <tr><td class="desc">Repetir comando a cada 2s</td><td class="code"><code>watch -n2 kubectl get pods</code><button type="button" class="cp" data-c="watch -n2 kubectl get pods">⧉</button></td></tr>
+                <tr><td class="desc">Criar alias temporário</td><td class="code"><code>alias k="kubectl" && alias d="docker"</code><button type="button" class="cp" data-c='alias k="kubectl" && alias d="docker"'>⧉</button></td></tr>
+                <tr><td class="desc">Sessão persistente (tmux)</td><td class="code"><code>tmux new -s minha-sessao</code><button type="button" class="cp" data-c="tmux new -s minha-sessao">⧉</button></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+
+  </div><!-- /main-wrap -->
+</div><!-- /app-shell -->
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Poetry Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link active" href="#"              data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ POETRY ══ -->
+      <section class="tech-section" id="poetry" data-tech="Poetry">
+        <div class="section-head" data-toggle="poetry">
+          <div class="sh-left">
+            <span class="tech-icon">📝</span>
+            <h2>Poetry <em>gerenciamento de dependências Python</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">python</span><span class="tag">packaging</span><span class="tag">dependencies</span>
+            <button class="collapse-btn" aria-label="colapsar">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🚀 Setup & Instalação</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar Poetry</td><td class="code"><code>curl -sSL https://install.python-poetry.org | python3 -</code><button type="button" class="cp" data-c="curl -sSL https://install.python-poetry.org | python3 -">⧉</button></td></tr>
+                <tr><td class="desc">Ver versão</td><td class="code"><code>poetry --version</code><button type="button" class="cp" data-c="poetry --version">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar ao PATH</td><td class="code"><code>export PATH="$HOME/.local/bin:$PATH"</code><button type="button" class="cp" data-c="export PATH='$HOME/.local/bin:$PATH'">⧉</button></td></tr>
+                <tr><td class="desc">Configurar auto-completion</td><td class="code"><code>poetry completions bash >> ~/.bash_completion</code><button type="button" class="cp" data-c="poetry completions bash >> ~/.bash_completion">⧉</button></td></tr>
+                <tr><td class="desc">Criar novo projeto</td><td class="code"><code>poetry new my-project</code><button type="button" class="cp" data-c="poetry new my-project">⧉</button></td></tr>
+                <tr><td class="desc">Inicializar em projeto existente</td><td class="code"><code>poetry init</code><button type="button" class="cp" data-c="poetry init">⧉</button></td></tr>
+                <tr><td class="desc">Ver configuração</td><td class="code"><code>poetry config --list</code><button type="button" class="cp" data-c="poetry config --list">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📦 Gerenciamento de Dependências</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Adicionar dependência</td><td class="code"><code>poetry add requests</code><button type="button" class="cp" data-c="poetry add requests">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar dev dependency</td><td class="code"><code>poetry add --group dev pytest</code><button type="button" class="cp" data-c="poetry add --group dev pytest">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar com versão específica</td><td class="code"><code>poetry add "requests>=2.25.0"</code><button type="button" class="cp" data-c="poetry add 'requests>=2.25.0'">⧉</button></td></tr>
+                <tr><td class="desc">Remover dependência</td><td class="code"><code>poetry remove requests</code><button type="button" class="cp" data-c="poetry remove requests">⧉</button></td></tr>
+                <tr><td class="desc">Atualizar dependências</td><td class="code"><code>poetry update</code><button type="button" class="cp" data-c="poetry update">⧉</button></td></tr>
+                <tr><td class="desc">Atualizar dependência específica</td><td class="code"><code>poetry update requests</code><button type="button" class="cp" data-c="poetry update requests">⧉</button></td></tr>
+                <tr><td class="desc">Ver dependências instaladas</td><td class="code"><code>poetry show</code><button type="button" class="cp" data-c="poetry show">⧉</button></td></tr>
+                <tr><td class="desc">Ver árvore de dependências</td><td class="code"><code>poetry show --tree</code><button type="button" class="cp" data-c="poetry show --tree">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🐍 Ambientes Virtuais</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar dependências</td><td class="code"><code>poetry install</code><button type="button" class="cp" data-c="poetry install">⧉</button></td></tr>
+                <tr><td class="desc">Criar ambiente virtual</td><td class="code"><code>poetry env use python3.9</code><button type="button" class="cp" data-c="poetry env use python3.9">⧉</button></td></tr>
+                <tr><td class="desc">Listar ambientes</td><td class="code"><code>poetry env list</code><button type="button" class="cp" data-c="poetry env list">⧉</button></td></tr>
+                <tr><td class="desc">Ativar ambiente</td><td class="code"><code>poetry shell</code><button type="button" class="cp" data-c="poetry shell">⧉</button></td></tr>
+                <tr><td class="desc">Executar comando no ambiente</td><td class="code"><code>poetry run python main.py</code><button type="button" class="cp" data-c="poetry run python main.py">⧉</button></td></tr>
+                <tr><td class="desc">Ver caminho do ambiente</td><td class="code"><code>poetry env info --path</code><button type="button" class="cp" data-c="poetry env info --path">⧉</button></td></tr>
+                <tr><td class="desc">Remover ambiente</td><td class="code"><code>poetry env remove python3.9</code><button type="button" class="cp" data-c="poetry env remove python3.9">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📋 Arquivos de Configuração</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Estrutura pyproject.toml</td><td class="code"><code">[tool.poetry]<br>name = "my-project"<br>version = "0.1.0"<br>description = ""<br>authors = ["Your Name &lt;email@example.com&gt;"]<br><br>[tool.poetry.dependencies]<br>python = "^3.9"<br>requests = "^2.25.0"<br><br>[tool.poetry.group.dev.dependencies]<br>pytest = "^6.2.0"<br><br>[build-system]<br>requires = ["poetry-core"]<br>build-backend = "poetry.core.masonry.api"</code><button type="button" class="cp" data-c="[tool.poetry]
+name = 'my-project'
+version = '0.1.0'
+description = ''
+authors = ['Your Name <email@example.com>']
+
+[tool.poetry.dependencies]
+python = '^3.9'
+requests = '^2.25.0'
+
+[tool.poetry.group.dev.dependencies]
+pytest = '^6.2.0'
+
+[build-system]
+requires = ['poetry-core']
+build-backend = 'poetry.core.masonry.api'">⧉</button></td></tr>
+                <tr><td class="desc">Adicionar script</td><td class="code"><code>[tool.poetry.scripts]<br>my-command = "my_package:main"</code><button type="button" class="cp" data-c="[tool.poetry.scripts]
+my-command = 'my_package:main'">⧉</button></td></tr>
+                <tr><td class="desc">Configurar repositório</td><td class="code"><code>poetry config repositories.my-repo https://my-repo.com/simple</code><button type="button" class="cp" data-c="poetry config repositories.my-repo https://my-repo.com/simple">⧉</button></td></tr>
+                <tr><td class="desc">Configurar PyPI token</td><td class="code"><code>poetry config pypi-token.pypi my-token</code><button type="button" class="cp" data-c="poetry config pypi-token.pypi my-token">⧉</button></td></tr>
+                <tr><td class="desc">Verificar pyproject.toml</td><td class="code"><code>poetry check</code><button type="button" class="cp" data-c="poetry check">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📦 Build & Publish</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Build package</td><td class="code"><code>poetry build</code><button type="button" class="cp" data-c="poetry build">⧉</button></td></tr>
+                <tr><td class="desc">Publish no PyPI</td><td class="code"><code>poetry publish</code><button type="button" class="cp" data-c="poetry publish">⧉</button></td></tr>
+                <tr><td class="desc">Publish no repositório custom</td><td class="code"><code>poetry publish -r my-repo</code><button type="button" class="cp" data-c="poetry publish -r my-repo">⧉</button></td></tr>
+                <tr><td class="desc">Ver informações do package</td><td class="code"><code>poetry version</code><button type="button" class="cp" data-c="poetry version">⧉</button></td></tr>
+                <tr><td class="desc">Atualizar versão</td><td class="code"><code>poetry version patch</code><button type="button" class="cp" data-c="poetry version patch">⧉</button></td></tr>
+                <tr><td class="desc">Exportar requirements.txt</td><td class="code"><code>poetry export -f requirements.txt --output requirements.txt</code><button type="button" class="cp" data-c="poetry export -f requirements.txt --output requirements.txt">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔧 Configurações Avançadas</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Configurar cache</td><td class="code"><code>poetry config cache-dir ~/.cache/poetry</code><button type="button" class="cp" data-c="poetry config cache-dir ~/.cache/poetry">⧉</button></td></tr>
+                <tr><td class="desc">Configurar virtualenvs.in-project</td><td class="code"><code>poetry config virtualenvs.in-project true</code><button type="button" class="cp" data-c="poetry config virtualenvs.in-project true">⧉</button></td></tr>
+                <tr><td class="desc">Paralelizar downloads</td><td class="code"><code>poetry config installer.parallel true</code><button type="button" class="cp" data-c="poetry config installer.parallel true">⧉</button></td></tr>
+                <tr><td class="desc">Ver logs detalhados</td><td class="code"><code>poetry -vvv install</code><button type="button" class="cp" data-c="poetry -vvv install">⧉</button></td></tr>
+                <tr><td class="desc">Limpar cache</td><td class="code"><code>poetry cache clear --all pypi</code><button type="button" class="cp" data-c="poetry cache clear --all pypi">⧉</button></td></tr>
+                <tr><td class="desc">Usar HTTP em vez de HTTPS</td><td class="code"><code>poetry config experimental.new-installer false</code><button type="button" class="cp" data-c="poetry config experimental.new-installer false">⧉</button></td></tr>
+                <tr><td class="desc">Configurar Python mínimo</td><td class="code"><code>poetry env use python3.8</code><button type="button" class="cp" data-c="poetry env use python3.8">⧉</button></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /content -->
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+
+  </div><!-- /main-wrap -->
+</div><!-- /app-shell -->
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

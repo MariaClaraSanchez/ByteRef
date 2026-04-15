@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — GCP Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link active" href="#"        data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link"        href="./bash.html"       data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ GCP ══ -->
+      <section class="tech-section" id="gcp" data-tech="GCP">
+        <div class="section-head" data-toggle="gcp">
+          <div class="sh-left">
+            <span class="tech-icon">☁️</span>
+            <h2>GCP <em>Google Cloud Platform</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">gcloud</span><span class="tag">gsutil</span><span class="tag">Cloud Run</span>
+            <button class="collapse-btn" aria-label="colapsar">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">⚙️ Configuração & Auth</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Login interativo</td><td class="code"><code>gcloud auth login</code><button type="button" class="cp" data-c="gcloud auth login">⧉</button></td></tr>
+                <tr><td class="desc">Auth para aplicações (ADC)</td><td class="code"><code>gcloud auth application-default login</code><button type="button" class="cp" data-c="gcloud auth application-default login">⧉</button></td></tr>
+                <tr><td class="desc">Definir projeto padrão</td><td class="code"><code>gcloud config set project PROJECT_ID</code><button type="button" class="cp" data-c="gcloud config set project PROJECT_ID">⧉</button></td></tr>
+                <tr><td class="desc">Criar configuração de ambiente</td><td class="code"><code>gcloud config configurations create prod</code><button type="button" class="cp" data-c="gcloud config configurations create prod">⧉</button></td></tr>
+                <tr><td class="desc">Listar configurações</td><td class="code"><code>gcloud config configurations list</code><button type="button" class="cp" data-c="gcloud config configurations list">⧉</button></td></tr>
+                <tr><td class="desc">Ativar configuração</td><td class="code"><code>gcloud config configurations activate prod</code><button type="button" class="cp" data-c="gcloud config configurations activate prod">⧉</button></td></tr>
+                <tr><td class="desc">Ver config atual</td><td class="code"><code>gcloud config list</code><button type="button" class="cp" data-c="gcloud config list">⧉</button></td></tr>
+                <tr><td class="desc">Revogar credenciais</td><td class="code"><code>gcloud auth revoke --all</code><button type="button" class="cp" data-c="gcloud auth revoke --all">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🚀 Cloud Run</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Deploy de serviço</td><td class="code"><code>gcloud run deploy SERVICO --image gcr.io/PROJ/IMG --platform managed --region us-central1 --allow-unauthenticated</code><button type="button" class="cp" data-c="gcloud run deploy SERVICO --image gcr.io/PROJ/IMG --platform managed --region us-central1 --allow-unauthenticated">⧉</button></td></tr>
+                <tr><td class="desc">Deploy com env vars</td><td class="code"><code>gcloud run deploy SERVICO --image IMG --set-env-vars DB_URL=postgres://...</code><button type="button" class="cp" data-c="gcloud run deploy SERVICO --image IMG --set-env-vars DB_URL=postgres://...">⧉</button></td></tr>
+                <tr><td class="desc">Listar serviços</td><td class="code"><code>gcloud run services list --platform managed</code><button type="button" class="cp" data-c="gcloud run services list --platform managed">⧉</button></td></tr>
+                <tr><td class="desc">Descrever serviço</td><td class="code"><code>gcloud run services describe SERVICO --region us-central1</code><button type="button" class="cp" data-c="gcloud run services describe SERVICO --region us-central1">⧉</button></td></tr>
+                <tr><td class="desc">Deletar serviço</td><td class="code"><code>gcloud run services delete SERVICO --region us-central1</code><button type="button" class="cp" data-c="gcloud run services delete SERVICO --region us-central1">⧉</button></td></tr>
+                <tr><td class="desc">Mínimo de instâncias (evitar cold start)</td><td class="code"><code>gcloud run services update SERVICO --min-instances=1</code><button type="button" class="cp" data-c="gcloud run services update SERVICO --min-instances=1">⧉</button></td></tr>
+                <tr><td class="desc">Ver URL do serviço</td><td class="code"><code>gcloud run services describe SERVICO --format='value(status.url)'</code><button type="button" class="cp" data-c="gcloud run services describe SERVICO --format='value(status.url)'">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🖥️ Compute Engine</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Listar instâncias</td><td class="code"><code>gcloud compute instances list</code><button type="button" class="cp" data-c="gcloud compute instances list">⧉</button></td></tr>
+                <tr><td class="desc">SSH em instância</td><td class="code"><code>gcloud compute ssh INSTANCIA --zone us-central1-a</code><button type="button" class="cp" data-c="gcloud compute ssh INSTANCIA --zone us-central1-a">⧉</button></td></tr>
+                <tr><td class="desc">Iniciar / parar instância</td><td class="code"><code>gcloud compute instances start INSTANCIA --zone us-central1-a</code><button type="button" class="cp" data-c="gcloud compute instances start INSTANCIA --zone us-central1-a">⧉</button></td></tr>
+                <tr><td class="desc">Criar VM simples</td><td class="code"><code>gcloud compute instances create vm-1 --machine-type=e2-micro --zone=us-central1-a --image-family=debian-12 --image-project=debian-cloud</code><button type="button" class="cp" data-c="gcloud compute instances create vm-1 --machine-type=e2-micro --zone=us-central1-a --image-family=debian-12 --image-project=debian-cloud">⧉</button></td></tr>
+                <tr><td class="desc">Copiar arquivo para VM</td><td class="code"><code>gcloud compute scp ./app.py INSTANCIA:~/ --zone us-central1-a</code><button type="button" class="cp" data-c="gcloud compute scp ./app.py INSTANCIA:~/ --zone us-central1-a">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🪣 GCS · Container Registry</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Listar buckets</td><td class="code"><code>gsutil ls</code><button type="button" class="cp" data-c="gsutil ls">⧉</button></td></tr>
+                <tr><td class="desc">Upload de arquivo</td><td class="code"><code>gsutil cp arquivo.csv gs://meu-bucket/pasta/</code><button type="button" class="cp" data-c="gsutil cp arquivo.csv gs://meu-bucket/pasta/">⧉</button></td></tr>
+                <tr><td class="desc">Sync de pasta</td><td class="code"><code>gsutil -m rsync -r ./dist gs://meu-bucket/</code><button type="button" class="cp" data-c="gsutil -m rsync -r ./dist gs://meu-bucket/">⧉</button></td></tr>
+                <tr><td class="desc">Tornar bucket público</td><td class="code"><code>gsutil iam ch allUsers:objectViewer gs://meu-bucket</code><button type="button" class="cp" data-c="gsutil iam ch allUsers:objectViewer gs://meu-bucket">⧉</button></td></tr>
+                <tr><td class="desc">Fazer build via Cloud Build</td><td class="code"><code>gcloud builds submit --tag gcr.io/PROJ/minha-app .</code><button type="button" class="cp" data-c="gcloud builds submit --tag gcr.io/PROJ/minha-app .">⧉</button></td></tr>
+                <tr><td class="desc">Listar imagens no GCR</td><td class="code"><code>gcloud container images list --repository=gcr.io/PROJETO</code><button type="button" class="cp" data-c="gcloud container images list --repository=gcr.io/PROJETO">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block ref-block--wide">
+              <div class="ref-block-title">🚨 Erros Frequentes & Fixes</div>
+              <table class="cmd-table err-table">
+                <tr><td class="err-label">PERMISSION_DENIED</td><td class="err-fix">Verifique roles IAM: <code>gcloud projects get-iam-policy PROJETO</code> — adicione o role necessário ao Service Account.</td></tr>
+                <tr><td class="err-label">Cloud Run: Container failed to start</td><td class="err-fix">O Cloud Run espera <code>PORT=8080</code>. Certifique-se que a app escuta em <code>0.0.0.0:8080</code> e o Dockerfile expõe essa porta.</td></tr>
+                <tr><td class="err-label">Quota exceeded</td><td class="err-fix">IAM & Admin → Quotas no console. Mude de região ou solicite aumento. Use <code>gcloud compute regions list</code> para ver alternativas.</td></tr>
+                <tr><td class="err-label">gcloud: command not found</td><td class="err-fix">Instale o SDK: <code>curl https://sdk.cloud.google.com | bash</code> e reinicie o shell.</td></tr>
+                <tr><td class="err-label">Cloud Run: too many requests (429)</td><td class="err-fix">Aumente <code>--concurrency</code> e <code>--max-instances</code> no deploy. Ou use Cloud Tasks para processar filas.</td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

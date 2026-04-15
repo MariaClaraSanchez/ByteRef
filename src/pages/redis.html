@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Redis Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ══════════════ SIDEBAR ══════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link" href="./gcp.html" data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link" href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link" href="./docker.html" data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link" href="./bash.html" data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link" href="./flask.html" data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link" href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link" href="./mysql.html" data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link active" href="#" data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link" href="./poetry.html" data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link" href="./pandas.html" data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <!-- ══════════════ MAIN ══════════════ -->
+  <div class="main-wrap">
+
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+
+      <!-- ══ REDIS ══ -->
+      <section class="tech-section" id="redis" data-tech="Redis">
+        <div class="section-head" data-toggle="redis">
+          <div class="sh-left">
+            <span class="tech-icon">⚡</span>
+            <h2>Redis <em>cache, filas e pub/sub</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">redis-cli</span><span class="tag">cache</span><span class="tag">pub/sub</span>
+            <button class="collapse-btn">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔑 Keys & Strings</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Conectar</td><td class="code"><code>redis-cli -h localhost -p 6379 -a senha</code><button type="button" class="cp" data-c="redis-cli -h localhost -p 6379 -a senha">⧉</button></td></tr>
+                <tr><td class="desc">Set com expiração (TTL)</td><td class="code"><code>SET sessao:abc123 "dados" EX 3600</code><button type="button" class="cp" data-c='SET sessao:abc123 "dados" EX 3600'>⧉</button></td></tr>
+                <tr><td class="desc">Get valor</td><td class="code"><code>GET sessao:abc123</code><button type="button" class="cp" data-c="GET sessao:abc123">⧉</button></td></tr>
+                <tr><td class="desc">Verificar existência</td><td class="code"><code>EXISTS sessao:abc123</code><button type="button" class="cp" data-c="EXISTS sessao:abc123">⧉</button></td></tr>
+                <tr><td class="desc">Ver TTL restante</td><td class="code"><code>TTL sessao:abc123</code><button type="button" class="cp" data-c="TTL sessao:abc123">⧉</button></td></tr>
+                <tr><td class="desc">Remover chave</td><td class="code"><code>DEL sessao:abc123</code><button type="button" class="cp" data-c="DEL sessao:abc123">⧉</button></td></tr>
+                <tr><td class="desc">Listar chaves por padrão (seguro)</td><td class="code"><code>SCAN 0 MATCH "sessao:*" COUNT 100</code><button type="button" class="cp" data-c='SCAN 0 MATCH "sessao:*" COUNT 100'>⧉</button></td></tr>
+                <tr><td class="desc">Incrementar contador</td><td class="code"><code>INCR visitas:pagina:home</code><button type="button" class="cp" data-c="INCR visitas:pagina:home">⧉</button></td></tr>
+                <tr><td class="desc">Definir expiração em chave existente</td><td class="code"><code>EXPIRE minha_chave 600</code><button type="button" class="cp" data-c="EXPIRE minha_chave 600">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📦 Hash · List · Set</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Hash — set múltiplos campos</td><td class="code"><code>HSET user:123 nome "João" email "j@x.com" plano "pro"</code><button type="button" class="cp" data-c='HSET user:123 nome "João" email "j@x.com" plano "pro"'>⧉</button></td></tr>
+                <tr><td class="desc">Hash — obter campo</td><td class="code"><code>HGET user:123 email</code><button type="button" class="cp" data-c="HGET user:123 email">⧉</button></td></tr>
+                <tr><td class="desc">Hash — obter tudo</td><td class="code"><code>HGETALL user:123</code><button type="button" class="cp" data-c="HGETALL user:123">⧉</button></td></tr>
+                <tr><td class="desc">List — push à esquerda (fila)</td><td class="code"><code>LPUSH fila:emails "job:123"</code><button type="button" class="cp" data-c='LPUSH fila:emails "job:123"'>⧉</button></td></tr>
+                <tr><td class="desc">List — pop bloqueante (consumer)</td><td class="code"><code>BRPOP fila:emails 0</code><button type="button" class="cp" data-c="BRPOP fila:emails 0">⧉</button></td></tr>
+                <tr><td class="desc">Sorted Set — add com score</td><td class="code"><code>ZADD ranking 1500 "usuario:456"</code><button type="button" class="cp" data-c='ZADD ranking 1500 "usuario:456"'>⧉</button></td></tr>
+                <tr><td class="desc">Sorted Set — top 10</td><td class="code"><code>ZREVRANGE ranking 0 9 WITHSCORES</code><button type="button" class="cp" data-c="ZREVRANGE ranking 0 9 WITHSCORES">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">📡 Pub/Sub & Monitoramento</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Publicar mensagem</td><td class="code"><code>PUBLISH canal:notif '{"tipo":"email","para":"user@x.com"}'</code><button type="button" class="cp" data-c='PUBLISH canal:notif {"tipo":"email","para":"user@x.com"}'>⧉</button></td></tr>
+                <tr><td class="desc">Inscrever em canal</td><td class="code"><code>SUBSCRIBE canal:notif</code><button type="button" class="cp" data-c="SUBSCRIBE canal:notif">⧉</button></td></tr>
+                <tr><td class="desc">Monitorar todos os comandos</td><td class="code"><code>redis-cli MONITOR</code><button type="button" class="cp" data-c="redis-cli MONITOR">⧉</button></td></tr>
+                <tr><td class="desc">Info do servidor</td><td class="code"><code>redis-cli INFO server</code><button type="button" class="cp" data-c="redis-cli INFO server">⧉</button></td></tr>
+                <tr><td class="desc">Uso de memória</td><td class="code"><code>redis-cli INFO memory | grep used_memory_human</code><button type="button" class="cp" data-c="redis-cli INFO memory | grep used_memory_human">⧉</button></td></tr>
+                <tr><td class="desc">Flush db atual (CUIDADO)</td><td class="code"><code>FLUSHDB</code><button type="button" class="cp" data-c="FLUSHDB">⧉</button></td></tr>
+                <tr><td class="desc">Total de chaves</td><td class="code"><code>DBSIZE</code><button type="button" class="cp" data-c="DBSIZE">⧉</button></td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

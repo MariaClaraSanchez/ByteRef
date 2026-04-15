@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Kubernetes Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </div>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
+      <button id="searchClear" class="search-clear" hidden>✕</button>
+    </div>
+    <nav class="nav">
+      <span class="nav-group-label">Tecnologias</span>
+      <a class="nav-link" href="./gcp.html" data-s="gcp">        <i class="dot"></i> GCP</a>
+      <a class="nav-link active" href="#" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
+      <a class="nav-link" href="./docker.html" data-s="docker">      <i class="dot"></i> Docker</a>
+      <a class="nav-link" href="./bash.html" data-s="bash">        <i class="dot"></i> CLI / Bash</a>
+      <a class="nav-link" href="./flask.html" data-s="flask">       <i class="dot"></i> Flask</a>
+      <a class="nav-link" href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
+      <a class="nav-link" href="./mysql.html" data-s="mysql">       <i class="dot"></i> MySQL</a>
+      <a class="nav-link" href="./redis.html" data-s="redis">       <i class="dot"></i> Redis</a>
+      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
+      <a class="nav-link" href="./poetry.html" data-s="poetry">      <i class="dot"></i> Poetry</a>
+      <a class="nav-link" href="./pandas.html" data-s="pandas">      <i class="dot"></i> Pandas</a>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div class="topbar-right">
+        <a href="../index.html" class="nav-home">← Home</a>
+        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <section class="tech-section" id="kubernetes" data-tech="Kubernetes">
+        <div class="section-head" data-toggle="kubernetes">
+          <div class="sh-left">
+            <span class="tech-icon">🚢</span>
+            <h2>Kubernetes <em>kubectl & cluster ops</em></h2>
+          </div>
+          <div class="sh-right">
+            <span class="tag">kubectl</span><span class="tag">pods</span><span class="tag">deployments</span>
+            <button class="collapse-btn">▾</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <div class="ref-grid">
+
+            <div class="ref-block">
+              <div class="ref-block-title">🔍 Consulta & Diagnóstico</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Todos os pods (all namespaces)</td><td class="code"><code>kubectl get pods -A</code><button type="button" class="cp" data-c="kubectl get pods -A">⧉</button></td></tr>
+                <tr><td class="desc">Pods com IPs e nodes</td><td class="code"><code>kubectl get pods -o wide</code><button type="button" class="cp" data-c="kubectl get pods -o wide">⧉</button></td></tr>
+                <tr><td class="desc">Logs ao vivo</td><td class="code"><code>kubectl logs -f POD --tail=100</code><button type="button" class="cp" data-c="kubectl logs -f POD --tail=100">⧉</button></td></tr>
+                <tr><td class="desc">Logs de container específico</td><td class="code"><code>kubectl logs POD -c CONTAINER --tail=50</code><button type="button" class="cp" data-c="kubectl logs POD -c CONTAINER --tail=50">⧉</button></td></tr>
+                <tr><td class="desc">Logs do pod anterior (crash)</td><td class="code"><code>kubectl logs POD --previous</code><button type="button" class="cp" data-c="kubectl logs POD --previous">⧉</button></td></tr>
+                <tr><td class="desc">Descrever pod (debug completo)</td><td class="code"><code>kubectl describe pod POD</code><button type="button" class="cp" data-c="kubectl describe pod POD">⧉</button></td></tr>
+                <tr><td class="desc">Entrar no shell do container</td><td class="code"><code>kubectl exec -it POD -- /bin/bash</code><button type="button" class="cp" data-c="kubectl exec -it POD -- /bin/bash">⧉</button></td></tr>
+                <tr><td class="desc">CPU e memória dos pods</td><td class="code"><code>kubectl top pods --sort-by=memory</code><button type="button" class="cp" data-c="kubectl top pods --sort-by=memory">⧉</button></td></tr>
+                <tr><td class="desc">Eventos do cluster</td><td class="code"><code>kubectl get events --sort-by=.metadata.creationTimestamp</code><button type="button" class="cp" data-c="kubectl get events --sort-by=.metadata.creationTimestamp">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🚀 Deploy & Rollout</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Aplicar manifesto YAML</td><td class="code"><code>kubectl apply -f deployment.yaml</code><button type="button" class="cp" data-c="kubectl apply -f deployment.yaml">⧉</button></td></tr>
+                <tr><td class="desc">Aplicar pasta inteira</td><td class="code"><code>kubectl apply -f ./k8s/</code><button type="button" class="cp" data-c="kubectl apply -f ./k8s/">⧉</button></td></tr>
+                <tr><td class="desc">Reiniciar deployment</td><td class="code"><code>kubectl rollout restart deployment/NOME</code><button type="button" class="cp" data-c="kubectl rollout restart deployment/NOME">⧉</button></td></tr>
+                <tr><td class="desc">Status do rollout</td><td class="code"><code>kubectl rollout status deployment/NOME</code><button type="button" class="cp" data-c="kubectl rollout status deployment/NOME">⧉</button></td></tr>
+                <tr><td class="desc">Voltar versão anterior</td><td class="code"><code>kubectl rollout undo deployment/NOME</code><button type="button" class="cp" data-c="kubectl rollout undo deployment/NOME">⧉</button></td></tr>
+                <tr><td class="desc">Escalar replicas</td><td class="code"><code>kubectl scale deployment NOME --replicas=3</code><button type="button" class="cp" data-c="kubectl scale deployment NOME --replicas=3">⧉</button></td></tr>
+                <tr><td class="desc">Deletar deployment</td><td class="code"><code>kubectl delete deployment NOME</code><button type="button" class="cp" data-c="kubectl delete deployment NOME">⧉</button></td></tr>
+                <tr><td class="desc">Forçar recriação dos pods</td><td class="code"><code>kubectl delete pods -l app=NOME</code><button type="button" class="cp" data-c="kubectl delete pods -l app=NOME">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block">
+              <div class="ref-block-title">🌐 Services & Config</div>
+              <table class="cmd-table">
+                <tr><td class="desc">Port forward para teste local</td><td class="code"><code>kubectl port-forward svc/SERVICO 8080:80</code><button type="button" class="cp" data-c="kubectl port-forward svc/SERVICO 8080:80">⧉</button></td></tr>
+                <tr><td class="desc">Listar services</td><td class="code"><code>kubectl get svc -A</code><button type="button" class="cp" data-c="kubectl get svc -A">⧉</button></td></tr>
+                <tr><td class="desc">Criar namespace</td><td class="code"><code>kubectl create namespace staging</code><button type="button" class="cp" data-c="kubectl create namespace staging">⧉</button></td></tr>
+                <tr><td class="desc">Usar namespace default</td><td class="code"><code>kubectl config set-context --current --namespace=staging</code><button type="button" class="cp" data-c="kubectl config set-context --current --namespace=staging">⧉</button></td></tr>
+                <tr><td class="desc">Criar secret</td><td class="code"><code>kubectl create secret generic meu-secret --from-literal=DB_PASS=senha123</code><button type="button" class="cp" data-c="kubectl create secret generic meu-secret --from-literal=DB_PASS=senha123">⧉</button></td></tr>
+                <tr><td class="desc">Ver secrets (base64)</td><td class="code"><code>kubectl get secret meu-secret -o yaml</code><button type="button" class="cp" data-c="kubectl get secret meu-secret -o yaml">⧉</button></td></tr>
+              </table>
+            </div>
+
+            <div class="ref-block ref-block--wide">
+              <div class="ref-block-title">🚨 Erros Frequentes & Fixes</div>
+              <table class="cmd-table err-table">
+                <tr><td class="err-label">kubectl: command not found</td><td class="err-fix">Instale o kubectl: <code>curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"</code> e torne executável.</td></tr>
+                <tr><td class="err-label">Unable to connect to the server</td><td class="err-fix">Verifique conexão com cluster: <code>kubectl cluster-info</code>. Baixe kubeconfig do provedor (GKE: <code>gcloud container clusters get-credentials</code>).</td></tr>
+                <tr><td class="err-label">ImagePullBackOff</td><td class="err-fix">Imagem não encontrada. Verifique registry access: <code>kubectl describe pod POD</code>. Para GCR: <code>gcloud auth configure-docker</code>.</td></tr>
+                <tr><td class="err-label">CrashLoopBackOff</td><td class="err-fix">App crashando. Logs: <code>kubectl logs POD --previous</code>. Verifique env vars, secrets, configmaps. Teste localmente primeiro.</td></tr>
+                <tr><td class="err-label">Pending pods</td><td class="err-fix">Sem recursos. Verifique nodes: <code>kubectl get nodes</code>. Aumente cluster ou reduza requests/limits nos manifests.</td></tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
