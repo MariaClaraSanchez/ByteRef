@@ -3,7 +3,7 @@
 > Referência técnica rápida para engenheiros: comandos reais, erros comuns e fixes direto ao ponto.
 
 ![Dark/Light Mode](https://img.shields.io/badge/Tema-Dark%20%2F%20Light-f0a500?style=flat-square)
-![Tecnologias](https://img.shields.io/badge/Tecnologias-11-3dd68c?style=flat-square)
+![Tecnologias](https://img.shields.io/badge/Tecnologias-15-3dd68c?style=flat-square)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?style=flat-square)
 [![Contribuições](https://img.shields.io/badge/Contribuições-Bem%20vindas-brightgreen?style=flat-square)](https://github.com/mariaclarasanchez/ByteRef/blob/main/CONTRIBUTING.md)
 
@@ -11,18 +11,21 @@
 
 ## 📖 Descrição
 
-**ByteRef** é uma referência técnica rápida para engenheiros **DevOps & Backend**, com foco em consulta eficiente e sem enrolação. Layout de **tabela densa** com comandos reais, erros comuns e fixes direto ao ponto.
+**ByteRef** é uma referência técnica rápida para engenheiros **DevOps, Backend, Dados e IA**, com foco em consulta eficiente e sem enrolação. Layout de **tabela densa** com comandos reais, erros comuns e fixes direto ao ponto.
 
 ### ✨ Features
 
-- **📍 Página Inicial**: Cards visuais para navegação rápida às tecnologias
+- **📍 Página Inicial**: Tecnologias agrupadas por área (Cloud & DevOps, Terminal, Backend & Bancos, Dados, IA & LLM)
+- **🧱 Estrutura padrão por página**: Resumo → Conceitos-chave → Como funciona (diagramas) → Comandos → Armadilhas → Links oficiais
+- **🗺️ Diagramas Mermaid**: Fluxos e arquiteturas desenhados no navegador, nas cores do tema, com descrição em texto quando estiver offline
 - **📊 Tabelas Densas**: Descrição ↔ Código com botão de cópia (⧉) em cada linha
-- **🔍 Busca Real-time**: Encontra comandos em toda a documentação
-- **🌓 Dark/Light Mode**: Alterável com um clique, tema persistente
-- **⚙️ Seções Colapsáveis**: Expanda/retraia categorias conforme necessário
-- **📱 Responsivo**: Funciona em desktop, tablet e mobile
+- **🔍 Busca Real-time**: Filtra e destaca comandos na página atual (na home, filtra as tecnologias)
+- **🌓 Dark/Light Mode**: Alterável com um clique, persistente e sem "piscar" ao carregar
+- **⚙️ Seções Colapsáveis**: Cada área da página pode ser recolhida (mouse ou teclado)
+- **🧩 Vitrine de Componentes**: [`src/pages/componentes.html`](src/pages/componentes.html) com markup pronto para copiar
+- **♿ Acessível & Responsivo**: Contraste AA nos dois temas, foco visível, funciona em 375px
 - **⌨️ Atalhos**: `/` para buscar, `Esc` para limpar
-- **🚀 Production-ready**: Static HTML/CSS/JS, zero dependências
+- **🚀 Production-ready**: Static HTML/CSS/JS, sem build; única dependência externa é o Mermaid (CDN), carregado só em páginas com diagrama
 
 🌐 **Acesse online:** [https://mariaclarasanchez.github.io/ByteRef/](https://mariaclarasanchez.github.io/ByteRef/)
 
@@ -30,19 +33,23 @@
 
 ## 🛠 Tecnologias Cobertas
 
-| #  | Tecnologia     | Tema                          | Categorias                                                     |
-|----|----------------|-------------------------------|----------------------------------------------------------------|
-| 1  | ☁️ GCP          | Cloud / IaaS                  | gcloud CLI, IAM, Cloud Run, Compute Engine, Storage, Build    |
-| 2  | 🚢 Kubernetes   | Container Orchestration       | kubectl, Pods, Deployments, Services, Secrets, ConfigMaps     |
-| 3  | 🐳 Docker       | Containerization              | Build, Images, Containers, Registry, Compose                  |
-| 4  | 💻 CLI / Bash   | Terminal Productivity         | grep, find, ssh, scp, tar, top, awk, sed                      |
-| 5  | 🧪 Flask        | Web Framework / Python        | Routes, Blueprints, Database, Auth, Deploy, Testing           |
-| 6  | 🐘 PostgreSQL   | Relational Database           | DDL, Queries, Window Functions, Performance, Backup           |
-| 7  | 🐬 MySQL        | Relational Database           | DDL, Queries, JSON, Replication, Admin, Optimization          |
-| 8  | ⚡ Redis        | Cache / In-Memory DB          | Keys, Hashes, Lists, Sets, Pub/Sub, Persistence               |
-| 9  | 📦 Poetry       | Dependency Management / Python | Setup, Add/Remove, Environments, Build, Publish              |
-| 10 | 🐼 Pandas       | Data Analysis / Python        | DataFrames, Groupby, Joins, Statistics, Export                |
-| 11 | 🌿 Git          | Version Control               | Commits, Branches, Merge, Rebase, Stash, Tags                 |
+| #  | Grupo                  | Tecnologia            | Destaques                                                        |
+|----|------------------------|-----------------------|------------------------------------------------------------------|
+| 1  | Cloud & DevOps         | ☁️ GCP                 | gcloud, IAM, Cloud Run, Compute Engine, Storage, Artifact Registry |
+| 2  | Cloud & DevOps         | 🚢 Kubernetes          | Pods, Deployments, Services, rollout/rollback, ConfigMaps        |
+| 3  | Cloud & DevOps         | 🐳 Docker              | Build, imagens, containers, registry, volumes, Compose           |
+| 4  | Terminal & Ferramentas | 💻 CLI / Bash          | Pipes, redirecionamento, processos, SSH, grep/awk/sed            |
+| 5  | Terminal & Ferramentas | 🐙 Git / GitHub        | Commits, branches, merge/rebase, PRs, stash, correções rápidas   |
+| 6  | Terminal & Ferramentas | 📦 Poetry              | pyproject, lock, ambientes, build & publish                      |
+| 7  | Backend & Bancos       | 🌶️ Flask               | Rotas, blueprints, contexto de app, extensões, deploy WSGI       |
+| 8  | Backend & Bancos       | 🐘 PostgreSQL          | Índices, MVCC, EXPLAIN ANALYZE, window functions, backup         |
+| 9  | Backend & Bancos       | 🐬 MySQL               | InnoDB, índices, replicação, mysqldump, utf8mb4                  |
+| 10 | Backend & Bancos       | ⚡ Redis               | Tipos de dados, TTL, pub/sub, persistência, cache-aside          |
+| 11 | Dados                  | 🐼 Pandas              | DataFrame, seleção, groupby, merge, exportação                   |
+| 12 | Dados                  | 🎈 Streamlit           | Widgets, rerun, cache, session state, secrets                    |
+| 13 | IA & LLM               | 🤖 LLMs & APIs         | Tokens, contexto, streaming, effort, caching, rate limits        |
+| 14 | IA & LLM               | 📚 RAG & Embeddings    | Embeddings, chunking, pgvector, busca e resposta com fontes      |
+| 15 | IA & LLM               | 🛠️ Agentes & Tool Use  | Ferramentas, loop do agente, MCP, confirmação humana             |
 
 ---
 
@@ -89,10 +96,22 @@ npx http-server . -p 8000
 ByteRef/
 ├─ src/
 │  ├─ css/
-│  │  └─ style.css          Estilos unificados (dark/light, responsivo)
+│  │  ├─ style.css          Entrada única (importa os 4 arquivos abaixo)
+│  │  ├─ tokens.css         Cores, espaçamentos e tipografia (dark/light)
+│  │  ├─ base.css           Reset, foco visível, movimento reduzido
+│  │  ├─ layout.css         Sidebar, topbar, conteúdo, rodapé
+│  │  └─ components.css     Áreas da página, tabelas, callouts, cards…
 │  ├─ js/
-│  │  └─ script.js          Busca, tema, sidebar, navegação
+│  │  ├─ theme-init.js      Aplica o tema salvo antes da página aparecer
+│  │  ├─ registry.js        Lista de tecnologias (fonte única da navegação)
+│  │  ├─ diagrams.js        Carrega o Mermaid sob demanda e desenha os diagramas
+│  │  └─ script.js          Sidebar, home, busca, tema, cópia, atalhos
 │  └─ pages/                Subpáginas por tecnologia
+│     ├─ componentes.html   🧩 Vitrine de componentes para contribuidores
+│     ├─ agents.html        IA & LLM: agentes e tool use
+│     ├─ llm-apis.html      IA & LLM: chamadas de API
+│     ├─ rag.html           IA & LLM: RAG e embeddings
+│     ├─ streamlit.html     Dados: apps com Streamlit
 │     ├─ bash.html
 │     ├─ docker.html
 │     ├─ flask.html
@@ -108,7 +127,7 @@ ByteRef/
 └─ README.md
 ```
 
-Cada página em `src/pages/` é **isolada e autônoma**: referencia o CSS e JS centralizados, possui link "← Home" no topo e a sidebar marca a página atual.
+Cada página em `src/pages/` segue o mesmo esqueleto e referencia o CSS e JS centralizados. A sidebar e os cards da home são gerados a partir de `src/js/registry.js`, então não há listas de links duplicadas nas páginas.
 
 ---
 
@@ -140,25 +159,49 @@ Em qualquer `src/pages/*.html`, encontre a seção desejada e adicione uma linha
 </tr>
 ```
 
-#### Adicionar uma nova seção
+#### Adicionar um bloco de comandos, aviso, conceito ou diagrama
 
-Dentro de `<div class="ref-grid">`, copie um `<div class="ref-block">` e adapte:
+Abra a vitrine [`src/pages/componentes.html`](src/pages/componentes.html), copie o markup do componente (botão ⧉ do bloco "HTML") e cole na área certa da página. Exemplo de bloco de comandos, dentro de `<div class="ref-grid">`:
 
 ```html
 <div class="ref-block">
-  <div class="ref-block-title">🤔 Sua Nova Seção</div>
+  <h3 class="ref-block-title">🤔 Sua Nova Seção</h3>
   <table class="cmd-table">
     <!-- linhas de comando aqui -->
   </table>
 </div>
 ```
 
+#### Adicionar um diagrama
+
+Na área "Como funciona" da página, cole o componente de diagrama da vitrine:
+
+```html
+<figure class="diagram" data-diagram>
+  <div class="diagram-body">
+    <script type="text/plain" class="diagram-src">
+flowchart LR
+  A[Dockerfile] -->|docker build| B[(Imagem)]
+  B -->|docker run| C[Container]
+    </script>
+    <p class="diagram-fallback">Descrição do mesmo fluxo em texto (aparece se o diagrama não carregar).</p>
+  </div>
+  <figcaption>Uma frase dizendo o que observar.</figcaption>
+</figure>
+```
+
+Use [Mermaid](https://mermaid.js.org/) (`flowchart`, `sequenceDiagram`, `gitGraph`…) sem cores fixas: elas vêm do tema. A página precisa incluir `<script src="../js/diagrams.js"></script>` depois do `script.js`. Teste a sintaxe no [Mermaid Live Editor](https://mermaid.live/).
+
+#### Avisos em comandos perigosos
+
+Comandos destrutivos (`rm -rf`, `DROP`, `push --force`, `prune`…) devem vir com um aviso `<aside class="callout" data-kind="danger">`. Não use `style=""` nem `<style>` nas páginas: todo estilo vem do CSS compartilhado.
+
 #### Adicionar uma nova tecnologia
 
-1. Copie um arquivo em `src/pages/` (ex: `bash.html`) e renomeie
-2. Altere o `<title>`, `data-tech`, emoji e conteúdo
-3. Adicione o card no `index.html` em `<div class="tech-grid">`
-4. Adicione o link na sidebar `<nav class="nav">` com um novo `<a class="nav-link">`
+1. Copie uma página em `src/pages/` (ex: `redis.html`), renomeie para `<id>.html` e ajuste `<title>`, `<body data-tech-id="<id>">`, o hero e o conteúdo
+2. Adicione uma entrada em `TECHS` no `src/js/registry.js` (`id`, `name`, `icon`, `tagline`, `group`, `page`, `cmds`)
+
+Pronto: a sidebar, a home e as contagens se atualizam sozinhas.
 
 ### 3. Testar Localmente
 
@@ -184,10 +227,13 @@ Abra um Pull Request em [github.com/mariaclarasanchez/ByteRef/pulls](https://git
 R: Sim! Siga o passo "Adicionar uma nova tecnologia" acima.
 
 **P: Como mudo o tema/cores?**  
-R: Edite as variáveis CSS em `src/css/style.css` em `:root { --bg: ..., --amber: ... }`.
+R: Edite os tokens em `src/css/tokens.css` (`:root` para o tema escuro, `:root[data-theme="light"]` para o claro). Mantenha contraste ≥ 4.5:1.
 
 **P: Posso hospedar em outro lugar?**  
 R: Sim, é 100% estático! Suba o repositório para qualquer host (Vercel, Netlify, etc.).
+
+**P: E sem internet?**  
+R: Tudo funciona, exceto o desenho dos diagramas (o Mermaid vem do jsDelivr, versão fixada 12.1.0). No lugar de cada diagrama aparece a descrição em texto.
 
 ---
 

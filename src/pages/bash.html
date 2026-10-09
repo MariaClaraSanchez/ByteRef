@@ -3,85 +3,137 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — CLI / Bash Reference</title>
+  <title>ByteRef — CLI / Bash</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="bash">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link active" href="#"              data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ BASH / CLI ══ -->
-      <section class="tech-section" id="bash" data-tech="CLI Bash">
-        <div class="section-head" data-toggle="bash">
-          <div class="sh-left">
-            <span class="tech-icon">💻</span>
-            <h2>CLI / Bash <em>produtividade no terminal</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">bash</span><span class="tag">grep</span><span class="tag">ssh</span>
-            <button class="collapse-btn" aria-label="colapsar">▾</button>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">💻</div>
+        <h1>CLI / Bash</h1>
+        <p class="hero-tagline">produtividade no terminal</p>
+        <div class="hero-meta"><span class="tag">bash</span><span class="tag">grep</span><span class="tag">ssh</span><span class="hero-stat">30 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Bash</strong> é o shell padrão da maioria das distribuições Linux: interpreta comandos, encadeia programas e automatiza tarefas com scripts.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> buscar e transformar texto, inspecionar processos e rede, acessar servidores via SSH e automatizar rotinas sem instalar nada.</li>
+            <li><strong>Quando usar:</strong> tarefas operacionais rápidas, scripts de deploy e manutenção curtos, investigação de servidores e pipelines que combinam ferramentas como <code>grep</code>, <code>awk</code> e <code>sed</code>.</li>
+            <li><strong>Quando evitar:</strong> lógica complexa com estruturas de dados, tratamento de erro elaborado ou scripts com centenas de linhas; nesses casos, Python é mais legível e testável.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>stdin, stdout e stderr</h3>
+              <p>Todo processo lê da entrada padrão (stdin), escreve resultados na saída padrão (stdout) e erros na saída de erro (stderr), que são canais separados.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Pipe</h3>
+              <p>O <code>|</code> liga o stdout de um comando ao stdin do próximo, montando pipelines como <code>cat log | grep ERROR | wc -l</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Redirecionamento</h3>
+              <p><code>&gt;</code> grava o stdout num arquivo, <code>&gt;&gt;</code> acrescenta, <code>2&gt;</code> redireciona o stderr e <code>2&gt;&amp;1</code> junta os dois.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Processo e PID</h3>
+              <p>Cada programa em execução é um processo com um PID. <code>ps</code>, <code>top</code> e <code>kill</code> inspecionam e controlam processos.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Exit code</h3>
+              <p>Número que o comando devolve ao terminar: 0 é sucesso, outro valor é erro. <code>&amp;&amp;</code> e <code>||</code> decidem o próximo passo com base nele.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Chave SSH</h3>
+              <p>Par de chaves pública e privada para autenticar em servidores sem senha. A pública vai para <code>~/.ssh/authorized_keys</code> do servidor.</p>
+            </article>
           </div>
         </div>
-        <div class="section-body">
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  IN[stdin: arquivo ou teclado] --> A[grep ERROR]
+  A -->|pipe| B[sort]
+  B -->|pipe| C[uniq -c]
+  C -->|stdout| OUT[(resumo.txt)]
+  A -.->|"stderr via 2>"| ERR[(erros.log)]
+</script>
+              <p class="diagram-fallback">O grep lê do stdin e passa as linhas filtradas pelo pipe para o sort e depois para o uniq -c. O resultado final sai no stdout e é redirecionado para resumo.txt, enquanto as mensagens de erro vão pelo stderr para erros.log.</p>
+            </div>
+            <figcaption>Pipes conectam stdout ao stdin; o stderr segue por um canal separado.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
           <div class="ref-grid">
-
             <div class="ref-block">
-              <div class="ref-block-title">🔎 Busca & Texto</div>
+              <h3 class="ref-block-title">🔎 Busca & Texto</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Busca recursiva em arquivos</td><td class="code"><code>grep -rn "termo" ./src --include="*.py"</code><button type="button" class="cp" data-c='grep -rn "termo" ./src --include="*.py"'>⧉</button></td></tr>
                 <tr><td class="desc">Busca case-insensitive</td><td class="code"><code>grep -ri "erro" ./logs/</code><button type="button" class="cp" data-c='grep -ri "erro" ./logs/'>⧉</button></td></tr>
@@ -92,9 +144,8 @@
                 <tr><td class="desc">Filtrar log por erro</td><td class="code"><code>tail -f app.log | grep -i "error\|exception"</code><button type="button" class="cp" data-c='tail -f app.log | grep -i "error\|exception"'>⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🌐 Rede & Processos</div>
+              <h3 class="ref-block-title">🌐 Rede & Processos</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Ver portas abertas</td><td class="code"><code>netstat -tlnp | grep LISTEN</code><button type="button" class="cp" data-c="netstat -tlnp | grep LISTEN">⧉</button></td></tr>
                 <tr><td class="desc">Testar conectividade</td><td class="code"><code>ping -c 4 google.com</code><button type="button" class="cp" data-c="ping -c 4 google.com">⧉</button></td></tr>
@@ -106,9 +157,8 @@
                 <tr><td class="desc">Ver tamanho de pastas</td><td class="code"><code>du -sh *</code><button type="button" class="cp" data-c="du -sh *">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔒 SSH & Transferência</div>
+              <h3 class="ref-block-title">🔒 SSH & Transferência</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Conectar via SSH</td><td class="code"><code>ssh -i ~/.ssh/chave.pem user@servidor</code><button type="button" class="cp" data-c="ssh -i ~/.ssh/chave.pem user@servidor">⧉</button></td></tr>
                 <tr><td class="desc">SSH com port forwarding</td><td class="code"><code>ssh -L 5432:localhost:5432 user@servidor</code><button type="button" class="cp" data-c="ssh -L 5432:localhost:5432 user@servidor">⧉</button></td></tr>
@@ -119,9 +169,8 @@
                 <tr><td class="desc">Executar em background</td><td class="code"><code>nohup ./script.sh > output.log 2>&1 &</code><button type="button" class="cp" data-c="nohup ./script.sh > output.log 2>&1 &">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">⚡ Produtividade Shell</div>
+              <h3 class="ref-block-title">⚡ Produtividade Shell</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Busca no histórico</td><td class="code"><code>Ctrl+R</code><button type="button" class="cp" data-c="Ctrl+R">⧉</button></td></tr>
                 <tr><td class="desc">Repetir último comando como root</td><td class="code"><code>sudo !!</code><button type="button" class="cp" data-c="sudo !!">⧉</button></td></tr>
@@ -133,28 +182,56 @@
                 <tr><td class="desc">Sessão persistente (tmux)</td><td class="code"><code>tmux new -s minha-sessao</code><button type="button" class="cp" data-c="tmux new -s minha-sessao">⧉</button></td></tr>
               </table>
             </div>
-
           </div>
         </div>
       </section>
-
-    </main><!-- /content -->
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">Permission denied (publickey)</td><td class="err-cause" data-label="Causa">O servidor não reconheceu sua chave: a chave pública não está em <code>authorized_keys</code>, o SSH está usando outra chave ou as permissões de <code>~/.ssh</code> estão abertas demais.</td><td class="err-fix" data-label="Correção">Teste com <code>ssh -v usuario@host</code>, indique a chave com <code>-i ~/.ssh/id_ed25519</code> e ajuste <code>chmod 700 ~/.ssh</code> e <code>chmod 600 ~/.ssh/id_ed25519</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">command not found</td><td class="err-cause" data-label="Causa">O programa não está instalado ou a pasta dele não está no <code>PATH</code>.</td><td class="err-fix" data-label="Correção">Confira com <code>which programa</code> e <code>echo $PATH</code>; adicione a pasta com <code>export PATH="$HOME/.local/bin:$PATH"</code> no <code>~/.bashrc</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">rm apagou mais do que devia</td><td class="err-cause" data-label="Causa">Uma variável vazia transformou <code>rm -rf "$DIR"/*</code> em <code>rm -rf /*</code>, ou o glob casou com arquivos inesperados.</td><td class="err-fix" data-label="Correção">Use <code>set -u</code> e <code>${DIR:?}</code> para abortar com variável vazia, e rode o comando com <code>ls</code> antes do <code>rm</code>.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">rm não tem lixeira</p>
+            <p><code>rm -rf</code> apaga sem confirmação e sem volta. Em scripts, use <code>set -euo pipefail</code> e proteja variáveis com <code>${VAR:?}</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener">Manual do Bash (GNU)</a></li>
+            <li><a href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener">Man pages do Linux</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
       <span class="footer-brand">BR ByteRef</span>
       <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
       <span class="footer-count" id="cmdCount">— comandos</span>
     </footer>
+  </div>
+</div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /app-shell -->
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

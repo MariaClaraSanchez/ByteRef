@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Streamlit</title>
+  <script src="../js/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body data-tech-id="streamlit">
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../../index.html">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </a>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
+    </div>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
+      <div class="topbar-right">
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
+
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🎈</div>
+        <h1>Streamlit</h1>
+        <p class="hero-tagline">apps de dados em Python</p>
+        <div class="hero-meta"><span class="tag">streamlit</span><span class="tag">dashboards</span><span class="tag">python</span><span class="hero-stat">13 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Streamlit</strong> transforma um script Python em app web interativo, sem HTML nem JavaScript. Cada widget (slider, filtro, upload) dispara um <strong>rerun</strong>: o script roda de novo de cima a baixo com os novos valores.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> publicar análises feitas com <a href="./pandas.html">Pandas</a> como dashboards, protótipos de ferramentas internas e demos de modelos e LLMs.</li>
+            <li><strong>Quando usar:</strong> ferramentas internas e painéis de dados em que velocidade de entrega importa mais que controle fino de layout.</li>
+            <li><strong>Quando evitar:</strong> produtos com muitos usuários simultâneos, regras complexas de autenticação ou interface sob medida; nesses casos, uma API (Flask) com um front-end próprio é melhor.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Script e rerun</h3>
+              <p>O app é um script comum. A cada interação, o Streamlit executa o arquivo inteiro de novo e redesenha a página.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Widget</h3>
+              <p>Componente de entrada (<code>st.slider</code>, <code>st.selectbox</code>, <code>st.button</code>) que devolve o valor atual direto numa variável Python.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Cache</h3>
+              <p><code>@st.cache_data</code> guarda resultados serializáveis (DataFrames, JSON); <code>@st.cache_resource</code> guarda recursos compartilhados, como conexões e modelos.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Session state</h3>
+              <p><code>st.session_state</code> guarda valores por usuário entre reruns, como contadores, carrinho e etapas de formulário.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Layout</h3>
+              <p><code>st.sidebar</code>, <code>st.columns</code>, <code>st.tabs</code> e <code>st.expander</code> organizam a página sem CSS.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Secrets</h3>
+              <p>Credenciais em <code>.streamlit/secrets.toml</code> (fora do Git) ou no painel de deploy, lidas com <code>st.secrets</code>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  A[Usuário abre a página] --> B[Script roda de cima a baixo]
+  B --> C[Página exibida]
+  C --> D[Usuário mexe num widget]
+  D -->|rerun| B
+  B -.->|funções com cache| K[(Cache: não recalcula)]
+  B -.->|st.session_state| S[(Estado do usuário)]
+</script>
+              <p class="diagram-fallback">Ao abrir a página, o script roda inteiro e a página é exibida. Quando o usuário mexe num widget, o script roda de novo do começo (rerun). Funções com cache devolvem o resultado guardado sem recalcular, e o session_state mantém os valores do usuário entre os reruns.</p>
+            </div>
+            <figcaption>Tudo é rerun: cache e session_state são o que evita recalcular e esquecer.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos & Snippets</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
+          <div class="ref-grid">
+            <div class="ref-block">
+              <h3 class="ref-block-title">⚙️ CLI</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar</td><td class="code"><code>pip install streamlit</code><button type="button" class="cp" data-c="pip install streamlit">⧉</button></td></tr>
+                <tr><td class="desc">App de demonstração</td><td class="code"><code>streamlit hello</code><button type="button" class="cp" data-c="streamlit hello">⧉</button></td></tr>
+                <tr><td class="desc">Rodar o app</td><td class="code"><code>streamlit run app.py</code><button type="button" class="cp" data-c="streamlit run app.py">⧉</button></td></tr>
+                <tr><td class="desc">Rodar em outra porta</td><td class="code"><code>streamlit run app.py --server.port 8502</code><button type="button" class="cp" data-c="streamlit run app.py --server.port 8502">⧉</button></td></tr>
+                <tr><td class="desc">Limpar o cache em disco</td><td class="code"><code>streamlit cache clear</code><button type="button" class="cp" data-c="streamlit cache clear">⧉</button></td></tr>
+                <tr><td class="desc">Manter os segredos fora do Git</td><td class="code"><code>echo ".streamlit/secrets.toml" &gt;&gt; .gitignore</code><button type="button" class="cp" data-c="echo &quot;.streamlit/secrets.toml&quot; &gt;&gt; .gitignore">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">📊 App & widgets</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · app mínimo</span><button type="button" class="cp" data-c="import pandas as pd
+import streamlit as st
+
+st.title(&quot;Vendas por região&quot;)
+
+df = pd.DataFrame({
+    &quot;regiao&quot;: [&quot;Sul&quot;, &quot;Sudeste&quot;, &quot;Norte&quot;],
+    &quot;valor&quot;: [120, 340, 80],
+})
+
+st.dataframe(df)
+st.bar_chart(df, x=&quot;regiao&quot;, y=&quot;valor&quot;)">⧉</button></div>
+                <pre><code>import pandas as pd
+import streamlit as st
+
+st.title("Vendas por região")
+
+df = pd.DataFrame({
+    "regiao": ["Sul", "Sudeste", "Norte"],
+    "valor": [120, 340, 80],
+})
+
+st.dataframe(df)
+st.bar_chart(df, x="regiao", y="valor")</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · widgets e filtro</span><button type="button" class="cp" data-c="regioes = st.multiselect(&quot;Regiões&quot;, df[&quot;regiao&quot;].unique(), default=list(df[&quot;regiao&quot;].unique()))
+minimo = st.slider(&quot;Valor mínimo&quot;, 0, 500, 100)
+
+filtrado = df[df[&quot;regiao&quot;].isin(regioes) &amp; (df[&quot;valor&quot;] &gt;= minimo)]
+st.metric(&quot;Total&quot;, f&quot;R$ {filtrado[&#x27;valor&#x27;].sum():,.0f}&quot;)
+st.dataframe(filtrado)">⧉</button></div>
+                <pre><code>regioes = st.multiselect("Regiões", df["regiao"].unique(), default=list(df["regiao"].unique()))
+minimo = st.slider("Valor mínimo", 0, 500, 100)
+
+filtrado = df[df["regiao"].isin(regioes) &amp; (df["valor"] &gt;= minimo)]
+st.metric("Total", f"R$ {filtrado['valor'].sum():,.0f}")
+st.dataframe(filtrado)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · layout</span><button type="button" class="cp" data-c="with st.sidebar:
+    pagina = st.radio(&quot;Página&quot;, [&quot;Resumo&quot;, &quot;Detalhes&quot;])
+
+col1, col2 = st.columns(2)
+col1.metric(&quot;Pedidos&quot;, 128)
+col2.metric(&quot;Ticket médio&quot;, &quot;R$ 87&quot;)">⧉</button></div>
+                <pre><code>with st.sidebar:
+    pagina = st.radio("Página", ["Resumo", "Detalhes"])
+
+col1, col2 = st.columns(2)
+col1.metric("Pedidos", 128)
+col2.metric("Ticket médio", "R$ 87")</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · upload de CSV</span><button type="button" class="cp" data-c="arquivo = st.file_uploader(&quot;Envie um CSV&quot;, type=&quot;csv&quot;)
+if arquivo is not None:
+    df = pd.read_csv(arquivo)
+    st.write(df.describe())">⧉</button></div>
+                <pre><code>arquivo = st.file_uploader("Envie um CSV", type="csv")
+if arquivo is not None:
+    df = pd.read_csv(arquivo)
+    st.write(df.describe())</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">⚡ Cache, estado & segredos</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · cache de dados e de recursos</span><button type="button" class="cp" data-c="import pandas as pd
+import sqlalchemy
+import streamlit as st
+
+@st.cache_data(ttl=600)  # dados: recalcula no máximo a cada 10 min
+def carregar_vendas(caminho: str) -&gt; pd.DataFrame:
+    return pd.read_csv(caminho)
+
+@st.cache_resource  # recursos compartilhados: conexões, modelos
+def banco():
+    return sqlalchemy.create_engine(st.secrets[&quot;DB_URL&quot;])
+
+df = carregar_vendas(&quot;vendas.csv&quot;)">⧉</button></div>
+                <pre><code>import pandas as pd
+import sqlalchemy
+import streamlit as st
+
+@st.cache_data(ttl=600)  # dados: recalcula no máximo a cada 10 min
+def carregar_vendas(caminho: str) -&gt; pd.DataFrame:
+    return pd.read_csv(caminho)
+
+@st.cache_resource  # recursos compartilhados: conexões, modelos
+def banco():
+    return sqlalchemy.create_engine(st.secrets["DB_URL"])
+
+df = carregar_vendas("vendas.csv")</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · session state</span><button type="button" class="cp" data-c="if &quot;cliques&quot; not in st.session_state:
+    st.session_state.cliques = 0
+
+if st.button(&quot;Clique&quot;):
+    st.session_state.cliques += 1
+
+st.write(&quot;Cliques:&quot;, st.session_state.cliques)">⧉</button></div>
+                <pre><code>if "cliques" not in st.session_state:
+    st.session_state.cliques = 0
+
+if st.button("Clique"):
+    st.session_state.cliques += 1
+
+st.write("Cliques:", st.session_state.cliques)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>TOML · .streamlit/secrets.toml (fora do Git)</span><button type="button" class="cp" data-c="DB_URL = &quot;postgresql://usuario:SENHA@host:5432/banco&quot;
+ANTHROPIC_API_KEY = &quot;coloque-aqui-e-nunca-commite&quot;">⧉</button></div>
+                <pre><code>DB_URL = "postgresql://usuario:SENHA@host:5432/banco"
+ANTHROPIC_API_KEY = "coloque-aqui-e-nunca-commite"</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">App lento a cada clique</td><td class="err-cause" data-label="Causa">Sem cache, cada rerun relê o CSV, refaz a consulta ao banco e recalcula tudo.</td><td class="err-fix" data-label="Correção">Use <code>@st.cache_data</code> na carga e nas transformações e <code>@st.cache_resource</code> nas conexões.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Valor volta ao inicial a cada interação</td><td class="err-cause" data-label="Causa">Variáveis Python comuns são recriadas a cada rerun.</td><td class="err-fix" data-label="Correção">Guarde o valor em <code>st.session_state</code> e inicialize só se a chave não existir.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Dados velhos ou erro ao cachear</td><td class="err-cause" data-label="Causa"><code>cache_data</code> sem <code>ttl</code> nunca expira, e ele exige retorno serializável (conexões não servem).</td><td class="err-fix" data-label="Correção">Defina <code>ttl</code>, limpe com <code>st.cache_data.clear()</code> e use <code>cache_resource</code> para conexões e modelos.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Erro de widget ou elemento duplicado</td><td class="err-cause" data-label="Causa">Dois widgets com o mesmo tipo, rótulo e parâmetros geram o mesmo ID interno.</td><td class="err-fix" data-label="Correção">Passe um <code>key=</code> único para cada widget.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Senha do banco no GitHub</td><td class="err-cause" data-label="Causa">O <code>.streamlit/secrets.toml</code> foi commitado junto com o código.</td><td class="err-fix" data-label="Correção">Revogue a credencial, adicione o arquivo ao <code>.gitignore</code> e configure os segredos no painel do deploy.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://docs.streamlit.io/" target="_blank" rel="noopener">Documentação</a></li>
+            <li><a href="https://docs.streamlit.io/develop/api-reference" target="_blank" rel="noopener">Referência da API</a></li>
+            <li><a href="https://docs.streamlit.io/develop/concepts/architecture/caching" target="_blank" rel="noopener">Caching</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../js/registry.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
+</body>
+</html>
