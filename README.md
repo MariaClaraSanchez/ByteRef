@@ -1,11 +1,12 @@
-# ByteRef — DevOps & Backend Reference
+# ByteRef — DevOps, Backend, Dados & IA Reference
 
 > Referência técnica rápida para engenheiros: comandos reais, erros comuns e fixes direto ao ponto.
 
 ![Dark/Light Mode](https://img.shields.io/badge/Tema-Dark%20%2F%20Light-f0a500?style=flat-square)
 ![Tecnologias](https://img.shields.io/badge/Tecnologias-15-3dd68c?style=flat-square)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?style=flat-square)
-[![Contribuições](https://img.shields.io/badge/Contribuições-Bem%20vindas-brightgreen?style=flat-square)](https://github.com/mariaclarasanchez/ByteRef/blob/main/CONTRIBUTING.md)
+[![Contribuições](https://img.shields.io/badge/Contribuições-Bem%20vindas-brightgreen?style=flat-square)](#-contribuições)
+[![Licença](https://img.shields.io/badge/Licença-MIT-lightgrey?style=flat-square)](LICENSE)
 
 ---
 
@@ -55,7 +56,7 @@
 
 ## 🚀 Como Usar Localmente
 
-Zero build, zero dependências. Clone e abra direto no navegador:
+Zero build, nada para instalar. Clone e abra direto no navegador:
 
 ```bash
 git clone https://github.com/mariaclarasanchez/ByteRef.git
@@ -84,7 +85,8 @@ npx http-server . -p 8000
 |------------------------|-------------------------------------|
 | **`/`**                | Abre e foca a barra de busca        |
 | **`Esc`**              | Limpa busca / fecha sidebar mobile  |
-| **Clique no título**   | Colapsa/expande a seção             |
+| **Botão `▾`**          | Recolhe/expande a área (mouse, `Enter` ou `Espaço`) |
+| **Botão `◑`**          | Alterna tema escuro/claro           |
 | **`⧉` (botão)**        | Copia comando para o clipboard      |
 | **Clique no `≡`**      | Abre/fecha sidebar em mobile        |
 
@@ -147,17 +149,13 @@ git checkout -b feature/minha-contribuicao
 
 #### Adicionar um comando simples
 
-Em qualquer `src/pages/*.html`, encontre a seção desejada e adicione uma linha na tabela:
+Em qualquer `src/pages/*.html`, encontre o bloco desejado na área "Comandos" e adicione uma linha na `cmd-table` (uma linha de HTML por comando, como no resto da página):
 
 ```html
-<tr>
-  <td class="desc">O que este comando faz</td>
-  <td class="code">
-    <code>seu-comando --com-flags</code>
-    <button class="cp" data-c="seu-comando --com-flags">⧉</button>
-  </td>
-</tr>
+<tr><td class="desc">O que este comando faz</td><td class="code"><code>seu-comando --com-flags</code><button type="button" class="cp" data-c="seu-comando --com-flags">⧉</button></td></tr>
 ```
+
+O texto de `data-c` é o que vai para o clipboard; escape aspas como `&quot;`. Depois, atualize `cmds` da tecnologia em `src/js/registry.js` (é a contagem mostrada no card da home).
 
 #### Adicionar um bloco de comandos, aviso, conceito ou diagrama
 
@@ -239,4 +237,4 @@ R: Tudo funciona, exceto o desenho dos diagramas (o Mermaid vem do jsDelivr, ver
 
 ## Licença
 
-MIT © 2026
+[MIT](LICENSE) © 2026 Maria Clara Sanchez
