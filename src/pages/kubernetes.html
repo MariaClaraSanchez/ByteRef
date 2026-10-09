@@ -55,6 +55,96 @@
         <p class="hero-tagline">kubectl & cluster ops</p>
         <div class="hero-meta"><span class="tag">kubectl</span><span class="tag">pods</span><span class="tag">deployments</span><span class="hero-stat">23 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Kubernetes</strong> é um orquestrador de containers: você descreve o estado desejado (quantas réplicas, qual imagem, como expor) e o cluster trabalha continuamente para mantê-lo.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> rodar aplicações em containers com alta disponibilidade, escalar réplicas, fazer rollout e rollback de versões e distribuir tráfego entre Pods.</li>
+            <li><strong>Quando usar:</strong> vários serviços em produção que precisam de auto-recuperação, escala e deploy sem downtime, geralmente num cluster gerenciado (GKE, EKS, AKS).</li>
+            <li><strong>Quando evitar:</strong> um único serviço simples (Cloud Run ou uma VM resolvem com menos operação) ou equipes sem tempo para operar e entender o cluster.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Cluster e Node</h3>
+              <p>O cluster é o conjunto de máquinas (nodes) que rodam os containers, coordenadas pelo control plane, que decide onde cada Pod roda.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Pod</h3>
+              <p>Menor unidade implantável: um ou mais containers que compartilham rede e volumes. Pods são descartáveis e trocam de IP ao serem recriados.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Deployment</h3>
+              <p>Declara a imagem e o número de réplicas. Cria um ReplicaSet que mantém os Pods vivos e controla o rollout e o rollback de versões.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Service</h3>
+              <p>Endereço estável (DNS e IP) que distribui o tráfego entre os Pods que combinam com um seletor de labels.</p>
+            </article>
+            <article class="concept-card">
+              <h3>ConfigMap e Secret</h3>
+              <p>Guardam configuração e dados sensíveis fora da imagem, entregues ao Pod como variáveis de ambiente ou arquivos.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Namespace</h3>
+              <p>Divide o cluster em espaços lógicos (ex.: <code>dev</code>, <code>prod</code>) para separar recursos, permissões e cotas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Context</h3>
+              <p>Combinação de cluster, usuário e namespace no kubeconfig. Define onde o <code>kubectl</code> está executando os comandos.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  U([Tráfego]) --> SVC[Service]
+  SVC --> P1[Pod]
+  SVC --> P2[Pod]
+  SVC --> P3[Pod]
+  DEP[Deployment] --> RS[ReplicaSet]
+  RS -. mantém 3 réplicas .-> P1
+  RS -.-> P2
+  RS -.-> P3
+</script>
+              <p class="diagram-fallback">O Deployment cria um ReplicaSet, que mantém o número desejado de Pods. O Service recebe o tráfego e distribui entre os Pods selecionados pelos labels, mesmo quando eles são recriados.</p>
+            </div>
+            <figcaption>O Deployment cuida de quantos Pods existem; o Service cuida de como o tráfego chega até eles.</figcaption>
+          </figure>
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  V1[ReplicaSet v1: 3 Pods] -->|kubectl set image| R{Rollout}
+  R -->|sobe v2 aos poucos| V2[ReplicaSet v2: 3 Pods]
+  R -->|desce v1 aos poucos| V1B[ReplicaSet v1: 0 Pods]
+  V2 -->|kubectl rollout undo| V1
+</script>
+              <p class="diagram-fallback">Ao trocar a imagem, o Deployment cria um novo ReplicaSet e sobe os Pods da nova versão enquanto desliga os da antiga. Com kubectl rollout undo, volta para o ReplicaSet anterior.</p>
+            </div>
+            <figcaption>Rolling update: a versão nova entra aos poucos, e o rollback reaproveita o ReplicaSet antigo.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -112,14 +202,29 @@
           <table class="pitfalls">
             <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
             <tbody>
-              <tr><td class="err-label" data-label="Erro">kubectl: command not found</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Instale o kubectl: <code>curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"</code> e torne executável.</td></tr>
-              <tr><td class="err-label" data-label="Erro">Unable to connect to the server</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Verifique conexão com cluster: <code>kubectl cluster-info</code>. Baixe kubeconfig do provedor (GKE: <code>gcloud container clusters get-credentials</code>).</td></tr>
-              <tr><td class="err-label" data-label="Erro">ImagePullBackOff</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Imagem não encontrada. Verifique registry access: <code>kubectl describe pod POD</code>. Para GCR: <code>gcloud auth configure-docker</code>.</td></tr>
-              <tr><td class="err-label" data-label="Erro">CrashLoopBackOff</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">App crashando. Logs: <code>kubectl logs POD --previous</code>. Verifique env vars, secrets, configmaps. Teste localmente primeiro.</td></tr>
-              <tr><td class="err-label" data-label="Erro">Pending pods</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Sem recursos. Verifique nodes: <code>kubectl get nodes</code>. Aumente cluster ou reduza requests/limits nos manifests.</td></tr>
+              <tr><td class="err-label" data-label="Erro">kubectl: command not found</td><td class="err-cause" data-label="Causa">O <code>kubectl</code> não está instalado ou o binário não está no <code>PATH</code>.</td><td class="err-fix" data-label="Correção">Instale o kubectl: <code>curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"</code> e torne executável.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Unable to connect to the server</td><td class="err-cause" data-label="Causa">O kubeconfig aponta para um cluster inacessível, para o contexto errado ou usa credenciais expiradas.</td><td class="err-fix" data-label="Correção">Verifique conexão com cluster: <code>kubectl cluster-info</code>. Baixe kubeconfig do provedor (GKE: <code>gcloud container clusters get-credentials</code>).</td></tr>
+              <tr><td class="err-label" data-label="Erro">ImagePullBackOff</td><td class="err-cause" data-label="Causa">O node não consegue baixar a imagem: nome ou tag errados, ou registry privado sem permissão (<code>imagePullSecrets</code>).</td><td class="err-fix" data-label="Correção">Imagem não encontrada. Verifique registry access: <code>kubectl describe pod POD</code>. Para GCR: <code>gcloud auth configure-docker</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">CrashLoopBackOff</td><td class="err-cause" data-label="Causa">O container inicia e encerra repetidamente (erro da aplicação, comando errado, configuração faltando), e o Kubernetes espera cada vez mais antes de reiniciar.</td><td class="err-fix" data-label="Correção">App crashando. Logs: <code>kubectl logs POD --previous</code>. Verifique env vars, secrets, configmaps. Teste localmente primeiro.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Pending pods</td><td class="err-cause" data-label="Causa">O scheduler não encontra node com CPU e memória livres ou que atenda a selectors e taints; também acontece com volume (PVC) não vinculado.</td><td class="err-fix" data-label="Correção">Sem recursos. Verifique nodes: <code>kubectl get nodes</code>. Aumente cluster ou reduza requests/limits nos manifests.</td></tr>
             </tbody>
           </table>
-
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">Confira o contexto antes de apagar</p>
+            <p><code>kubectl delete</code> age no cluster e no namespace do contexto atual. Rode <code>kubectl config current-context</code> antes, principalmente se você também acessa produção.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://kubernetes.io/docs/concepts/" target="_blank" rel="noopener">Conceitos</a></li>
+            <li><a href="https://kubernetes.io/docs/reference/kubectl/" target="_blank" rel="noopener">Referência do kubectl</a></li>
+          </ul>
         </div>
       </section>
     </main>
@@ -137,5 +242,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

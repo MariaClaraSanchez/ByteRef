@@ -177,54 +177,48 @@
           <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagram">▾</button>
         </div>
         <div class="area-body" id="area-diagram">
-          <p>Contêiner para diagramas (Mermaid na spec 2, ou SVG inline). Rola por dentro se for largo.</p>
+          <p>Diagrama Mermaid desenhado no navegador com as cores do tema. A descrição em <code>diagram-fallback</code> aparece se o diagrama não puder ser desenhado (ex.: sem internet). SVG inline continua aceito para casos especiais.</p>
           <div class="showcase-example">
-            <figure class="diagram">
+            <figure class="diagram" data-diagram>
               <div class="diagram-body">
-                <svg viewBox="0 0 520 90" width="520" height="90" role="img" aria-label="Dockerfile gera imagem, que roda como container">
-                  <rect class="node" x="5" y="20" width="130" height="50" rx="8"/>
-                  <text x="70" y="50" text-anchor="middle">Dockerfile</text>
-                  <path class="edge" d="M135 45 H190"/><path class="edge" d="M182 39 L190 45 L182 51"/>
-                  <rect class="node" x="195" y="20" width="130" height="50" rx="8"/>
-                  <text x="260" y="50" text-anchor="middle">Imagem</text>
-                  <path class="edge" d="M325 45 H380"/><path class="edge" d="M372 39 L380 45 L372 51"/>
-                  <rect class="node" x="385" y="20" width="130" height="50" rx="8"/>
-                  <text x="450" y="50" text-anchor="middle">Container</text>
-                </svg>
+                <script type="text/plain" class="diagram-src">
+flowchart LR
+  A[Dockerfile] -->|docker build| B[(Imagem)]
+  B -->|docker run| C[Container]
+  B -->|docker push| D[(Registry)]
+  D -->|docker pull| B
+    </script>
+                <p class="diagram-fallback">O Dockerfile vira uma imagem com docker build; a imagem roda como container com docker run e vai para o registry com docker push.</p>
               </div>
-              <figcaption>docker build gera a imagem; docker run cria o container.</figcaption>
+              <figcaption>Do Dockerfile ao container — e o vai-e-volta com o registry.</figcaption>
             </figure>
           </div>
           <div class="code-block">
-            <div class="code-block-head"><span>HTML</span><button type="button" class="cp" data-c="&lt;figure class=&quot;diagram&quot;&gt;
+            <div class="code-block-head"><span>HTML</span><button type="button" class="cp" data-c="&lt;figure class=&quot;diagram&quot; data-diagram&gt;
   &lt;div class=&quot;diagram-body&quot;&gt;
-    &lt;svg viewBox=&quot;0 0 520 90&quot; width=&quot;520&quot; height=&quot;90&quot; role=&quot;img&quot; aria-label=&quot;Dockerfile gera imagem, que roda como container&quot;&gt;
-      &lt;rect class=&quot;node&quot; x=&quot;5&quot; y=&quot;20&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;8&quot;/&gt;
-      &lt;text x=&quot;70&quot; y=&quot;50&quot; text-anchor=&quot;middle&quot;&gt;Dockerfile&lt;/text&gt;
-      &lt;path class=&quot;edge&quot; d=&quot;M135 45 H190&quot;/&gt;&lt;path class=&quot;edge&quot; d=&quot;M182 39 L190 45 L182 51&quot;/&gt;
-      &lt;rect class=&quot;node&quot; x=&quot;195&quot; y=&quot;20&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;8&quot;/&gt;
-      &lt;text x=&quot;260&quot; y=&quot;50&quot; text-anchor=&quot;middle&quot;&gt;Imagem&lt;/text&gt;
-      &lt;path class=&quot;edge&quot; d=&quot;M325 45 H380&quot;/&gt;&lt;path class=&quot;edge&quot; d=&quot;M372 39 L380 45 L372 51&quot;/&gt;
-      &lt;rect class=&quot;node&quot; x=&quot;385&quot; y=&quot;20&quot; width=&quot;130&quot; height=&quot;50&quot; rx=&quot;8&quot;/&gt;
-      &lt;text x=&quot;450&quot; y=&quot;50&quot; text-anchor=&quot;middle&quot;&gt;Container&lt;/text&gt;
-    &lt;/svg&gt;
+    &lt;script type=&quot;text/plain&quot; class=&quot;diagram-src&quot;&gt;
+flowchart LR
+  A[Dockerfile] --&gt;|docker build| B[(Imagem)]
+  B --&gt;|docker run| C[Container]
+  B --&gt;|docker push| D[(Registry)]
+  D --&gt;|docker pull| B
+    &lt;/script&gt;
+    &lt;p class=&quot;diagram-fallback&quot;&gt;O Dockerfile vira uma imagem com docker build; a imagem roda como container com docker run e vai para o registry com docker push.&lt;/p&gt;
   &lt;/div&gt;
-  &lt;figcaption&gt;docker build gera a imagem; docker run cria o container.&lt;/figcaption&gt;
+  &lt;figcaption&gt;Do Dockerfile ao container — e o vai-e-volta com o registry.&lt;/figcaption&gt;
 &lt;/figure&gt;" aria-label="Copiar markup">⧉</button></div>
-            <pre><code>&lt;figure class="diagram"&gt;
+            <pre><code>&lt;figure class="diagram" data-diagram&gt;
   &lt;div class="diagram-body"&gt;
-    &lt;svg viewBox="0 0 520 90" width="520" height="90" role="img" aria-label="Dockerfile gera imagem, que roda como container"&gt;
-      &lt;rect class="node" x="5" y="20" width="130" height="50" rx="8"/&gt;
-      &lt;text x="70" y="50" text-anchor="middle"&gt;Dockerfile&lt;/text&gt;
-      &lt;path class="edge" d="M135 45 H190"/&gt;&lt;path class="edge" d="M182 39 L190 45 L182 51"/&gt;
-      &lt;rect class="node" x="195" y="20" width="130" height="50" rx="8"/&gt;
-      &lt;text x="260" y="50" text-anchor="middle"&gt;Imagem&lt;/text&gt;
-      &lt;path class="edge" d="M325 45 H380"/&gt;&lt;path class="edge" d="M372 39 L380 45 L372 51"/&gt;
-      &lt;rect class="node" x="385" y="20" width="130" height="50" rx="8"/&gt;
-      &lt;text x="450" y="50" text-anchor="middle"&gt;Container&lt;/text&gt;
-    &lt;/svg&gt;
+    &lt;script type="text/plain" class="diagram-src"&gt;
+flowchart LR
+  A[Dockerfile] --&gt;|docker build| B[(Imagem)]
+  B --&gt;|docker run| C[Container]
+  B --&gt;|docker push| D[(Registry)]
+  D --&gt;|docker pull| B
+    &lt;/script&gt;
+    &lt;p class="diagram-fallback"&gt;O Dockerfile vira uma imagem com docker build; a imagem roda como container com docker run e vai para o registry com docker push.&lt;/p&gt;
   &lt;/div&gt;
-  &lt;figcaption&gt;docker build gera a imagem; docker run cria o container.&lt;/figcaption&gt;
+  &lt;figcaption&gt;Do Dockerfile ao container — e o vai-e-volta com o registry.&lt;/figcaption&gt;
 &lt;/figure&gt;</code></pre>
           </div>
         </div>
@@ -405,5 +399,6 @@ CMD ["python", "app.py"]&lt;/code&gt;&lt;/pre&gt;
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

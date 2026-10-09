@@ -55,6 +55,81 @@
         <p class="hero-tagline">análise de dados Python</p>
         <div class="hero-meta"><span class="tag">python</span><span class="tag">data</span><span class="tag">analysis</span><span class="hero-stat">47 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Pandas</strong> é a biblioteca Python para dados tabulares: o <strong>DataFrame</strong> organiza linhas e colunas com rótulos e tipos, como uma planilha programável.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> ler dados de CSV, Excel, SQL e Parquet, fazer limpeza, seleção e filtro, agregação com <code>groupby</code>, junções e exportação.</li>
+            <li><strong>Quando usar:</strong> análise exploratória, relatórios, preparação de dados para modelos e ETLs que cabem na memória de uma máquina.</li>
+            <li><strong>Quando evitar:</strong> volumes maiores que a memória (use Polars, DuckDB ou Spark), processamento linha a linha em laços Python e cálculos numéricos puros, em que o NumPy é mais direto.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Series</h3>
+              <p>Coluna unidimensional com um índice e um único tipo de dado. Cada coluna de um DataFrame é uma Series.</p>
+            </article>
+            <article class="concept-card">
+              <h3>DataFrame</h3>
+              <p>Tabela bidimensional com colunas nomeadas, possivelmente de tipos diferentes, e um índice para as linhas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Índice</h3>
+              <p>Rótulos das linhas. <code>.loc</code> seleciona por rótulo e <code>.iloc</code> por posição; joins e alinhamentos usam o índice.</p>
+            </article>
+            <article class="concept-card">
+              <h3>dtype</h3>
+              <p>Tipo de cada coluna (<code>int64</code>, <code>float64</code>, <code>object</code>, <code>datetime64</code>, <code>category</code>). O tipo certo economiza memória e evita erros.</p>
+            </article>
+            <article class="concept-card">
+              <h3>groupby</h3>
+              <p>Divide o DataFrame em grupos por uma ou mais chaves, aplica uma agregação em cada grupo e combina o resultado.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Merge e join</h3>
+              <p>Combina DataFrames por colunas-chave, como um JOIN de SQL, com <code>how='inner'</code>, <code>'left'</code>, <code>'right'</code> ou <code>'outer'</code>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  DF[DataFrame: vendas] --> S{split por região}
+  S --> G1[Sul]
+  S --> G2[Sudeste]
+  S --> G3[Norte]
+  G1 -->|sum| A1[Sul: 120]
+  G2 -->|sum| A2[Sudeste: 340]
+  G3 -->|sum| A3[Norte: 80]
+  A1 --> R[(Resultado combinado)]
+  A2 --> R
+  A3 --> R
+</script>
+              <p class="diagram-fallback">O groupby divide o DataFrame de vendas em grupos por região (split), aplica a soma em cada grupo (apply) e junta os totais numa nova tabela (combine).</p>
+            </div>
+            <figcaption>Split-apply-combine: o modelo mental por trás do df.groupby('regiao')['valor'].sum().</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -142,6 +217,34 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">SettingWithCopyWarning</td><td class="err-cause" data-label="Causa">Você atribuiu valores num recorte que pode ser uma cópia (<code>df[df.x &gt; 0]['y'] = 1</code>), e a alteração pode não chegar ao DataFrame original.</td><td class="err-fix" data-label="Correção">Use uma única operação com <code>.loc</code>: <code>df.loc[df.x &gt; 0, 'y'] = 1</code>, ou faça <code>.copy()</code> se quiser mesmo um novo DataFrame.</td></tr>
+              <tr><td class="err-label" data-label="Erro">KeyError: 'coluna'</td><td class="err-cause" data-label="Causa">A coluna não existe com esse nome exato: espaços, maiúsculas ou cabeçalho lido como dado.</td><td class="err-fix" data-label="Correção">Confira <code>df.columns.tolist()</code> e normalize com <code>df.columns = df.columns.str.strip().str.lower()</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Merge multiplicou as linhas</td><td class="err-cause" data-label="Causa">A chave de junção se repete nos dois lados, e o merge gera uma linha para cada combinação.</td><td class="err-fix" data-label="Correção">Verifique duplicatas com <code>df.duplicated('chave').sum()</code> e use <code>validate='one_to_one'</code> ou <code>'many_to_one'</code> no <code>merge</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://pandas.pydata.org/docs/user_guide/index.html" target="_blank" rel="noopener">User Guide</a></li>
+            <li><a href="https://pandas.pydata.org/docs/reference/index.html" target="_blank" rel="noopener">Referência da API</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -157,5 +260,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

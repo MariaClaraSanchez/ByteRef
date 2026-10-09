@@ -55,6 +55,80 @@
         <p class="hero-tagline">banco de dados relacional</p>
         <div class="hero-meta"><span class="tag">sql</span><span class="tag">database</span><span class="tag">mysql</span><span class="hero-stat">41 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>MySQL</strong> é um banco relacional open source muito difundido em aplicações web. Com o engine InnoDB, oferece transações, chaves estrangeiras e replicação nativa.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> armazenar dados transacionais de aplicações, escalar leitura com réplicas e operar com ferramentas maduras de backup e administração.</li>
+            <li><strong>Quando usar:</strong> stacks que já usam MySQL ou MariaDB, aplicações web com muitas leituras simples e ambientes com hospedagem gerenciada (Cloud SQL, RDS).</li>
+            <li><strong>Quando evitar:</strong> consultas analíticas pesadas ou recursos avançados como JSONB indexável e tipos customizados, cenários em que o PostgreSQL costuma ser mais adequado.</li>
+          </ul>
+          <aside class="callout" data-kind="info">
+            <p class="callout-title">DDL e transações</p>
+            <p>No MySQL, comandos de estrutura (DDL) como <code>ALTER TABLE</code> fazem commit implícito: não dá para desfazê-los com <code>ROLLBACK</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>InnoDB</h3>
+              <p>Engine de armazenamento padrão: transações ACID, bloqueio por linha, chaves estrangeiras e recuperação após falha.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Índice</h3>
+              <p>Acelera buscas e ordenações. No InnoDB, a chave primária é o índice clusterizado e os índices secundários apontam para ela.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Transação</h3>
+              <p>Agrupa comandos que precisam acontecer juntos com <code>START TRANSACTION</code>, <code>COMMIT</code> e <code>ROLLBACK</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>EXPLAIN</h3>
+              <p>Mostra como o MySQL vai executar a query: ordem das tabelas, índice usado e linhas estimadas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Binlog e replicação</h3>
+              <p>O binary log registra as alterações da primária; as réplicas leem esse log e reaplicam as mudanças.</p>
+            </article>
+            <article class="concept-card">
+              <h3>mysqldump e backup</h3>
+              <p>Gera um backup lógico em SQL. Com <code>--single-transaction</code>, faz uma cópia consistente de tabelas InnoDB sem travar escrita.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  APP[Aplicação] -->|INSERT / UPDATE| PRI[(Primária)]
+  PRI -->|grava| BIN[Binlog]
+  BIN -->|IO thread| RL[Relay log]
+  RL -->|SQL thread| REP[(Réplica)]
+  LEIT[Leituras] --> REP
+</script>
+              <p class="diagram-fallback">A aplicação escreve na primária, que registra as alterações no binlog. Na réplica, a IO thread copia o binlog para o relay log e a SQL thread reaplica as mudanças, deixando a réplica pronta para leituras.</p>
+            </div>
+            <figcaption>Replicação assíncrona: escritas na primária, leituras podem ir para a réplica (com algum atraso).</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -166,6 +240,34 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">ERROR 1045: Access denied for user</td><td class="err-cause" data-label="Causa">Usuário, senha ou host não conferem: no MySQL, <code>'app'@'localhost'</code> e <code>'app'@'%'</code> são usuários diferentes.</td><td class="err-fix" data-label="Correção">Confira com <code>SELECT user, host FROM mysql.user;</code> e crie ou ajuste o usuário para o host certo com <code>CREATE USER</code> e <code>GRANT</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">ERROR 1040: Too many connections</td><td class="err-cause" data-label="Causa">A aplicação abriu mais conexões que <code>max_connections</code>, geralmente por falta de pool ou por conexões que não são fechadas.</td><td class="err-fix" data-label="Correção">Use pool de conexões na aplicação, feche as conexões e, se necessário, aumente <code>max_connections</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Emojis viram ???? ou erro 1366</td><td class="err-cause" data-label="Causa">A tabela usa <code>utf8</code> (utf8mb3), que só guarda até 3 bytes por caractere.</td><td class="err-fix" data-label="Correção">Use <code>utf8mb4</code>: <code>ALTER TABLE t CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</code>, e o mesmo charset na conexão.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener">Documentação do MySQL</a></li>
+            <li><a href="https://dev.mysql.com/doc/refman/8.4/en/" target="_blank" rel="noopener">Manual de referência (8.4 LTS)</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -181,5 +283,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

@@ -55,6 +55,76 @@
         <p class="hero-tagline">produtividade no terminal</p>
         <div class="hero-meta"><span class="tag">bash</span><span class="tag">grep</span><span class="tag">ssh</span><span class="hero-stat">30 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Bash</strong> é o shell padrão da maioria das distribuições Linux: interpreta comandos, encadeia programas e automatiza tarefas com scripts.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> buscar e transformar texto, inspecionar processos e rede, acessar servidores via SSH e automatizar rotinas sem instalar nada.</li>
+            <li><strong>Quando usar:</strong> tarefas operacionais rápidas, scripts de deploy e manutenção curtos, investigação de servidores e pipelines que combinam ferramentas como <code>grep</code>, <code>awk</code> e <code>sed</code>.</li>
+            <li><strong>Quando evitar:</strong> lógica complexa com estruturas de dados, tratamento de erro elaborado ou scripts com centenas de linhas; nesses casos, Python é mais legível e testável.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>stdin, stdout e stderr</h3>
+              <p>Todo processo lê da entrada padrão (stdin), escreve resultados na saída padrão (stdout) e erros na saída de erro (stderr), que são canais separados.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Pipe</h3>
+              <p>O <code>|</code> liga o stdout de um comando ao stdin do próximo, montando pipelines como <code>cat log | grep ERROR | wc -l</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Redirecionamento</h3>
+              <p><code>&gt;</code> grava o stdout num arquivo, <code>&gt;&gt;</code> acrescenta, <code>2&gt;</code> redireciona o stderr e <code>2&gt;&amp;1</code> junta os dois.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Processo e PID</h3>
+              <p>Cada programa em execução é um processo com um PID. <code>ps</code>, <code>top</code> e <code>kill</code> inspecionam e controlam processos.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Exit code</h3>
+              <p>Número que o comando devolve ao terminar: 0 é sucesso, outro valor é erro. <code>&amp;&amp;</code> e <code>||</code> decidem o próximo passo com base nele.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Chave SSH</h3>
+              <p>Par de chaves pública e privada para autenticar em servidores sem senha. A pública vai para <code>~/.ssh/authorized_keys</code> do servidor.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  IN[stdin: arquivo ou teclado] --> A[grep ERROR]
+  A -->|pipe| B[sort]
+  B -->|pipe| C[uniq -c]
+  C -->|stdout| OUT[(resumo.txt)]
+  A -.->|"stderr via 2>"| ERR[(erros.log)]
+</script>
+              <p class="diagram-fallback">O grep lê do stdin e passa as linhas filtradas pelo pipe para o sort e depois para o uniq -c. O resultado final sai no stdout e é redirecionado para resumo.txt, enquanto as mensagens de erro vão pelo stderr para erros.log.</p>
+            </div>
+            <figcaption>Pipes conectam stdout ao stdin; o stderr segue por um canal separado.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -115,6 +185,38 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">Permission denied (publickey)</td><td class="err-cause" data-label="Causa">O servidor não reconheceu sua chave: a chave pública não está em <code>authorized_keys</code>, o SSH está usando outra chave ou as permissões de <code>~/.ssh</code> estão abertas demais.</td><td class="err-fix" data-label="Correção">Teste com <code>ssh -v usuario@host</code>, indique a chave com <code>-i ~/.ssh/id_ed25519</code> e ajuste <code>chmod 700 ~/.ssh</code> e <code>chmod 600 ~/.ssh/id_ed25519</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">command not found</td><td class="err-cause" data-label="Causa">O programa não está instalado ou a pasta dele não está no <code>PATH</code>.</td><td class="err-fix" data-label="Correção">Confira com <code>which programa</code> e <code>echo $PATH</code>; adicione a pasta com <code>export PATH="$HOME/.local/bin:$PATH"</code> no <code>~/.bashrc</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">rm apagou mais do que devia</td><td class="err-cause" data-label="Causa">Uma variável vazia transformou <code>rm -rf "$DIR"/*</code> em <code>rm -rf /*</code>, ou o glob casou com arquivos inesperados.</td><td class="err-fix" data-label="Correção">Use <code>set -u</code> e <code>${DIR:?}</code> para abortar com variável vazia, e rode o comando com <code>ls</code> antes do <code>rm</code>.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">rm não tem lixeira</p>
+            <p><code>rm -rf</code> apaga sem confirmação e sem volta. Em scripts, use <code>set -euo pipefail</code> e proteja variáveis com <code>${VAR:?}</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener">Manual do Bash (GNU)</a></li>
+            <li><a href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener">Man pages do Linux</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -130,5 +232,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

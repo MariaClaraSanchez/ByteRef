@@ -55,6 +55,95 @@
         <p class="hero-tagline">version control & código</p>
         <div class="hero-meta"><span class="tag">git</span><span class="tag">github</span><span class="tag">merge</span><span class="hero-stat">15 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Git</strong> é um controle de versão distribuído: cada clone tem o histórico completo de commits. O <strong>GitHub</strong> hospeda os repositórios remotos e organiza a revisão de código em pull requests.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> registrar a evolução do código, trabalhar em paralelo em branches, desfazer erros e integrar mudanças de várias pessoas.</li>
+            <li><strong>Quando usar:</strong> em qualquer projeto de código ou texto versionável, inclusive solo; para colaborar com revisão via pull request.</li>
+            <li><strong>Quando evitar:</strong> arquivos binários grandes ou que mudam muito (vídeos, datasets) sem Git LFS, e segredos como senhas e chaves, que ficam no histórico mesmo depois de apagados.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Working tree, stage e commit</h3>
+              <p>Você edita na working tree, escolhe o que entra com <code>git add</code> (stage) e grava um snapshot com <code>git commit</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Branch</h3>
+              <p>Ponteiro móvel para um commit. Permite desenvolver uma feature isolada da <code>main</code> e integrá-la depois.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Remote</h3>
+              <p>Cópia do repositório em outro lugar (geralmente <code>origin</code> no GitHub). <code>push</code> envia commits e <code>pull</code>/<code>fetch</code> trazem.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Merge vs Rebase</h3>
+              <p>Merge junta branches criando um commit de merge; rebase reaplica seus commits sobre outra base, deixando o histórico linear.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Pull Request</h3>
+              <p>Pedido no GitHub para integrar uma branch na outra, com diff, revisão, comentários e checagens de CI.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Stash</h3>
+              <p>Gaveta temporária para alterações não commitadas, útil para trocar de branch sem perder o trabalho.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+gitGraph
+  commit id: "init"
+  commit id: "readme"
+  branch feature/login
+  checkout feature/login
+  commit id: "form"
+  commit id: "validação"
+  checkout main
+  commit id: "hotfix"
+  merge feature/login id: "PR #12"
+  commit id: "release"
+</script>
+              <p class="diagram-fallback">A branch feature/login sai da main, recebe dois commits e, enquanto isso, a main recebe um hotfix. O pull request faz o merge da feature na main, criando um commit de merge.</p>
+            </div>
+            <figcaption>Fluxo de feature branch: desenvolve isolado, integra via pull request.</figcaption>
+          </figure>
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  WT[Working tree] -->|git add| ST[Stage]
+  ST -->|git commit| LOC[(Repositório local)]
+  LOC -->|git push| REM[(Remote: GitHub)]
+  REM -->|git fetch / pull| LOC
+  LOC -->|git switch / restore| WT
+</script>
+              <p class="diagram-fallback">As alterações saem da working tree para o stage com git add, viram commit no repositório local com git commit e vão para o GitHub com git push. Fetch e pull trazem commits do remote.</p>
+            </div>
+            <figcaption>As quatro áreas do Git e os comandos que movem as mudanças entre elas.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -97,21 +186,42 @@
         </div>
         <div class="area-body" id="area-pitfalls">
           <table class="pitfalls">
-            <thead><tr><th>Situação</th><th>Causa</th><th>Comando</th></tr></thead>
+            <thead><tr><th>Situação</th><th>Quando usar</th><th>Comando</th></tr></thead>
             <tbody>
-              <tr><td class="err-label" data-label="Situação">Reset suave</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git reset --soft HEAD~1</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Reset completo</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git reset --hard HEAD~1</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Remover do stage</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git restore --staged arquivo.txt</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Descartar alterações</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git checkout -- arquivo.txt</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Ver histórico compacto</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git log --oneline --graph --all</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Guardar alterações</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git stash push -m "work-in-progress"</code></td></tr>
-              <tr><td class="err-label" data-label="Situação">Restaurar stash</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Comando"><code>git stash pop</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Reset suave</td><td class="err-cause" data-label="Quando usar">Desfazer o último commit mantendo as mudanças no stage, por exemplo para corrigir a mensagem ou incluir um arquivo esquecido.</td><td class="err-fix" data-label="Comando"><code>git reset --soft HEAD~1</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Reset completo</td><td class="err-cause" data-label="Quando usar">Descartar o último commit e todas as mudanças locais. Só use se o commit ainda não foi enviado.</td><td class="err-fix" data-label="Comando"><code>git reset --hard HEAD~1</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Remover do stage</td><td class="err-cause" data-label="Quando usar">Tirar do stage um arquivo adicionado por engano, sem perder as alterações.</td><td class="err-fix" data-label="Comando"><code>git restore --staged arquivo.txt</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Descartar alterações</td><td class="err-cause" data-label="Quando usar">Voltar um arquivo ao estado do último commit, perdendo as alterações locais dele.</td><td class="err-fix" data-label="Comando"><code>git checkout -- arquivo.txt</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Ver histórico compacto</td><td class="err-cause" data-label="Quando usar">Entender o histórico e ver onde cada branch está.</td><td class="err-fix" data-label="Comando"><code>git log --oneline --graph --all</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Guardar alterações</td><td class="err-cause" data-label="Quando usar">Trocar de branch sem commitar trabalho em andamento.</td><td class="err-fix" data-label="Comando"><code>git stash push -m "work-in-progress"</code></td></tr>
+              <tr><td class="err-label" data-label="Situação">Restaurar stash</td><td class="err-cause" data-label="Quando usar">Retomar o trabalho guardado com <code>git stash</code>.</td><td class="err-fix" data-label="Comando"><code>git stash pop</code></td></tr>
+            </tbody>
+          </table>
+          <h3 class="pitfalls-title">Erros Frequentes</h3>
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">CONFLICT (content): Merge conflict in arquivo</td><td class="err-cause" data-label="Causa">As duas branches alteraram as mesmas linhas, e o Git não sabe qual versão manter.</td><td class="err-fix" data-label="Correção">Edite os trechos entre <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>, depois <code>git add arquivo</code> e <code>git commit</code> (ou <code>git rebase --continue</code>).</td></tr>
+              <tr><td class="err-label" data-label="Erro">! [rejected] main -> main (non-fast-forward)</td><td class="err-cause" data-label="Causa">O remote tem commits que você ainda não tem localmente.</td><td class="err-fix" data-label="Correção">Traga as mudanças com <code>git pull --rebase</code> e envie de novo. Evite <code>--force</code> em branches compartilhadas.</td></tr>
+              <tr><td class="err-label" data-label="Erro">You are in 'detached HEAD' state</td><td class="err-cause" data-label="Causa">Você fez checkout de um commit ou tag em vez de uma branch; novos commits ficam sem branch.</td><td class="err-fix" data-label="Correção">Crie uma branch para guardar o trabalho: <code>git switch -c minha-branch</code>, ou volte com <code>git switch main</code>.</td></tr>
             </tbody>
           </table>
           <aside class="callout" data-kind="danger">
             <p class="callout-title">Comandos destrutivos</p>
-            <p><code>git reset --hard</code> e <code>git checkout -- arquivo</code> descartam alterações locais não commitadas de forma permanente. Na dúvida, rode <code>git stash</code> antes.</p>
+            <p><code>git reset --hard</code> e <code>git checkout -- arquivo</code> descartam alterações não commitadas de forma permanente. Se precisar reescrever o histórico remoto, prefira <code>git push --force-with-lease</code> a <code>--force</code>, e nunca na <code>main</code> compartilhada.</p>
           </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://git-scm.com/docs" target="_blank" rel="noopener">Documentação do Git</a></li>
+            <li><a href="https://docs.github.com/en/pull-requests" target="_blank" rel="noopener">Pull requests no GitHub</a></li>
+          </ul>
         </div>
       </section>
     </main>
@@ -129,5 +239,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

@@ -81,6 +81,47 @@
 
 .area-body > p strong { color: var(--text-1); }
 
+.summary-list {
+  list-style: none;
+  max-width: 78ch;
+  display: grid;
+  gap: var(--space-2);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.summary-list li {
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--border);
+}
+
+.summary-list strong { color: var(--text-1); }
+
+.summary-list code,
+.diagram-fallback code {
+  font-size: var(--fs-xs);
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0 5px;
+  color: var(--code);
+}
+
+.area-body > .summary-list + .callout,
+.area-body > * + .pitfalls,
+.pitfalls + .pitfalls-title { margin-top: var(--space-4); }
+
+.pitfalls-title {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-2);
+  margin-bottom: var(--space-2);
+}
+
+.pitfalls + .callout { margin-top: var(--space-4); }
+
 .area-body > * + .callout,
 .area-body > * + .concept-grid,
 .area-body > * + .diagram { margin-top: var(--space-4); }
@@ -409,11 +450,27 @@ td.code code {
   padding: var(--space-5);
   overflow-x: auto;
   display: flex;
-  justify-content: center;
+  justify-content: safe center;
+  align-items: center;
   color: var(--diagram-text);
 }
 
 .diagram-body svg { height: auto; flex-shrink: 0; }
+/* Desktop: encolhe para caber; celular: tamanho real com rolagem interna */
+.diagram-body svg[id^="dg-"] { max-width: 100%; height: auto; }
+
+.diagram-src { display: none !important; }
+
+.diagram-fallback {
+  max-width: 60ch;
+  margin: 0 auto;
+  text-align: center;
+  font-size: var(--fs-md);
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.diagram[data-state="loading"] .diagram-fallback { opacity: 0.6; }
 .diagram-body svg .node { fill: var(--diagram-node); stroke: var(--diagram-line); }
 .diagram-body svg .edge { fill: none; stroke: var(--diagram-line); stroke-width: 1.5; }
 .diagram-body svg text {
@@ -662,6 +719,7 @@ a.tech-card:hover {
 }
 
 @media (max-width: 640px) {
+  .diagram-body svg[id^="dg-"] { max-width: none; }
   .page-hero { grid-template-columns: 1fr; padding: var(--space-5); }
   .hero-icon { grid-row: auto; width: 56px; height: 56px; font-size: 32px; }
   .page-hero h1 { font-size: 24px; }

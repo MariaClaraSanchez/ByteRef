@@ -16,7 +16,8 @@
 ### ✨ Features
 
 - **📍 Página Inicial**: Tecnologias agrupadas por área (Cloud & DevOps, Terminal, Backend & Bancos, Dados, IA & LLM)
-- **🧱 Estrutura padrão por página**: Resumo → Conceitos → Diagramas → Comandos → Armadilhas → Links oficiais
+- **🧱 Estrutura padrão por página**: Resumo → Conceitos-chave → Como funciona (diagramas) → Comandos → Armadilhas → Links oficiais
+- **🗺️ Diagramas Mermaid**: Fluxos e arquiteturas desenhados no navegador, nas cores do tema, com descrição em texto quando estiver offline
 - **📊 Tabelas Densas**: Descrição ↔ Código com botão de cópia (⧉) em cada linha
 - **🔍 Busca Real-time**: Filtra e destaca comandos na página atual (na home, filtra as tecnologias)
 - **🌓 Dark/Light Mode**: Alterável com um clique, persistente e sem "piscar" ao carregar
@@ -24,7 +25,7 @@
 - **🧩 Vitrine de Componentes**: [`src/pages/componentes.html`](src/pages/componentes.html) com markup pronto para copiar
 - **♿ Acessível & Responsivo**: Contraste AA nos dois temas, foco visível, funciona em 375px
 - **⌨️ Atalhos**: `/` para buscar, `Esc` para limpar
-- **🚀 Production-ready**: Static HTML/CSS/JS, zero dependências
+- **🚀 Production-ready**: Static HTML/CSS/JS, sem build; única dependência externa é o Mermaid (CDN), carregado só em páginas com diagrama
 
 🌐 **Acesse online:** [https://mariaclarasanchez.github.io/ByteRef/](https://mariaclarasanchez.github.io/ByteRef/)
 
@@ -99,6 +100,7 @@ ByteRef/
 │  ├─ js/
 │  │  ├─ theme-init.js      Aplica o tema salvo antes da página aparecer
 │  │  ├─ registry.js        Lista de tecnologias (fonte única da navegação)
+│  │  ├─ diagrams.js        Carrega o Mermaid sob demanda e desenha os diagramas
 │  │  └─ script.js          Sidebar, home, busca, tema, cópia, atalhos
 │  └─ pages/                Subpáginas por tecnologia
 │     ├─ componentes.html   🧩 Vitrine de componentes para contribuidores
@@ -162,6 +164,28 @@ Abra a vitrine [`src/pages/componentes.html`](src/pages/componentes.html), copie
 </div>
 ```
 
+#### Adicionar um diagrama
+
+Na área "Como funciona" da página, cole o componente de diagrama da vitrine:
+
+```html
+<figure class="diagram" data-diagram>
+  <div class="diagram-body">
+    <script type="text/plain" class="diagram-src">
+flowchart LR
+  A[Dockerfile] -->|docker build| B[(Imagem)]
+  B -->|docker run| C[Container]
+    </script>
+    <p class="diagram-fallback">Descrição do mesmo fluxo em texto (aparece se o diagrama não carregar).</p>
+  </div>
+  <figcaption>Uma frase dizendo o que observar.</figcaption>
+</figure>
+```
+
+Use [Mermaid](https://mermaid.js.org/) (`flowchart`, `sequenceDiagram`, `gitGraph`…) sem cores fixas: elas vêm do tema. A página precisa incluir `<script src="../js/diagrams.js"></script>` depois do `script.js`. Teste a sintaxe no [Mermaid Live Editor](https://mermaid.live/).
+
+#### Avisos em comandos perigosos
+
 Comandos destrutivos (`rm -rf`, `DROP`, `push --force`, `prune`…) devem vir com um aviso `<aside class="callout" data-kind="danger">`. Não use `style=""` nem `<style>` nas páginas: todo estilo vem do CSS compartilhado.
 
 #### Adicionar uma nova tecnologia
@@ -199,6 +223,9 @@ R: Edite os tokens em `src/css/tokens.css` (`:root` para o tema escuro, `:root[d
 
 **P: Posso hospedar em outro lugar?**  
 R: Sim, é 100% estático! Suba o repositório para qualquer host (Vercel, Netlify, etc.).
+
+**P: E sem internet?**  
+R: Tudo funciona, exceto o desenho dos diagramas (o Mermaid vem do jsDelivr, versão fixada 12.1.0). No lugar de cada diagrama aparece a descrição em texto.
 
 ---
 

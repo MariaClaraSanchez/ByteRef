@@ -168,6 +168,7 @@ themeToggle.addEventListener('click', () => {
   root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
   try { localStorage.setItem('sr-theme', root.dataset.theme); } catch { /* storage bloqueado */ }
   syncThemeButton();
+  document.dispatchEvent(new CustomEvent('byteref:themechange', { detail: { theme: root.dataset.theme } }));
 });
 
 /* ─── COLAPSO DE ÁREAS ─── */
@@ -243,9 +244,20 @@ function showToast(msg) {
 
 /* ─── BUSCA ─── */
 const HIGHLIGHT_TARGETS = [
-  'td.desc', 'td.code code', '.pitfalls td', '.area-body > p',
-  '.callout', '.concept-card', '.diagram figcaption', '.code-block pre',
+  'td.desc', 'td.code code', '.pitfalls td', '.area-body > p', '.summary-list li',
+  '.callout', '.concept-card', '.diagram figcaption', '.diagram-fallback', '.code-block pre',
 ].join(', ');
+
+// Texto visível de um elemento, sem o conteúdo de <script> (ex.: fonte dos diagramas)
+function visibleText(el) {
+  const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode: node => (node.parentElement.closest('script') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
+  });
+  let text = '';
+  let n;
+  while ((n = walk.nextNode())) text += n.nodeValue;
+  return text;
+}
 
 let searchDebounce;
 
@@ -288,7 +300,7 @@ function doSearch() {
 
   // Páginas: filtra as áreas e destaca os trechos
   searchableAreas().forEach(area => {
-    if (!area.textContent.toLowerCase().includes(q)) {
+    if (!visibleText(area).toLowerCase().includes(q)) {
       area.classList.add('sr-hidden');
       return;
     }
@@ -328,7 +340,7 @@ function highlightNode(el, q) {
   const nodes = [];
   let n;
   while ((n = walk.nextNode())) {
-    if (!n.parentElement.closest('mark.hl, button')) nodes.push(n);
+    if (!n.parentElement.closest('mark.hl, button, script')) nodes.push(n);
   }
 
   const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');

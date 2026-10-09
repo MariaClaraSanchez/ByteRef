@@ -55,6 +55,85 @@
         <p class="hero-tagline">microframework web Python</p>
         <div class="hero-meta"><span class="tag">python</span><span class="tag">web</span><span class="tag">api</span><span class="hero-stat">30 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Flask</strong> é um microframework web em Python: entrega roteamento, requisição/resposta e templates, e deixa o resto (banco de dados, autenticação, validação) para extensões que você escolhe.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> criar APIs e aplicações web pequenas e médias com pouco código e controle total sobre as dependências.</li>
+            <li><strong>Quando usar:</strong> APIs REST, microsserviços, protótipos e painéis internos; projetos em que você quer escolher cada peça.</li>
+            <li><strong>Quando evitar:</strong> quando você quer tudo pronto (admin, ORM, autenticação) como no Django, ou quando a API é fortemente assíncrona e tipada, cenário em que o FastAPI se encaixa melhor. Para deploy, use um servidor WSGI como Gunicorn, nunca o servidor de desenvolvimento.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>App e factory</h3>
+              <p>O objeto <code>Flask(__name__)</code> é a aplicação. A função factory <code>create_app()</code> cria e configura a app, facilitando testes e múltiplos ambientes.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Rota e view</h3>
+              <p><code>@app.route('/users/&lt;int:id&gt;')</code> liga uma URL e métodos HTTP a uma função (view) que devolve a resposta.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Blueprint</h3>
+              <p>Agrupa rotas, templates e arquivos estáticos de uma parte da aplicação, registrados na app com um prefixo de URL.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Request e Response</h3>
+              <p><code>request</code> traz dados da requisição (args, JSON, form, headers); a view devolve texto, JSON, template ou um objeto <code>Response</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Contexto de aplicação</h3>
+              <p><code>current_app</code>, <code>g</code> e <code>request</code> só existem durante uma requisição ou dentro de <code>app.app_context()</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Extensões</h3>
+              <p>Pacotes como Flask-SQLAlchemy (banco), Flask-Login (autenticação) e Flask-Migrate somam recursos sem acoplar o núcleo.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+sequenceDiagram
+  participant C as Cliente
+  participant W as Gunicorn (WSGI)
+  participant F as Flask
+  participant V as View
+  participant DB as Banco
+  C->>W: GET /users/42
+  W->>F: chama a app WSGI
+  F->>F: casa a URL com a rota
+  F->>V: user_detail(id=42)
+  V->>DB: SELECT * FROM users WHERE id = 42
+  DB-->>V: linha
+  V-->>F: jsonify(user)
+  F-->>W: Response 200
+  W-->>C: JSON
+</script>
+              <p class="diagram-fallback">O cliente faz a requisição ao servidor WSGI (Gunicorn), que chama a aplicação Flask. O Flask encontra a rota correspondente e executa a view, que consulta o banco e devolve um JSON, enviado de volta ao cliente como resposta 200.</p>
+            </div>
+            <figcaption>O caminho de uma requisição: servidor WSGI, roteamento, view e resposta.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -189,6 +268,38 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">RuntimeError: Working outside of application context</td><td class="err-cause" data-label="Causa">Código usa <code>current_app</code>, <code>db</code> ou <code>g</code> fora de uma requisição, por exemplo num script ou no shell.</td><td class="err-fix" data-label="Correção">Envolva o código em <code>with app.app_context():</code> ou use <code>flask shell</code>, que já cria o contexto.</td></tr>
+              <tr><td class="err-label" data-label="Erro">404 em rota que existe</td><td class="err-cause" data-label="Causa">A barra final não bate: <code>/users</code> e <code>/users/</code> são rotas diferentes, ou o blueprint foi registrado com outro <code>url_prefix</code>.</td><td class="err-fix" data-label="Correção">Liste as rotas com <code>flask routes</code> e padronize a barra final na definição.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Debugger exposto em produção</td><td class="err-cause" data-label="Causa">A app rodou com <code>debug=True</code> ou <code>flask run --debug</code> num servidor público; o debugger permite executar código remotamente.</td><td class="err-fix" data-label="Correção">Em produção, rode com <code>gunicorn 'app:create_app()'</code> e sem modo debug.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">Debug em produção é execução remota de código</p>
+            <p>O debugger interativo do Werkzeug executa Python enviado pelo navegador. Nunca ative o modo debug fora da sua máquina.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://flask.palletsprojects.com/en/stable/quickstart/" target="_blank" rel="noopener">Quickstart</a></li>
+            <li><a href="https://flask.palletsprojects.com/en/stable/patterns/" target="_blank" rel="noopener">Patterns</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -204,5 +315,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

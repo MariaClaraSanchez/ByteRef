@@ -55,6 +55,86 @@
         <p class="hero-tagline">banco de dados avançado</p>
         <div class="hero-meta"><span class="tag">sql</span><span class="tag">database</span><span class="tag">postgres</span><span class="hero-stat">41 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>PostgreSQL</strong> é um banco relacional open source focado em correção e recursos avançados: transações ACID, JSONB, window functions, CTEs e extensões como PostGIS.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> guardar dados estruturados com integridade, consultá-los com SQL rico e escalar leitura com índices e réplicas.</li>
+            <li><strong>Quando usar:</strong> a maioria das aplicações backend que precisam de consistência, consultas analíticas moderadas, dados semiestruturados em JSONB ou geográficos.</li>
+            <li><strong>Quando evitar:</strong> cache de altíssima frequência (use Redis), séries temporais ou eventos em volume massivo sem extensões específicas, e armazenamento de arquivos grandes.</li>
+          </ul>
+          <aside class="callout" data-kind="tip">
+            <p class="callout-title">Dica</p>
+            <p>Os comandos de estrutura (DDL: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>) também rodam dentro de transações no PostgreSQL, então dá para testar uma migração e desfazer com <code>ROLLBACK</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Banco, schema e tabela</h3>
+              <p>Um servidor tem vários bancos; cada banco tem schemas (o padrão é <code>public</code>), que agrupam tabelas, views e funções.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Índice</h3>
+              <p>Estrutura que acelera buscas. B-tree atende igualdade e intervalos; GIN atende JSONB, arrays e busca textual.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Transação e MVCC</h3>
+              <p>Cada transação enxerga um snapshot consistente; escritas criam novas versões das linhas, então leitores não bloqueiam escritores.</p>
+            </article>
+            <article class="concept-card">
+              <h3>EXPLAIN ANALYZE</h3>
+              <p>Mostra o plano que o planner escolheu e o tempo real de cada etapa. É o ponto de partida para otimizar uma query.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Window function</h3>
+              <p>Calcula sobre um conjunto de linhas relacionadas sem agrupá-las, como ranking com <code>ROW_NUMBER() OVER (PARTITION BY …)</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>VACUUM</h3>
+              <p>Recupera o espaço das versões antigas de linhas deixadas pelo MVCC e atualiza estatísticas. O autovacuum faz isso automaticamente.</p>
+            </article>
+            <article class="concept-card">
+              <h3>pg_dump e backup</h3>
+              <p><code>pg_dump</code> exporta um banco de forma consistente; <code>pg_restore</code> ou <code>psql</code> restauram o backup.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  Q[SQL] --> P[Parser]
+  P --> PL{Planner}
+  PL -->|tem índice seletivo| IS[Index Scan]
+  PL -->|sem índice ou tabela pequena| SS[Seq Scan]
+  IS --> EX[Executor]
+  SS --> EX
+  EX --> R[(Resultado)]
+</script>
+              <p class="diagram-fallback">A query passa pelo parser e chega ao planner, que estima custos e escolhe entre ler pelo índice (Index Scan) ou percorrer a tabela inteira (Seq Scan). O executor roda o plano escolhido e devolve o resultado.</p>
+            </div>
+            <figcaption>O planner decide entre índice e varredura completa; EXPLAIN ANALYZE mostra essa escolha.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -162,6 +242,34 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">could not connect to server / no pg_hba.conf entry</td><td class="err-cause" data-label="Causa">O servidor não escuta no endereço usado (<code>listen_addresses</code>) ou o <code>pg_hba.conf</code> não libera aquele usuário, banco e IP.</td><td class="err-fix" data-label="Correção">Ajuste <code>listen_addresses</code> no <code>postgresql.conf</code>, adicione a regra no <code>pg_hba.conf</code> e recarregue com <code>SELECT pg_reload_conf();</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">ERROR: deadlock detected</td><td class="err-cause" data-label="Causa">Duas transações bloquearam linhas em ordem inversa e cada uma espera a outra; o PostgreSQL aborta uma delas.</td><td class="err-fix" data-label="Correção">Acesse as linhas sempre na mesma ordem, mantenha transações curtas e trate o erro tentando de novo.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Query lenta com Seq Scan</td><td class="err-cause" data-label="Causa">Falta índice na coluna do <code>WHERE</code> ou <code>JOIN</code>, ou as estatísticas estão desatualizadas.</td><td class="err-fix" data-label="Correção">Rode <code>EXPLAIN ANALYZE</code>, crie o índice com <code>CREATE INDEX CONCURRENTLY</code> e atualize as estatísticas com <code>ANALYZE tabela;</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://www.postgresql.org/docs/current/" target="_blank" rel="noopener">Documentação oficial</a></li>
+            <li><a href="https://www.postgresql.org/docs/current/sql-commands.html" target="_blank" rel="noopener">Comandos SQL</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -177,5 +285,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

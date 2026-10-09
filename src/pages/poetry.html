@@ -55,6 +55,71 @@
         <p class="hero-tagline">gerenciamento de dependências Python</p>
         <div class="hero-meta"><span class="tag">python</span><span class="tag">packaging</span><span class="tag">dependencies</span><span class="hero-stat">40 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Poetry</strong> gerencia dependências, ambientes virtuais e empacotamento de projetos Python a partir de um único arquivo, o <code>pyproject.toml</code>.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> declarar dependências, resolver versões compatíveis, travar tudo num lock file e fazer build e publish de pacotes.</li>
+            <li><strong>Quando usar:</strong> aplicações e bibliotecas Python em equipe, em que todos (e o CI) precisam instalar exatamente as mesmas versões.</li>
+            <li><strong>Quando evitar:</strong> scripts avulsos sem dependências, ou projetos que já padronizaram outra ferramenta (uv, pip-tools, conda) e não ganham nada com a troca.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>pyproject.toml</h3>
+              <p>Arquivo padrão do Python que descreve o projeto: nome, versão, dependências com faixas de versão e configurações de ferramentas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>poetry.lock</h3>
+              <p>Registra a versão exata de cada pacote resolvido, inclusive as dependências indiretas. Deve ir para o Git.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Ambiente virtual</h3>
+              <p>Pasta isolada com o interpretador e os pacotes do projeto. O Poetry cria e usa um ambiente por projeto.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Grupos de dependências</h3>
+              <p>Separam dependências por uso, como <code>dev</code> ou <code>test</code>, instaladas ou não com <code>--with</code> e <code>--without</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Build e publish</h3>
+              <p><code>poetry build</code> gera wheel e sdist em <code>dist/</code>; <code>poetry publish</code> envia para o PyPI ou para um repositório privado.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  PY[pyproject.toml] -->|poetry lock| LK[poetry.lock]
+  LK -->|poetry install| VENV[(Ambiente virtual)]
+  PY -->|poetry build| DIST[dist/: wheel + sdist]
+  DIST -->|poetry publish| PYPI[(PyPI)]
+</script>
+              <p class="diagram-fallback">O pyproject.toml declara as dependências; poetry lock resolve as versões e grava o poetry.lock, que o poetry install usa para montar o ambiente virtual. Para distribuir, poetry build gera os pacotes em dist e poetry publish envia ao PyPI.</p>
+            </div>
+            <figcaption>Do pyproject ao ambiente instalado, e do pyproject ao pacote publicado.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -148,6 +213,34 @@
           </div>
         </div>
       </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">pyproject.toml changed significantly since poetry.lock was last generated</td><td class="err-cause" data-label="Causa">Alguém editou as dependências no <code>pyproject.toml</code> sem atualizar o lock.</td><td class="err-fix" data-label="Correção">Rode <code>poetry lock</code> e faça commit dos dois arquivos juntos.</td></tr>
+              <tr><td class="err-label" data-label="Erro">SolverProblemError: version solving failed</td><td class="err-cause" data-label="Causa">Duas dependências exigem faixas de versão incompatíveis de um mesmo pacote, ou a versão do Python do projeto não é suportada.</td><td class="err-fix" data-label="Correção">Leia a cadeia de conflito na mensagem, relaxe a restrição com <code>poetry add pacote@^X</code> ou ajuste <code>python</code> no <code>pyproject.toml</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">ModuleNotFoundError no editor ou no terminal</td><td class="err-cause" data-label="Causa">O editor ou o shell está usando outro interpretador, não o ambiente virtual do Poetry.</td><td class="err-fix" data-label="Correção">Veja o caminho com <code>poetry env info --path</code> e selecione esse interpretador no editor, ou rode o comando com <code>poetry run</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://python-poetry.org/docs/" target="_blank" rel="noopener">Documentação</a></li>
+            <li><a href="https://python-poetry.org/docs/cli/" target="_blank" rel="noopener">Referência da CLI</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -163,5 +256,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

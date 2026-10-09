@@ -55,6 +55,95 @@
         <p class="hero-tagline">containers & registry</p>
         <div class="hero-meta"><span class="tag">docker</span><span class="tag">build</span><span class="tag">run</span><span class="hero-stat">27 comandos</span></div>
       </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Docker</strong> empacota uma aplicação com tudo que ela precisa (runtime, bibliotecas, configuração) numa <strong>imagem</strong>, que roda isolada como <strong>container</strong> em qualquer máquina com Docker.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> garantir que a aplicação rode igual no notebook, no CI e em produção, e subir dependências (banco, cache) com um comando.</li>
+            <li><strong>Quando usar:</strong> empacotar serviços para deploy em Kubernetes, Cloud Run ou similares; montar ambientes de desenvolvimento com Docker Compose; isolar ferramentas sem instalá-las no host.</li>
+            <li><strong>Quando evitar:</strong> aplicações desktop com interface gráfica, cargas que precisam de acesso direto a hardware específico, ou quando um binário estático simples resolve.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Imagem</h3>
+              <p>Pacote somente leitura, em camadas, com o sistema de arquivos e a configuração da aplicação. É identificada por nome e tag (<code>app:1.0</code>).</p>
+            </article>
+            <article class="concept-card">
+              <h3>Container</h3>
+              <p>Instância em execução de uma imagem, com processo, rede e sistema de arquivos isolados. Pode ser criado, parado e removido sem afetar a imagem.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Dockerfile</h3>
+              <p>Receita para construir a imagem: cada instrução (<code>FROM</code>, <code>COPY</code>, <code>RUN</code>) gera uma camada, reaproveitada em cache nos próximos builds.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Registry</h3>
+              <p>Servidor que armazena e distribui imagens (Docker Hub, Artifact Registry, GHCR). <code>push</code> envia, <code>pull</code> baixa.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Volume</h3>
+              <p>Armazenamento que sobrevive ao container. Volumes nomeados são gerenciados pelo Docker; bind mounts apontam para uma pasta do host.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Docker Compose</h3>
+              <p>Arquivo YAML que descreve vários serviços (app, banco, cache) com redes e volumes, subidos juntos com <code>docker compose up</code>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  DF[Dockerfile] -->|docker build| IMG[(Imagem)]
+  IMG -->|docker run| C1[Container]
+  IMG -->|docker run| C2[Container]
+  IMG -->|docker push| REG[(Registry)]
+  REG -->|docker pull| IMG2[(Imagem em outra máquina)]
+</script>
+              <p class="diagram-fallback">O Dockerfile é construído em uma imagem com docker build. A mesma imagem pode rodar vários containers com docker run, e é enviada ao registry com docker push para ser baixada em outra máquina com docker pull.</p>
+            </div>
+            <figcaption>Uma imagem, vários containers: o registry é o ponto de troca entre máquinas.</figcaption>
+          </figure>
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  subgraph Host
+    PASTA["/home/eu/projeto"]
+    VOL[(Volume nomeado)]
+  end
+  subgraph Container
+    APP["/app"]
+    DATA["/data"]
+  end
+  PASTA -- bind mount --> APP
+  VOL -- volume --> DATA
+</script>
+              <p class="diagram-fallback">Um bind mount liga uma pasta do host a um caminho do container, útil para desenvolvimento. Um volume nomeado é gerenciado pelo Docker e guarda dados que precisam sobreviver ao container, como os de um banco.</p>
+            </div>
+            <figcaption>Bind mount para código em desenvolvimento; volume nomeado para dados persistentes.</figcaption>
+          </figure>
+        </div>
+      </section>
       <section class="page-area" data-area="commands">
         <div class="area-head">
           <h2>Comandos</h2>
@@ -125,14 +214,30 @@
           <table class="pitfalls">
             <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
             <tbody>
-              <tr><td class="err-label" data-label="Erro">Cannot connect to the Docker daemon</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Docker não está rodando. Inicie: <code>sudo systemctl start docker</code> ou no macOS: abra Docker Desktop.</td></tr>
-              <tr><td class="err-label" data-label="Erro">Permission denied</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Adicione seu usuário ao grupo docker: <code>sudo usermod -aG docker $USER</code> e faça logout/login.</td></tr>
-              <tr><td class="err-label" data-label="Erro">Port already in use</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Mude a porta do host: <code>docker run -p 8081:8080 ...</code> ou pare o processo usando a porta: <code>sudo lsof -i :8080</code>.</td></tr>
-              <tr><td class="err-label" data-label="Erro">No space left on device</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Limpe containers/imagens: <code>docker system prune -a</code>. Verifique espaço: <code>df -h</code>.</td></tr>
-              <tr><td class="err-label" data-label="Erro">exec user process caused "no such file or directory"</td><td class="err-cause" data-label="Causa">—</td><td class="err-fix" data-label="Correção">Problema de line endings no Windows. Use <code>dos2unix</code> no Dockerfile ou clone com <code>git config core.autocrlf false</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Cannot connect to the Docker daemon</td><td class="err-cause" data-label="Causa">O daemon do Docker não está rodando ou o socket <code>/var/run/docker.sock</code> não está acessível.</td><td class="err-fix" data-label="Correção">Docker não está rodando. Inicie: <code>sudo systemctl start docker</code> ou no macOS: abra Docker Desktop.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Permission denied</td><td class="err-cause" data-label="Causa">Seu usuário não pertence ao grupo <code>docker</code>, que tem permissão no socket do daemon.</td><td class="err-fix" data-label="Correção">Adicione seu usuário ao grupo docker: <code>sudo usermod -aG docker $USER</code> e faça logout/login.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Port already in use</td><td class="err-cause" data-label="Causa">Outro processo ou container já escuta essa porta no host.</td><td class="err-fix" data-label="Correção">Mude a porta do host: <code>docker run -p 8081:8080 ...</code> ou pare o processo usando a porta: <code>sudo lsof -i :8080</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">No space left on device</td><td class="err-cause" data-label="Causa">Imagens antigas, containers parados, volumes órfãos e cache de build acumulados ocupam o disco.</td><td class="err-fix" data-label="Correção">Limpe containers/imagens: <code>docker system prune -a</code>. Verifique espaço: <code>df -h</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">exec user process caused "no such file or directory"</td><td class="err-cause" data-label="Causa">O script de entrada tem quebras de linha do Windows (CRLF) ou o shebang aponta para um interpretador que não existe na imagem.</td><td class="err-fix" data-label="Correção">Problema de line endings no Windows. Use <code>dos2unix</code> no Dockerfile ou clone com <code>git config core.autocrlf false</code>.</td></tr>
             </tbody>
           </table>
-
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">Cuidado com o system prune</p>
+            <p><code>docker system prune -a</code> remove todas as imagens sem container em uso, além de containers parados e cache. Com <code>--volumes</code>, apaga também os dados dos volumes.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">Primeiros passos</a></li>
+            <li><a href="https://docs.docker.com/reference/cli/docker/" target="_blank" rel="noopener">Referência da CLI</a></li>
+            <li><a href="https://docs.docker.com/compose/" target="_blank" rel="noopener">Docker Compose</a></li>
+          </ul>
         </div>
       </section>
     </main>
@@ -150,5 +255,6 @@
 
 <script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>
