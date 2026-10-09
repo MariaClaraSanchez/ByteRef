@@ -1,0 +1,16 @@
+# Ferramentas locais de IA / especificação (não versionar)
+.claude/
+.specify/
+specs
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+.vscode/
+.idea/
+
+# Python (scripts de checagem)
+__pycache__/
+*.pyc

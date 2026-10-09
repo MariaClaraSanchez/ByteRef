@@ -15,12 +15,14 @@
 
 ### ✨ Features
 
-- **📍 Página Inicial**: Cards visuais para navegação rápida às tecnologias
+- **📍 Página Inicial**: Tecnologias agrupadas por área (Cloud & DevOps, Terminal, Backend & Bancos, Dados, IA & LLM)
+- **🧱 Estrutura padrão por página**: Resumo → Conceitos → Diagramas → Comandos → Armadilhas → Links oficiais
 - **📊 Tabelas Densas**: Descrição ↔ Código com botão de cópia (⧉) em cada linha
-- **🔍 Busca Real-time**: Encontra comandos em toda a documentação
-- **🌓 Dark/Light Mode**: Alterável com um clique, tema persistente
-- **⚙️ Seções Colapsáveis**: Expanda/retraia categorias conforme necessário
-- **📱 Responsivo**: Funciona em desktop, tablet e mobile
+- **🔍 Busca Real-time**: Filtra e destaca comandos na página atual (na home, filtra as tecnologias)
+- **🌓 Dark/Light Mode**: Alterável com um clique, persistente e sem "piscar" ao carregar
+- **⚙️ Seções Colapsáveis**: Cada área da página pode ser recolhida (mouse ou teclado)
+- **🧩 Vitrine de Componentes**: [`src/pages/componentes.html`](src/pages/componentes.html) com markup pronto para copiar
+- **♿ Acessível & Responsivo**: Contraste AA nos dois temas, foco visível, funciona em 375px
 - **⌨️ Atalhos**: `/` para buscar, `Esc` para limpar
 - **🚀 Production-ready**: Static HTML/CSS/JS, zero dependências
 
@@ -36,7 +38,7 @@
 | 2  | 🚢 Kubernetes   | Container Orchestration       | kubectl, Pods, Deployments, Services, Secrets, ConfigMaps     |
 | 3  | 🐳 Docker       | Containerization              | Build, Images, Containers, Registry, Compose                  |
 | 4  | 💻 CLI / Bash   | Terminal Productivity         | grep, find, ssh, scp, tar, top, awk, sed                      |
-| 5  | 🧪 Flask        | Web Framework / Python        | Routes, Blueprints, Database, Auth, Deploy, Testing           |
+| 5  | 🌶️ Flask        | Web Framework / Python        | Routes, Blueprints, Database, Auth, Deploy, Testing           |
 | 6  | 🐘 PostgreSQL   | Relational Database           | DDL, Queries, Window Functions, Performance, Backup           |
 | 7  | 🐬 MySQL        | Relational Database           | DDL, Queries, JSON, Replication, Admin, Optimization          |
 | 8  | ⚡ Redis        | Cache / In-Memory DB          | Keys, Hashes, Lists, Sets, Pub/Sub, Persistence               |
@@ -89,10 +91,17 @@ npx http-server . -p 8000
 ByteRef/
 ├─ src/
 │  ├─ css/
-│  │  └─ style.css          Estilos unificados (dark/light, responsivo)
+│  │  ├─ style.css          Entrada única (importa os 4 arquivos abaixo)
+│  │  ├─ tokens.css         Cores, espaçamentos e tipografia (dark/light)
+│  │  ├─ base.css           Reset, foco visível, movimento reduzido
+│  │  ├─ layout.css         Sidebar, topbar, conteúdo, rodapé
+│  │  └─ components.css     Áreas da página, tabelas, callouts, cards…
 │  ├─ js/
-│  │  └─ script.js          Busca, tema, sidebar, navegação
+│  │  ├─ theme-init.js      Aplica o tema salvo antes da página aparecer
+│  │  ├─ registry.js        Lista de tecnologias (fonte única da navegação)
+│  │  └─ script.js          Sidebar, home, busca, tema, cópia, atalhos
 │  └─ pages/                Subpáginas por tecnologia
+│     ├─ componentes.html   🧩 Vitrine de componentes para contribuidores
 │     ├─ bash.html
 │     ├─ docker.html
 │     ├─ flask.html
@@ -108,7 +117,7 @@ ByteRef/
 └─ README.md
 ```
 
-Cada página em `src/pages/` é **isolada e autônoma**: referencia o CSS e JS centralizados, possui link "← Home" no topo e a sidebar marca a página atual.
+Cada página em `src/pages/` segue o mesmo esqueleto e referencia o CSS e JS centralizados. A sidebar e os cards da home são gerados a partir de `src/js/registry.js`, então não há listas de links duplicadas nas páginas.
 
 ---
 
@@ -140,25 +149,27 @@ Em qualquer `src/pages/*.html`, encontre a seção desejada e adicione uma linha
 </tr>
 ```
 
-#### Adicionar uma nova seção
+#### Adicionar um bloco de comandos, aviso, conceito ou diagrama
 
-Dentro de `<div class="ref-grid">`, copie um `<div class="ref-block">` e adapte:
+Abra a vitrine [`src/pages/componentes.html`](src/pages/componentes.html), copie o markup do componente (botão ⧉ do bloco "HTML") e cole na área certa da página. Exemplo de bloco de comandos, dentro de `<div class="ref-grid">`:
 
 ```html
 <div class="ref-block">
-  <div class="ref-block-title">🤔 Sua Nova Seção</div>
+  <h3 class="ref-block-title">🤔 Sua Nova Seção</h3>
   <table class="cmd-table">
     <!-- linhas de comando aqui -->
   </table>
 </div>
 ```
 
+Comandos destrutivos (`rm -rf`, `DROP`, `push --force`, `prune`…) devem vir com um aviso `<aside class="callout" data-kind="danger">`. Não use `style=""` nem `<style>` nas páginas: todo estilo vem do CSS compartilhado.
+
 #### Adicionar uma nova tecnologia
 
-1. Copie um arquivo em `src/pages/` (ex: `bash.html`) e renomeie
-2. Altere o `<title>`, `data-tech`, emoji e conteúdo
-3. Adicione o card no `index.html` em `<div class="tech-grid">`
-4. Adicione o link na sidebar `<nav class="nav">` com um novo `<a class="nav-link">`
+1. Copie uma página em `src/pages/` (ex: `redis.html`), renomeie para `<id>.html` e ajuste `<title>`, `<body data-tech-id="<id>">`, o hero e o conteúdo
+2. Adicione uma entrada em `TECHS` no `src/js/registry.js` (`id`, `name`, `icon`, `tagline`, `group`, `page`, `cmds`)
+
+Pronto: a sidebar, a home e as contagens se atualizam sozinhas.
 
 ### 3. Testar Localmente
 
@@ -184,7 +195,7 @@ Abra um Pull Request em [github.com/mariaclarasanchez/ByteRef/pulls](https://git
 R: Sim! Siga o passo "Adicionar uma nova tecnologia" acima.
 
 **P: Como mudo o tema/cores?**  
-R: Edite as variáveis CSS em `src/css/style.css` em `:root { --bg: ..., --amber: ... }`.
+R: Edite os tokens em `src/css/tokens.css` (`:root` para o tema escuro, `:root[data-theme="light"]` para o claro). Mantenha contraste ≥ 4.5:1.
 
 **P: Posso hospedar em outro lugar?**  
 R: Sim, é 100% estático! Suba o repositório para qualquer host (Vercel, Netlify, etc.).
