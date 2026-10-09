@@ -40,4 +40,13 @@ const TECHS = [
 
   { id: 'pandas', name: 'Pandas', icon: '🐼', tagline: 'análise de dados Python',
     group: 'data', page: 'src/pages/pandas.html', cmds: 47 },
+  { id: 'streamlit', name: 'Streamlit', icon: '🎈', tagline: 'apps de dados em Python',
+    group: 'data', page: 'src/pages/streamlit.html', cmds: 13 },
+
+  { id: 'llm-apis', name: 'LLMs & APIs', icon: '🤖', tagline: 'tokens, contexto e chamadas de API',
+    group: 'ai-llm', page: 'src/pages/llm-apis.html', cmds: 13 },
+  { id: 'rag', name: 'RAG & Embeddings', icon: '📚', tagline: 'busca semântica e respostas com contexto',
+    group: 'ai-llm', page: 'src/pages/rag.html', cmds: 10 },
+  { id: 'agents', name: 'Agentes & Tool Use', icon: '🛠️', tagline: 'ferramentas, loop do agente e MCP',
+    group: 'ai-llm', page: 'src/pages/agents.html', cmds: 9 },
 ];

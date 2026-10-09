@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — RAG & Embeddings</title>
+  <script src="../js/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body data-tech-id="rag">
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../../index.html">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </a>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
+    </div>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
+      <div class="topbar-right">
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
+
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">📚</div>
+        <h1>RAG & Embeddings</h1>
+        <p class="hero-tagline">busca semântica e respostas com contexto</p>
+        <div class="hero-meta"><span class="tag">rag</span><span class="tag">embeddings</span><span class="tag">pgvector</span><span class="hero-stat">10 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>RAG</strong> (retrieval-augmented generation) responde perguntas buscando trechos relevantes nos seus documentos e enviando esses trechos ao LLM junto com a pergunta. A busca usa <strong>embeddings</strong>: vetores em que textos de significado parecido ficam próximos.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> fazer o modelo responder com base em dados privados ou atualizados (manuais, base de conhecimento, tickets) e citar a fonte.</li>
+            <li><strong>Quando usar:</strong> a resposta está em documentos seus, que mudam com frequência ou são grandes demais para caber inteiros no contexto (veja <a href="./llm-apis.html">janela de contexto</a>).</li>
+            <li><strong>Quando evitar:</strong> quando poucos documentos cabem inteiros no prompt (mais simples e preciso), ou quando a pergunta exige agregações exatas, que são melhor resolvidas com SQL.</li>
+          </ul>
+          <aside class="callout" data-kind="info">
+            <p class="callout-title">Embeddings com a API do Claude</p>
+            <p>A Anthropic não oferece modelo de embeddings próprio; a documentação oficial indica o Voyage AI. Os exemplos usam <code>voyage-4</code> (1024 dimensões) e pgvector no <a href="./postgresql.html">PostgreSQL</a>. Referência: out/2026.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Embedding</h3>
+              <p>Vetor de números que representa o significado de um texto. Textos parecidos geram vetores próximos, mesmo sem palavras em comum.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Similaridade</h3>
+              <p>Medida de proximidade entre vetores, geralmente cosseno. Com vetores normalizados, como os do Voyage AI, produto escalar e cosseno dão o mesmo ranking.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Chunking</h3>
+              <p>Divisão dos documentos em trechos menores antes de gerar embeddings, para que cada vetor represente um assunto e caiba no contexto.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Banco vetorial</h3>
+              <p>Armazena os embeddings e busca os mais próximos de um vetor de consulta, como o pgvector no PostgreSQL com índice HNSW.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Retrieval (top-k)</h3>
+              <p>Etapa que recupera os k trechos mais similares à pergunta para montar o contexto enviado ao LLM.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Reranking</h3>
+              <p>Segunda etapa opcional: um modelo reordena os candidatos da busca por relevância real, melhorando a precisão do top-k.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart TB
+  subgraph IDX[Indexação: quando os documentos mudam]
+    direction LR
+    D[Documentos] --> C[Chunks]
+    C --> E1["Embeddings (document)"]
+    E1 --> V[(pgvector)]
+  end
+  subgraph CON[Consulta: a cada pergunta]
+    direction LR
+    P[Pergunta] --> E2["Embedding (query)"]
+    E2 --> B{Busca top-k}
+    B --> T[Trechos relevantes]
+    T --> L[LLM com contexto]
+    L --> R[Resposta com fontes]
+  end
+  V --> B
+</script>
+              <p class="diagram-fallback">Na indexação, os documentos são divididos em chunks, transformados em embeddings do tipo document e gravados no pgvector. Na consulta, a pergunta vira um embedding do tipo query, a busca traz os trechos mais próximos e o LLM responde usando esses trechos como contexto, citando as fontes.</p>
+            </div>
+            <figcaption>Duas fases: indexar uma vez, consultar a cada pergunta.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos & Snippets</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
+          <div class="ref-grid">
+            <div class="ref-block">
+              <h3 class="ref-block-title">⚙️ Setup & SQL</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar dependências</td><td class="code"><code>pip install -U voyageai anthropic "psycopg[binary]" pgvector numpy</code><button type="button" class="cp" data-c="pip install -U voyageai anthropic &quot;psycopg[binary]&quot; pgvector numpy">⧉</button></td></tr>
+                <tr><td class="desc">Definir a chave do Voyage AI</td><td class="code"><code>export VOYAGE_API_KEY="sua-chave"</code><button type="button" class="cp" data-c="export VOYAGE_API_KEY=&quot;sua-chave&quot;">⧉</button></td></tr>
+                <tr><td class="desc">Habilitar o pgvector no banco</td><td class="code"><code>CREATE EXTENSION IF NOT EXISTS vector;</code><button type="button" class="cp" data-c="CREATE EXTENSION IF NOT EXISTS vector;">⧉</button></td></tr>
+                <tr><td class="desc">Tabela de chunks (1024 dimensões)</td><td class="code"><code>CREATE TABLE chunks (id bigserial PRIMARY KEY, fonte text, conteudo text, embedding vector(1024));</code><button type="button" class="cp" data-c="CREATE TABLE chunks (id bigserial PRIMARY KEY, fonte text, conteudo text, embedding vector(1024));">⧉</button></td></tr>
+                <tr><td class="desc">Índice HNSW por distância de cosseno</td><td class="code"><code>CREATE INDEX ON chunks USING hnsw (embedding vector_cosine_ops);</code><button type="button" class="cp" data-c="CREATE INDEX ON chunks USING hnsw (embedding vector_cosine_ops);">⧉</button></td></tr>
+                <tr><td class="desc">5 trechos mais próximos (&lt;=&gt; = cosseno)</td><td class="code"><code>SELECT fonte, conteudo FROM chunks ORDER BY embedding &lt;=&gt; '[0.01, -0.02, ...]' LIMIT 5;</code><button type="button" class="cp" data-c="SELECT fonte, conteudo FROM chunks ORDER BY embedding &lt;=&gt; &#x27;[0.01, -0.02, ...]&#x27; LIMIT 5;">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">🗂️ Indexação</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · chunking com sobreposição</span><button type="button" class="cp" data-c="def chunk(texto: str, tamanho: int = 1200, sobreposicao: int = 200) -&gt; list[str]:
+    &quot;&quot;&quot;Divide em pedaços de ~tamanho caracteres, repetindo o fim do anterior.&quot;&quot;&quot;
+    passo = tamanho - sobreposicao
+    return [texto[i:i + tamanho] for i in range(0, len(texto), passo)]">⧉</button></div>
+                <pre><code>def chunk(texto: str, tamanho: int = 1200, sobreposicao: int = 200) -&gt; list[str]:
+    """Divide em pedaços de ~tamanho caracteres, repetindo o fim do anterior."""
+    passo = tamanho - sobreposicao
+    return [texto[i:i + tamanho] for i in range(0, len(texto), passo)]</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · gerar embeddings e gravar no pgvector</span><button type="button" class="cp" data-c="import numpy as np
+import psycopg
+import voyageai
+from pgvector.psycopg import register_vector
+
+vo = voyageai.Client()  # lê VOYAGE_API_KEY do ambiente
+pedacos = chunk(open(&quot;manual.md&quot;).read())
+vetores = vo.embed(pedacos, model=&quot;voyage-4&quot;, input_type=&quot;document&quot;).embeddings
+
+with psycopg.connect(&quot;postgresql://localhost/app&quot;) as conn:
+    register_vector(conn)
+    with conn.cursor() as cur:
+        for texto, vetor in zip(pedacos, vetores):
+            cur.execute(
+                &quot;INSERT INTO chunks (fonte, conteudo, embedding) VALUES (%s, %s, %s)&quot;,
+                (&quot;manual.md&quot;, texto, np.array(vetor)),
+            )">⧉</button></div>
+                <pre><code>import numpy as np
+import psycopg
+import voyageai
+from pgvector.psycopg import register_vector
+
+vo = voyageai.Client()  # lê VOYAGE_API_KEY do ambiente
+pedacos = chunk(open("manual.md").read())
+vetores = vo.embed(pedacos, model="voyage-4", input_type="document").embeddings
+
+with psycopg.connect("postgresql://localhost/app") as conn:
+    register_vector(conn)
+    with conn.cursor() as cur:
+        for texto, vetor in zip(pedacos, vetores):
+            cur.execute(
+                "INSERT INTO chunks (fonte, conteudo, embedding) VALUES (%s, %s, %s)",
+                ("manual.md", texto, np.array(vetor)),
+            )</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">🔎 Consulta & resposta</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · buscar os trechos mais próximos</span><button type="button" class="cp" data-c="pergunta = &quot;Como redefino a senha?&quot;
+q = np.array(vo.embed([pergunta], model=&quot;voyage-4&quot;, input_type=&quot;query&quot;).embeddings[0])
+
+with psycopg.connect(&quot;postgresql://localhost/app&quot;) as conn:
+    register_vector(conn)
+    trechos = conn.execute(
+        &quot;SELECT fonte, conteudo FROM chunks ORDER BY embedding &lt;=&gt; %s LIMIT 5&quot;,
+        (q,),
+    ).fetchall()">⧉</button></div>
+                <pre><code>pergunta = "Como redefino a senha?"
+q = np.array(vo.embed([pergunta], model="voyage-4", input_type="query").embeddings[0])
+
+with psycopg.connect("postgresql://localhost/app") as conn:
+    register_vector(conn)
+    trechos = conn.execute(
+        "SELECT fonte, conteudo FROM chunks ORDER BY embedding &lt;=&gt; %s LIMIT 5",
+        (q,),
+    ).fetchall()</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · responder com o contexto recuperado</span><button type="button" class="cp" data-c="import anthropic
+
+contexto = &quot;\n\n&quot;.join(
+    f&#x27;&lt;documento fonte=&quot;{fonte}&quot;&gt;\n{conteudo}\n&lt;/documento&gt;&#x27; for fonte, conteudo in trechos
+)
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=16000,
+    system=(
+        &quot;Responda só com base nos documentos fornecidos e cite a fonte. &quot;
+        &quot;Se a resposta não estiver nos documentos, diga que não sabe.&quot;
+    ),
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: f&quot;{contexto}\n\nPergunta: {pergunta}&quot;}],
+)
+print(next(b.text for b in response.content if b.type == &quot;text&quot;))">⧉</button></div>
+                <pre><code>import anthropic
+
+contexto = "\n\n".join(
+    f'&lt;documento fonte="{fonte}"&gt;\n{conteudo}\n&lt;/documento&gt;' for fonte, conteudo in trechos
+)
+
+client = anthropic.Anthropic()
+response = client.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    system=(
+        "Responda só com base nos documentos fornecidos e cite a fonte. "
+        "Se a resposta não estiver nos documentos, diga que não sabe."
+    ),
+    messages=[{"role": "user", "content": f"{contexto}\n\nPergunta: {pergunta}"}],
+)
+print(next(b.text for b in response.content if b.type == "text"))</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">Busca traz trechos irrelevantes ou incompletos</td><td class="err-cause" data-label="Causa">Chunks grandes demais misturam vários assuntos num vetor; pequenos demais perdem o contexto da frase.</td><td class="err-fix" data-label="Correção">Divida por seção ou parágrafo, use sobreposição, teste tamanhos com perguntas reais e considere um reranker.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Similaridade sem sentido depois de trocar o modelo</td><td class="err-cause" data-label="Causa">Documentos e perguntas foram vetorizados com modelos ou dimensões diferentes, que não são comparáveis.</td><td class="err-fix" data-label="Correção">Use o mesmo modelo e a mesma dimensão nas duas fases; ao trocar de modelo, reindexe tudo e guarde o nome do modelo junto do vetor.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Ranking pior que o esperado</td><td class="err-cause" data-label="Causa">O <code>input_type</code> foi usado ao contrário ou omitido: documentos e perguntas são otimizados de formas diferentes.</td><td class="err-fix" data-label="Correção">Use <code>input_type="document"</code> na indexação e <code>input_type="query"</code> na pergunta.</td></tr>
+              <tr><td class="err-label" data-label="Erro">LLM ignora os documentos ou inventa</td><td class="err-cause" data-label="Causa">O prompt não obriga o uso do contexto, ou os trechos recuperados não contêm a resposta.</td><td class="err-fix" data-label="Correção">Instrua a responder só com base nos documentos, citar a fonte e dizer que não sabe; registre em log os trechos recuperados para depurar.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="warn">
+            <p class="callout-title">Prompt injection nos documentos</p>
+            <p>Trechos recuperados são dados, não instruções: um documento pode conter "ignore as regras anteriores". Delimite o contexto (ex.: tags <code>&lt;documento&gt;</code>), deixe as regras no system prompt e não dê ao modelo ações perigosas com base nesse conteúdo.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://platform.claude.com/docs/en/build-with-claude/embeddings" target="_blank" rel="noopener">Embeddings (Claude)</a></li>
+            <li><a href="https://www.mongodb.com/docs/voyageai/" target="_blank" rel="noopener">Voyage AI</a></li>
+            <li><a href="https://github.com/pgvector/pgvector" target="_blank" rel="noopener">pgvector</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../js/registry.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
+</body>
+</html>

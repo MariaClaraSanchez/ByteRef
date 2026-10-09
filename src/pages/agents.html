@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — Agentes & Tool Use</title>
+  <script src="../js/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body data-tech-id="agents">
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../../index.html">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </a>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
+    </div>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
+      <div class="topbar-right">
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
+
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🛠️</div>
+        <h1>Agentes & Tool Use</h1>
+        <p class="hero-tagline">ferramentas, loop do agente e MCP</p>
+        <div class="hero-meta"><span class="tag">agents</span><span class="tag">tool use</span><span class="tag">mcp</span><span class="hero-stat">9 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p>Com <strong>tool use</strong>, você descreve funções da sua aplicação (nome, descrição e parâmetros em JSON Schema) e o modelo pede para chamá-las quando precisa. Um <strong>agente</strong> é esse processo em loop: o modelo escolhe a ferramenta, sua aplicação executa, o resultado volta e o ciclo repete até a resposta final.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> consultar APIs e bancos, executar ações e combinar vários passos que o modelo planeja sozinho.</li>
+            <li><strong>Quando usar:</strong> tarefas com vários passos difíceis de prever, como suporte que consulta pedidos ou triagem de incidentes, em que erros podem ser detectados e revertidos.</li>
+            <li><strong>Quando evitar:</strong> quando uma única chamada ou um fluxo fixo controlado pelo seu código resolve; agentes custam mais, demoram mais e erram de formas menos previsíveis.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Ferramenta (tool)</h3>
+              <p>Função da sua aplicação exposta ao modelo com <code>name</code>, <code>description</code> e <code>input_schema</code>. A descrição diz ao modelo quando usá-la.</p>
+            </article>
+            <article class="concept-card">
+              <h3>input_schema</h3>
+              <p>JSON Schema dos parâmetros. Com <code>strict: true</code> e <code>additionalProperties: false</code>, a entrada gerada sempre segue o schema.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Loop do agente</h3>
+              <p>Enquanto <code>stop_reason</code> for <code>tool_use</code>: executar as ferramentas pedidas, devolver os resultados e chamar o modelo de novo.</p>
+            </article>
+            <article class="concept-card">
+              <h3>tool_result</h3>
+              <p>Bloco que devolve a saída de uma ferramenta, ligado ao pedido pelo <code>tool_use_id</code>. Erros voltam com <code>is_error: true</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>MCP</h3>
+              <p>Model Context Protocol: padrão aberto para expor ferramentas, dados e prompts a aplicações de IA por meio de servidores reutilizáveis.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Human-in-the-loop</h3>
+              <p>Pedir confirmação de uma pessoa antes de ações com efeito real (apagar, pagar, enviar), em vez de deixar o agente decidir sozinho.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+sequenceDiagram
+  participant U as Usuário
+  participant App as Sua aplicação
+  participant M as Modelo
+  participant T as Ferramenta
+  U->>App: Cadê meu pedido PED-1234?
+  App->>M: messages + tools
+  M-->>App: tool_use consultar_pedido(PED-1234)
+  App->>T: executa a função
+  T-->>App: status = enviado
+  App->>M: tool_result com o mesmo tool_use_id
+  M-->>App: end_turn com a resposta em texto
+  App-->>U: Seu pedido foi enviado
+</script>
+              <p class="diagram-fallback">O usuário pergunta; a aplicação envia a mensagem e a lista de ferramentas ao modelo. O modelo responde pedindo a ferramenta consultar_pedido; quem executa é a aplicação, que devolve o resultado como tool_result. Com essa informação, o modelo termina (end_turn) com a resposta final.</p>
+            </div>
+            <figcaption>O modelo só pede; quem executa a ferramenta é sempre a sua aplicação.</figcaption>
+          </figure>
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart TD
+  A{Cabe numa chamada?} -->|sim| B[Chamada única]
+  A -->|não| C{Passos previsíveis?}
+  C -->|sim| D[Workflow: seu código orquestra]
+  C -->|não| E[Agente: o modelo escolhe as ferramentas]
+</script>
+              <p class="diagram-fallback">Se a tarefa cabe numa chamada, use uma chamada única. Se tem vários passos previsíveis, escreva um workflow em que seu código decide a ordem. Só quando os passos não são previsíveis vale um agente, em que o modelo escolhe as ferramentas.</p>
+            </div>
+            <figcaption>Comece pelo mais simples: agente é o último degrau.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos & Snippets</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
+          <div class="ref-grid">
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">⚙️ Setup & HTTP</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar o SDK Python</td><td class="code"><code>pip install anthropic</code><button type="button" class="cp" data-c="pip install anthropic">⧉</button></td></tr>
+                <tr><td class="desc">Ver por que o modelo parou</td><td class="code"><code>jq -r '.stop_reason'</code><button type="button" class="cp" data-c="jq -r &#x27;.stop_reason&#x27;">⧉</button></td></tr>
+                <tr><td class="desc">Listar as ferramentas pedidas na resposta</td><td class="code"><code>jq '.content[] | select(.type == "tool_use") | {id, name, input}'</code><button type="button" class="cp" data-c="jq &#x27;.content[] | select(.type == &quot;tool_use&quot;) | {id, name, input}&#x27;">⧉</button></td></tr>
+              </table>
+              <div class="code-block">
+                <div class="code-block-head"><span>curl · requisição com ferramenta</span><button type="button" class="cp" data-c="curl https://api.anthropic.com/v1/messages \
+  -H &quot;content-type: application/json&quot; \
+  -H &quot;x-api-key: $ANTHROPIC_API_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -d &#x27;{
+    &quot;model&quot;: &quot;claude-opus-5-5&quot;,
+    &quot;max_tokens&quot;: 16000,
+    &quot;tools&quot;: [{
+      &quot;name&quot;: &quot;consultar_pedido&quot;,
+      &quot;description&quot;: &quot;Busca status e itens de um pedido pelo ID.&quot;,
+      &quot;input_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {&quot;pedido_id&quot;: {&quot;type&quot;: &quot;string&quot;}},
+        &quot;required&quot;: [&quot;pedido_id&quot;]
+      }
+    }],
+    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Cadê meu pedido PED-1234?&quot;}]
+  }&#x27;">⧉</button></div>
+                <pre><code>curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "tools": [{
+      "name": "consultar_pedido",
+      "description": "Busca status e itens de um pedido pelo ID.",
+      "input_schema": {
+        "type": "object",
+        "properties": {"pedido_id": {"type": "string"}},
+        "required": ["pedido_id"]
+      }
+    }],
+    "messages": [{"role": "user", "content": "Cadê meu pedido PED-1234?"}]
+  }'</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">🧰 Definir ferramentas</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · definição de ferramenta</span><button type="button" class="cp" data-c="tools = [{
+    &quot;name&quot;: &quot;consultar_pedido&quot;,
+    &quot;description&quot;: (
+        &quot;Busca status e itens de um pedido pelo ID. &quot;
+        &quot;Use quando o usuário perguntar sobre um pedido específico.&quot;
+    ),
+    &quot;input_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;pedido_id&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;ID do pedido, ex.: PED-1234&quot;},
+        },
+        &quot;required&quot;: [&quot;pedido_id&quot;],
+    },
+}]">⧉</button></div>
+                <pre><code>tools = [{
+    "name": "consultar_pedido",
+    "description": (
+        "Busca status e itens de um pedido pelo ID. "
+        "Use quando o usuário perguntar sobre um pedido específico."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "pedido_id": {"type": "string", "description": "ID do pedido, ex.: PED-1234"},
+        },
+        "required": ["pedido_id"],
+    },
+}]</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · schema estrito</span><button type="button" class="cp" data-c="ferramenta_estrita = {
+    &quot;name&quot;: &quot;abrir_ticket&quot;,
+    &quot;description&quot;: &quot;Abre um ticket de suporte.&quot;,
+    &quot;strict&quot;: True,  # a entrada gerada sempre valida contra o schema
+    &quot;input_schema&quot;: {
+        &quot;type&quot;: &quot;object&quot;,
+        &quot;properties&quot;: {
+            &quot;titulo&quot;: {&quot;type&quot;: &quot;string&quot;},
+            &quot;prioridade&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;enum&quot;: [&quot;baixa&quot;, &quot;media&quot;, &quot;alta&quot;]},
+        },
+        &quot;required&quot;: [&quot;titulo&quot;, &quot;prioridade&quot;],
+        &quot;additionalProperties&quot;: False,
+    },
+}">⧉</button></div>
+                <pre><code>ferramenta_estrita = {
+    "name": "abrir_ticket",
+    "description": "Abre um ticket de suporte.",
+    "strict": True,  # a entrada gerada sempre valida contra o schema
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "titulo": {"type": "string"},
+            "prioridade": {"type": "string", "enum": ["baixa", "media", "alta"]},
+        },
+        "required": ["titulo", "prioridade"],
+        "additionalProperties": False,
+    },
+}</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">🔁 Loop do agente</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · loop manual</span><button type="button" class="cp" data-c="import json
+import anthropic
+
+client = anthropic.Anthropic()
+
+def executar(nome: str, entrada: dict) -&gt; str:
+    if nome == &quot;consultar_pedido&quot;:
+        return json.dumps(buscar_pedido(entrada[&quot;pedido_id&quot;]))  # sua função
+    raise ValueError(f&quot;ferramenta desconhecida: {nome}&quot;)
+
+messages = [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Cadê meu pedido PED-1234?&quot;}]
+
+for _ in range(10):  # limite de iterações
+    response = client.messages.create(
+        model=&quot;claude-opus-5-5&quot;, max_tokens=16000, tools=tools, messages=messages,
+    )
+    if response.stop_reason != &quot;tool_use&quot;:
+        break
+    messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: response.content})
+    resultados = []
+    for bloco in response.content:
+        if bloco.type != &quot;tool_use&quot;:
+            continue
+        try:
+            saida = executar(bloco.name, bloco.input)
+            resultados.append({&quot;type&quot;: &quot;tool_result&quot;, &quot;tool_use_id&quot;: bloco.id, &quot;content&quot;: saida})
+        except Exception as erro:
+            resultados.append({&quot;type&quot;: &quot;tool_result&quot;, &quot;tool_use_id&quot;: bloco.id,
+                               &quot;content&quot;: str(erro), &quot;is_error&quot;: True})
+    messages.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: resultados})  # todos numa só mensagem
+else:
+    raise RuntimeError(&quot;limite de iterações atingido&quot;)
+
+print(next(b.text for b in response.content if b.type == &quot;text&quot;))">⧉</button></div>
+                <pre><code>import json
+import anthropic
+
+client = anthropic.Anthropic()
+
+def executar(nome: str, entrada: dict) -&gt; str:
+    if nome == "consultar_pedido":
+        return json.dumps(buscar_pedido(entrada["pedido_id"]))  # sua função
+    raise ValueError(f"ferramenta desconhecida: {nome}")
+
+messages = [{"role": "user", "content": "Cadê meu pedido PED-1234?"}]
+
+for _ in range(10):  # limite de iterações
+    response = client.messages.create(
+        model="claude-opus-5-5", max_tokens=16000, tools=tools, messages=messages,
+    )
+    if response.stop_reason != "tool_use":
+        break
+    messages.append({"role": "assistant", "content": response.content})
+    resultados = []
+    for bloco in response.content:
+        if bloco.type != "tool_use":
+            continue
+        try:
+            saida = executar(bloco.name, bloco.input)
+            resultados.append({"type": "tool_result", "tool_use_id": bloco.id, "content": saida})
+        except Exception as erro:
+            resultados.append({"type": "tool_result", "tool_use_id": bloco.id,
+                               "content": str(erro), "is_error": True})
+    messages.append({"role": "user", "content": resultados})  # todos numa só mensagem
+else:
+    raise RuntimeError("limite de iterações atingido")
+
+print(next(b.text for b in response.content if b.type == "text"))</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · tool runner (beta)</span><button type="button" class="cp" data-c="import json
+import anthropic
+from anthropic import beta_tool
+
+client = anthropic.Anthropic()
+
+@beta_tool
+def consultar_pedido(pedido_id: str) -&gt; str:
+    &quot;&quot;&quot;Busca status e itens de um pedido pelo ID.
+
+    Args:
+        pedido_id: ID do pedido, ex.: PED-1234.
+    &quot;&quot;&quot;
+    return json.dumps(buscar_pedido(pedido_id))  # sua função
+
+runner = client.beta.messages.tool_runner(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=16000,
+    tools=[consultar_pedido],
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Cadê meu pedido PED-1234?&quot;}],
+)
+for message in runner:  # o SDK executa as ferramentas e repete até terminar
+    print(message.stop_reason)">⧉</button></div>
+                <pre><code>import json
+import anthropic
+from anthropic import beta_tool
+
+client = anthropic.Anthropic()
+
+@beta_tool
+def consultar_pedido(pedido_id: str) -&gt; str:
+    """Busca status e itens de um pedido pelo ID.
+
+    Args:
+        pedido_id: ID do pedido, ex.: PED-1234.
+    """
+    return json.dumps(buscar_pedido(pedido_id))  # sua função
+
+runner = client.beta.messages.tool_runner(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    tools=[consultar_pedido],
+    messages=[{"role": "user", "content": "Cadê meu pedido PED-1234?"}],
+)
+for message in runner:  # o SDK executa as ferramentas e repete até terminar
+    print(message.stop_reason)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · confirmação humana antes de agir</span><button type="button" class="cp" data-c="def cancelar_pedido(pedido_id: str) -&gt; str:
+    resposta = input(f&quot;O agente quer CANCELAR {pedido_id}. Confirmar? [s/N] &quot;)
+    if resposta.strip().lower() != &quot;s&quot;:
+        return &quot;Cancelamento recusado pelo usuário. Não tente de novo sem nova instrução.&quot;
+    cancelar(pedido_id)  # sua função com efeito real
+    return f&quot;Pedido {pedido_id} cancelado.&quot;">⧉</button></div>
+                <pre><code>def cancelar_pedido(pedido_id: str) -&gt; str:
+    resposta = input(f"O agente quer CANCELAR {pedido_id}. Confirmar? [s/N] ")
+    if resposta.strip().lower() != "s":
+        return "Cancelamento recusado pelo usuário. Não tente de novo sem nova instrução."
+    cancelar(pedido_id)  # sua função com efeito real
+    return f"Pedido {pedido_id} cancelado."</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">Agente em loop, com custo disparando</td><td class="err-cause" data-label="Causa">Não há limite de iterações, e a ferramenta devolve erros vagos, então o modelo tenta de novo sem parar.</td><td class="err-fix" data-label="Correção">Limite iterações e orçamento, devolva erros claros com <code>is_error: true</code> e registre cada chamada em log.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Prompt injection vindo de uma ferramenta</td><td class="err-cause" data-label="Causa">Conteúdo externo (e-mail, página web, ticket) devolvido pela ferramenta contém instruções que o modelo pode seguir.</td><td class="err-fix" data-label="Correção">Trate resultados como dados, dê às ferramentas o mínimo de permissão e exija confirmação humana para ações sensíveis.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Ação destrutiva sem confirmação</td><td class="err-cause" data-label="Causa">A ferramenta executa direto o que o modelo pediu: apagar, pagar, enviar e-mail.</td><td class="err-fix" data-label="Correção">Peça confirmação humana, ofereça modo de simulação (dry-run) e use credenciais com permissões mínimas.</td></tr>
+              <tr><td class="err-label" data-label="Erro">400: tool_use sem tool_result correspondente</td><td class="err-cause" data-label="Causa">Algum resultado ficou faltando, foi enviado em mensagens separadas ou com o <code>tool_use_id</code> errado.</td><td class="err-fix" data-label="Correção">Devolva um <code>tool_result</code> para cada <code>tool_use</code>, todos numa única mensagem <code>user</code> logo após a resposta do assistente.</td></tr>
+              <tr><td class="err-label" data-label="Erro">400 ao forçar uma ferramenta</td><td class="err-cause" data-label="Causa"><code>tool_choice</code> do tipo <code>any</code> ou <code>tool</code> não é aceito nos modelos Claude atuais. Referência: out/2026.</td><td class="err-fix" data-label="Correção">Use <code>tool_choice: auto</code> com uma instrução clara no prompt e <code>strict: true</code> para garantir o formato.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">Ferramentas com efeito real exigem confirmação humana</p>
+            <p>Qualquer ferramenta que apaga dados, movimenta dinheiro, envia mensagens ou altera produção deve pedir confirmação de uma pessoa antes de executar. O modelo pode interpretar mal o pedido ou ser manipulado por conteúdo externo.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview" target="_blank" rel="noopener">Tool use (Claude)</a></li>
+            <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../js/registry.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
+</body>
+</html>

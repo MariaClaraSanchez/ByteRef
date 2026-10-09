@@ -3,7 +3,7 @@
 > Referência técnica rápida para engenheiros: comandos reais, erros comuns e fixes direto ao ponto.
 
 ![Dark/Light Mode](https://img.shields.io/badge/Tema-Dark%20%2F%20Light-f0a500?style=flat-square)
-![Tecnologias](https://img.shields.io/badge/Tecnologias-11-3dd68c?style=flat-square)
+![Tecnologias](https://img.shields.io/badge/Tecnologias-15-3dd68c?style=flat-square)
 ![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?style=flat-square)
 [![Contribuições](https://img.shields.io/badge/Contribuições-Bem%20vindas-brightgreen?style=flat-square)](https://github.com/mariaclarasanchez/ByteRef/blob/main/CONTRIBUTING.md)
 
@@ -11,7 +11,7 @@
 
 ## 📖 Descrição
 
-**ByteRef** é uma referência técnica rápida para engenheiros **DevOps & Backend**, com foco em consulta eficiente e sem enrolação. Layout de **tabela densa** com comandos reais, erros comuns e fixes direto ao ponto.
+**ByteRef** é uma referência técnica rápida para engenheiros **DevOps, Backend, Dados e IA**, com foco em consulta eficiente e sem enrolação. Layout de **tabela densa** com comandos reais, erros comuns e fixes direto ao ponto.
 
 ### ✨ Features
 
@@ -33,19 +33,23 @@
 
 ## 🛠 Tecnologias Cobertas
 
-| #  | Tecnologia     | Tema                          | Categorias                                                     |
-|----|----------------|-------------------------------|----------------------------------------------------------------|
-| 1  | ☁️ GCP          | Cloud / IaaS                  | gcloud CLI, IAM, Cloud Run, Compute Engine, Storage, Build    |
-| 2  | 🚢 Kubernetes   | Container Orchestration       | kubectl, Pods, Deployments, Services, Secrets, ConfigMaps     |
-| 3  | 🐳 Docker       | Containerization              | Build, Images, Containers, Registry, Compose                  |
-| 4  | 💻 CLI / Bash   | Terminal Productivity         | grep, find, ssh, scp, tar, top, awk, sed                      |
-| 5  | 🌶️ Flask        | Web Framework / Python        | Routes, Blueprints, Database, Auth, Deploy, Testing           |
-| 6  | 🐘 PostgreSQL   | Relational Database           | DDL, Queries, Window Functions, Performance, Backup           |
-| 7  | 🐬 MySQL        | Relational Database           | DDL, Queries, JSON, Replication, Admin, Optimization          |
-| 8  | ⚡ Redis        | Cache / In-Memory DB          | Keys, Hashes, Lists, Sets, Pub/Sub, Persistence               |
-| 9  | 📦 Poetry       | Dependency Management / Python | Setup, Add/Remove, Environments, Build, Publish              |
-| 10 | 🐼 Pandas       | Data Analysis / Python        | DataFrames, Groupby, Joins, Statistics, Export                |
-| 11 | 🌿 Git          | Version Control               | Commits, Branches, Merge, Rebase, Stash, Tags                 |
+| #  | Grupo                  | Tecnologia            | Destaques                                                        |
+|----|------------------------|-----------------------|------------------------------------------------------------------|
+| 1  | Cloud & DevOps         | ☁️ GCP                 | gcloud, IAM, Cloud Run, Compute Engine, Storage, Artifact Registry |
+| 2  | Cloud & DevOps         | 🚢 Kubernetes          | Pods, Deployments, Services, rollout/rollback, ConfigMaps        |
+| 3  | Cloud & DevOps         | 🐳 Docker              | Build, imagens, containers, registry, volumes, Compose           |
+| 4  | Terminal & Ferramentas | 💻 CLI / Bash          | Pipes, redirecionamento, processos, SSH, grep/awk/sed            |
+| 5  | Terminal & Ferramentas | 🐙 Git / GitHub        | Commits, branches, merge/rebase, PRs, stash, correções rápidas   |
+| 6  | Terminal & Ferramentas | 📦 Poetry              | pyproject, lock, ambientes, build & publish                      |
+| 7  | Backend & Bancos       | 🌶️ Flask               | Rotas, blueprints, contexto de app, extensões, deploy WSGI       |
+| 8  | Backend & Bancos       | 🐘 PostgreSQL          | Índices, MVCC, EXPLAIN ANALYZE, window functions, backup         |
+| 9  | Backend & Bancos       | 🐬 MySQL               | InnoDB, índices, replicação, mysqldump, utf8mb4                  |
+| 10 | Backend & Bancos       | ⚡ Redis               | Tipos de dados, TTL, pub/sub, persistência, cache-aside          |
+| 11 | Dados                  | 🐼 Pandas              | DataFrame, seleção, groupby, merge, exportação                   |
+| 12 | Dados                  | 🎈 Streamlit           | Widgets, rerun, cache, session state, secrets                    |
+| 13 | IA & LLM               | 🤖 LLMs & APIs         | Tokens, contexto, streaming, effort, caching, rate limits        |
+| 14 | IA & LLM               | 📚 RAG & Embeddings    | Embeddings, chunking, pgvector, busca e resposta com fontes      |
+| 15 | IA & LLM               | 🛠️ Agentes & Tool Use  | Ferramentas, loop do agente, MCP, confirmação humana             |
 
 ---
 
@@ -104,6 +108,10 @@ ByteRef/
 │  │  └─ script.js          Sidebar, home, busca, tema, cópia, atalhos
 │  └─ pages/                Subpáginas por tecnologia
 │     ├─ componentes.html   🧩 Vitrine de componentes para contribuidores
+│     ├─ agents.html        IA & LLM: agentes e tool use
+│     ├─ llm-apis.html      IA & LLM: chamadas de API
+│     ├─ rag.html           IA & LLM: RAG e embeddings
+│     ├─ streamlit.html     Dados: apps com Streamlit
 │     ├─ bash.html
 │     ├─ docker.html
 │     ├─ flask.html
