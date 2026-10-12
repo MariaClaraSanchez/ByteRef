@@ -1,0 +1,127 @@
+/* ============================================================
+   ByteRef — tokens.css
+   Fonte única de cores, espaçamentos, tipografia e movimento.
+   Tema escuro em :root; tema claro em :root[data-theme="light"].
+   Valores validados com specs/001-design-system-redesign/scripts/contrast.py
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+
+  /* Superfícies */
+  --surface-0:     #111318;
+  --surface-1:     #16191f;
+  --surface-2:     #1c2028;
+  --surface-3:     #222736;
+  --border:        #252b38;
+  --border-soft:   #1d2230;
+  --topbar-bg:     rgba(17, 19, 24, 0.94);
+  --overlay-bg:    rgba(0, 0, 0, 0.6);
+  --shadow:        0 8px 24px rgba(0, 0, 0, 0.35);
+  --scrollbar:     #2e3547;
+
+  /* Texto */
+  --text-1:        #dde3ee;
+  --text-2:        #8b95ab;
+  --text-3:        #7f89a1;
+  --desc:          #9ba8c0;
+  --code:          #7dd3fc;
+  --code-bg:       rgba(0, 0, 0, 0.3);
+
+  /* Marca */
+  --accent:        #f0a500;
+  --accent-soft:   rgba(240, 165, 0, 0.10);
+  --accent-glow:   rgba(240, 165, 0, 0.22);
+  --on-accent:     #111318;
+
+  /* Semânticas */
+  --tip:           #3dd68c;
+  --tip-soft:      rgba(61, 214, 140, 0.09);
+  --info:          #7dd3fc;
+  --info-soft:     rgba(125, 211, 252, 0.09);
+  --warn:          #f0a500;
+  --warn-soft:     rgba(240, 165, 0, 0.09);
+  --danger:        #f26b6b;
+  --danger-soft:   rgba(240, 86, 86, 0.09);
+  --danger-line:   rgba(240, 86, 86, 0.22);
+
+  /* Diagramas (mapeados no tema do Mermaid na spec 2) */
+  --diagram-bg:    #16191f;
+  --diagram-node:  #222736;
+  --diagram-line:  #8b95ab;
+  --diagram-text:  #dde3ee;
+
+  /* Espaçamento */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* Forma */
+  --radius-sm: 4px;
+  --radius:    8px;
+  --radius-lg: 12px;
+
+  /* Tipografia */
+  --font-sans: 'Epilogue', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+  --fs-xs:      11px;
+  --fs-sm:      12px;
+  --fs-md:      13px;
+  --fs-lg:      15px;
+  --fs-xl:      18px;
+  --fs-display: 28px;
+
+  /* Layout */
+  --sidebar-w: 230px;
+  --topbar-h:  52px;
+
+  /* Foco e movimento */
+  --focus-ring: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--accent);
+  --dur:  150ms;
+  --ease: ease;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --surface-0:     #f0f2f5;
+  --surface-1:     #e8eaef;
+  --surface-2:     #ffffff;
+  --surface-3:     #dde0e8;
+  --border:        #c8ccd8;
+  --border-soft:   #d4d8e2;
+  --topbar-bg:     rgba(240, 242, 245, 0.94);
+  --overlay-bg:    rgba(26, 29, 46, 0.4);
+  --shadow:        0 8px 24px rgba(26, 29, 46, 0.12);
+  --scrollbar:     #c8ccd8;
+
+  --text-1:        #1a1d2e;
+  --text-2:        #4a5068;
+  --text-3:        #5f6880;
+  --desc:          #4a5068;
+  --code:          #1a5fa8;
+  --code-bg:       rgba(0, 0, 0, 0.05);
+
+  --accent:        #8a5600;
+  --accent-soft:   rgba(200, 130, 0, 0.10);
+  --accent-glow:   rgba(200, 130, 0, 0.22);
+  --on-accent:     #ffffff;
+
+  --tip:           #137a45;
+  --tip-soft:      rgba(20, 160, 80, 0.09);
+  --info:          #1a5fa8;
+  --info-soft:     rgba(26, 95, 168, 0.08);
+  --warn:          #8a5600;
+  --warn-soft:     rgba(200, 130, 0, 0.10);
+  --danger:        #c02020;
+  --danger-soft:   rgba(220, 50, 50, 0.05);
+  --danger-line:   rgba(220, 50, 50, 0.18);
+
+  --diagram-bg:    #f7f8fa;
+  --diagram-node:  #ffffff;
+  --diagram-line:  #4a5068;
+  --diagram-text:  #1a1d2e;
+}

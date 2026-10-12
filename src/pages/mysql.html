@@ -3,85 +3,141 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — MySQL Reference</title>
+  <title>ByteRef — MySQL</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="mysql">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link active" href="#"              data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ MYSQL ══ -->
-      <section class="tech-section" id="mysql" data-tech="MySQL">
-        <div class="section-head" data-toggle="mysql">
-          <div class="sh-left">
-            <span class="tech-icon">🗄️</span>
-            <h2>MySQL <em>banco de dados relacional</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">sql</span><span class="tag">database</span><span class="tag">mysql</span>
-            <button class="collapse-btn" aria-label="colapsar">▾</button>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🗄️</div>
+        <h1>MySQL</h1>
+        <p class="hero-tagline">banco de dados relacional</p>
+        <div class="hero-meta"><span class="tag">sql</span><span class="tag">database</span><span class="tag">mysql</span><span class="hero-stat">41 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>MySQL</strong> é um banco relacional open source muito difundido em aplicações web. Com o engine InnoDB, oferece transações, chaves estrangeiras e replicação nativa.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> armazenar dados transacionais de aplicações, escalar leitura com réplicas e operar com ferramentas maduras de backup e administração.</li>
+            <li><strong>Quando usar:</strong> stacks que já usam MySQL ou MariaDB, aplicações web com muitas leituras simples e ambientes com hospedagem gerenciada (Cloud SQL, RDS).</li>
+            <li><strong>Quando evitar:</strong> consultas analíticas pesadas ou recursos avançados como JSONB indexável e tipos customizados, cenários em que o PostgreSQL costuma ser mais adequado.</li>
+          </ul>
+          <aside class="callout" data-kind="info">
+            <p class="callout-title">DDL e transações</p>
+            <p>No MySQL, comandos de estrutura (DDL) como <code>ALTER TABLE</code> fazem commit implícito: não dá para desfazê-los com <code>ROLLBACK</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>InnoDB</h3>
+              <p>Engine de armazenamento padrão: transações ACID, bloqueio por linha, chaves estrangeiras e recuperação após falha.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Índice</h3>
+              <p>Acelera buscas e ordenações. No InnoDB, a chave primária é o índice clusterizado e os índices secundários apontam para ela.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Transação</h3>
+              <p>Agrupa comandos que precisam acontecer juntos com <code>START TRANSACTION</code>, <code>COMMIT</code> e <code>ROLLBACK</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>EXPLAIN</h3>
+              <p>Mostra como o MySQL vai executar a query: ordem das tabelas, índice usado e linhas estimadas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Binlog e replicação</h3>
+              <p>O binary log registra as alterações da primária; as réplicas leem esse log e reaplicam as mudanças.</p>
+            </article>
+            <article class="concept-card">
+              <h3>mysqldump e backup</h3>
+              <p>Gera um backup lógico em SQL. Com <code>--single-transaction</code>, faz uma cópia consistente de tabelas InnoDB sem travar escrita.</p>
+            </article>
           </div>
         </div>
-        <div class="section-body">
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  APP[Aplicação] -->|INSERT / UPDATE| PRI[(Primária)]
+  PRI -->|grava| BIN[Binlog]
+  BIN -->|IO thread| RL[Relay log]
+  RL -->|SQL thread| REP[(Réplica)]
+  LEIT[Leituras] --> REP
+</script>
+              <p class="diagram-fallback">A aplicação escreve na primária, que registra as alterações no binlog. Na réplica, a IO thread copia o binlog para o relay log e a SQL thread reaplica as mudanças, deixando a réplica pronta para leituras.</p>
+            </div>
+            <figcaption>Replicação assíncrona: escritas na primária, leituras podem ir para a réplica (com algum atraso).</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
           <div class="ref-grid">
-
             <div class="ref-block">
-              <div class="ref-block-title">🚀 Conexão & Setup</div>
+              <h3 class="ref-block-title">🚀 Conexão & Setup</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Conectar ao MySQL</td><td class="code"><code>mysql -u root -p</code><button type="button" class="cp" data-c="mysql -u root -p">⧉</button></td></tr>
                 <tr><td class="desc">Conectar a banco específico</td><td class="code"><code>mysql -u user -p -h localhost mydb</code><button type="button" class="cp" data-c="mysql -u user -p -h localhost mydb">⧉</button></td></tr>
@@ -93,58 +149,55 @@
                 <tr><td class="desc">Iniciar serviço</td><td class="code"><code>sudo systemctl start mysql</code><button type="button" class="cp" data-c="sudo systemctl start mysql">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📋 DDL - Estrutura</div>
+              <h3 class="ref-block-title">📋 DDL - Estrutura</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Criar tabela</td><td class="code"><code>CREATE TABLE users (<br>&nbsp;&nbsp;id INT AUTO_INCREMENT PRIMARY KEY,<br>&nbsp;&nbsp;name VARCHAR(100) NOT NULL,<br>&nbsp;&nbsp;email VARCHAR(255) UNIQUE,<br>&nbsp;&nbsp;created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP<br>) ENGINE=InnoDB;</code><button type="button" class="cp" data-c="CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB;">⧉</button></td></tr>
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(255) UNIQUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB;">⧉</button></td></tr>
                 <tr><td class="desc">Adicionar coluna</td><td class="code"><code>ALTER TABLE users ADD COLUMN age INT;</code><button type="button" class="cp" data-c="ALTER TABLE users ADD COLUMN age INT;">⧉</button></td></tr>
                 <tr><td class="desc">Criar índice</td><td class="code"><code>CREATE INDEX idx_users_email ON users(email);</code><button type="button" class="cp" data-c="CREATE INDEX idx_users_email ON users(email);">⧉</button></td></tr>
                 <tr><td class="desc">Foreign key</td><td class="code"><code>ALTER TABLE posts ADD CONSTRAINT fk_user<br>&nbsp;&nbsp;FOREIGN KEY (user_id) REFERENCES users(id)<br>&nbsp;&nbsp;ON DELETE CASCADE;</code><button type="button" class="cp" data-c="ALTER TABLE posts ADD CONSTRAINT fk_user
-    FOREIGN KEY (user_id) REFERENCES users(id)
-    ON DELETE CASCADE;">⧉</button></td></tr>
+                FOREIGN KEY (user_id) REFERENCES users(id)
+                ON DELETE CASCADE;">⧉</button></td></tr>
                 <tr><td class="desc">Criar view</td><td class="code"><code>CREATE VIEW active_users AS<br>SELECT * FROM users WHERE active = 1;</code><button type="button" class="cp" data-c="CREATE VIEW active_users AS
-SELECT * FROM users WHERE active = 1;">⧉</button></td></tr>
+                SELECT * FROM users WHERE active = 1;">⧉</button></td></tr>
                 <tr><td class="desc">Auto increment custom</td><td class="code"><code>ALTER TABLE users AUTO_INCREMENT = 1000;</code><button type="button" class="cp" data-c="ALTER TABLE users AUTO_INCREMENT = 1000;">⧉</button></td></tr>
                 <tr><td class="desc">Enum type</td><td class="code"><code>ALTER TABLE users ADD COLUMN status ENUM('active', 'inactive', 'banned') DEFAULT 'active';</code><button type="button" class="cp" data-c="ALTER TABLE users ADD COLUMN status ENUM('active', 'inactive', 'banned') DEFAULT 'active';">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔍 Consultas & Joins</div>
+              <h3 class="ref-block-title">🔍 Consultas & Joins</h3>
               <table class="cmd-table">
                 <tr><td class="desc">JOIN com agregação</td><td class="code"><code>SELECT u.name, COUNT(p.id) as posts<br>FROM users u<br>LEFT JOIN posts p ON u.id = p.user_id<br>GROUP BY u.id, u.name<br>HAVING COUNT(p.id) > 0;</code><button type="button" class="cp" data-c="SELECT u.name, COUNT(p.id) as posts
-FROM users u
-LEFT JOIN posts p ON u.id = p.user_id
-GROUP BY u.id, u.name
-HAVING COUNT(p.id) > 0;">⧉</button></td></tr>
+                FROM users u
+                LEFT JOIN posts p ON u.id = p.user_id
+                GROUP BY u.id, u.name
+                HAVING COUNT(p.id) > 0;">⧉</button></td></tr>
                 <tr><td class="desc">Subquery</td><td class="code"><code>SELECT * FROM users<br>WHERE id IN (<br>&nbsp;&nbsp;SELECT user_id FROM posts<br>&nbsp;&nbsp;WHERE created_at > '2023-01-01'<br>);</code><button type="button" class="cp" data-c="SELECT * FROM users
-WHERE id IN (
-    SELECT user_id FROM posts
-    WHERE created_at > '2023-01-01'
-);">⧉</button></td></tr>
+                WHERE id IN (
+                SELECT user_id FROM posts
+                WHERE created_at > '2023-01-01'
+                );">⧉</button></td></tr>
                 <tr><td class="desc">Window functions</td><td class="code"><code>SELECT name, salary,<br>&nbsp;&nbsp;RANK() OVER (ORDER BY salary DESC) as rank<br>FROM employees;</code><button type="button" class="cp" data-c="SELECT name, salary,
-    RANK() OVER (ORDER BY salary DESC) as rank
-FROM employees;">⧉</button></td></tr>
+                RANK() OVER (ORDER BY salary DESC) as rank
+                FROM employees;">⧉</button></td></tr>
                 <tr><td class="desc">Full-text search</td><td class="code"><code>ALTER TABLE articles ADD FULLTEXT(content);<br>SELECT * FROM articles<br>WHERE MATCH(content) AGAINST('database query' IN NATURAL LANGUAGE MODE);</code><button type="button" class="cp" data-c="ALTER TABLE articles ADD FULLTEXT(content);
-SELECT * FROM articles
-WHERE MATCH(content) AGAINST('database query' IN NATURAL LANGUAGE MODE);">⧉</button></td></tr>
+                SELECT * FROM articles
+                WHERE MATCH(content) AGAINST('database query' IN NATURAL LANGUAGE MODE);">⧉</button></td></tr>
                 <tr><td class="desc">JSON operations</td><td class="code"><code>SELECT JSON_EXTRACT(data, '$.name') as name,<br>&nbsp;&nbsp;JSON_EXTRACT(data, '$.address.city') as city<br>FROM users WHERE JSON_CONTAINS(data, '{"active": true}');</code><button type="button" class="cp" data-c="SELECT JSON_EXTRACT(data, '$.name') as name,
-    JSON_EXTRACT(data, '$.address.city') as city
-FROM users WHERE JSON_CONTAINS(data, '{\"active\": true}');">⧉</button></td></tr>
+                JSON_EXTRACT(data, '$.address.city') as city
+                FROM users WHERE JSON_CONTAINS(data, '{\"active\": true}');">⧉</button></td></tr>
                 <tr><td class="desc">Pagination</td><td class="code"><code>SELECT * FROM users<br>ORDER BY created_at DESC<br>LIMIT 10 OFFSET 20;</code><button type="button" class="cp" data-c="SELECT * FROM users
-ORDER BY created_at DESC
-LIMIT 10 OFFSET 20;">⧉</button></td></tr>
+                ORDER BY created_at DESC
+                LIMIT 10 OFFSET 20;">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">⚡ Performance & Otimização</div>
+              <h3 class="ref-block-title">⚡ Performance & Otimização</h3>
               <table class="cmd-table">
                 <tr><td class="desc">EXPLAIN query</td><td class="code"><code>EXPLAIN SELECT * FROM users WHERE email = 'test@example.com';</code><button type="button" class="cp" data-c="EXPLAIN SELECT * FROM users WHERE email = 'test@example.com';">⧉</button></td></tr>
                 <tr><td class="desc">Ver índices</td><td class="code"><code>SHOW INDEX FROM users;</code><button type="button" class="cp" data-c="SHOW INDEX FROM users;">⧉</button></td></tr>
@@ -152,16 +205,15 @@ LIMIT 10 OFFSET 20;">⧉</button></td></tr>
                 <tr><td class="desc">Ver status do InnoDB</td><td class="code"><code>SHOW ENGINE INNODB STATUS;</code><button type="button" class="cp" data-c="SHOW ENGINE INNODB STATUS;">⧉</button></td></tr>
                 <tr><td class="desc">Ver conexões ativas</td><td class="code"><code>SHOW PROCESSLIST;</code><button type="button" class="cp" data-c="SHOW PROCESSLIST;">⧉</button></td></tr>
                 <tr><td class="desc">Cache hit ratio</td><td class="code"><code>SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_read%';<br>SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_reads';</code><button type="button" class="cp" data-c="SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_read%';
-SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_reads';">⧉</button></td></tr>
+                SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool_reads';">⧉</button></td></tr>
                 <tr><td class="desc">Tamanho das tabelas</td><td class="code"><code>SELECT table_name, data_length, index_length<br>FROM information_schema.tables<br>WHERE table_schema = 'mydb'<br>ORDER BY data_length DESC;</code><button type="button" class="cp" data-c="SELECT table_name, data_length, index_length
-FROM information_schema.tables
-WHERE table_schema = 'mydb'
-ORDER BY data_length DESC;">⧉</button></td></tr>
+                FROM information_schema.tables
+                WHERE table_schema = 'mydb'
+                ORDER BY data_length DESC;">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔄 Backup & Restore</div>
+              <h3 class="ref-block-title">🔄 Backup & Restore</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Backup completo</td><td class="code"><code>mysqldump -u root -p mydb > backup.sql</code><button type="button" class="cp" data-c="mysqldump -u root -p mydb > backup.sql">⧉</button></td></tr>
                 <tr><td class="desc">Backup comprimido</td><td class="code"><code>mysqldump -u root -p mydb | gzip > backup.sql.gz</code><button type="button" class="cp" data-c="mysqldump -u root -p mydb | gzip > backup.sql.gz">⧉</button></td></tr>
@@ -171,43 +223,66 @@ ORDER BY data_length DESC;">⧉</button></td></tr>
                 <tr><td class="desc">Backup incremental</td><td class="code"><code>mysqlbinlog --start-datetime="2023-01-01 00:00:00" /var/log/mysql/mysql-bin.000001 > incremental.sql</code><button type="button" class="cp" data-c="mysqlbinlog --start-datetime='2023-01-01 00:00:00' /var/log/mysql/mysql-bin.000001 > incremental.sql">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔧 Administração</div>
+              <h3 class="ref-block-title">🔧 Administração</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Ver variáveis globais</td><td class="code"><code>SHOW GLOBAL VARIABLES;</code><button type="button" class="cp" data-c="SHOW GLOBAL VARIABLES;">⧉</button></td></tr>
                 <tr><td class="desc">Alterar variável</td><td class="code"><code>SET GLOBAL innodb_buffer_pool_size = 268435456;</code><button type="button" class="cp" data-c="SET GLOBAL innodb_buffer_pool_size = 268435456;">⧉</button></td></tr>
                 <tr><td class="desc">Ver status</td><td class="code"><code>SHOW GLOBAL STATUS;</code><button type="button" class="cp" data-c="SHOW GLOBAL STATUS;">⧉</button></td></tr>
                 <tr><td class="desc">Ver logs de erro</td><td class="code"><code>tail -f /var/log/mysql/error.log</code><button type="button" class="cp" data-c="tail -f /var/log/mysql/error.log">⧉</button></td></tr>
                 <tr><td class="desc">Ver tamanho do banco</td><td class="code"><code>SELECT table_schema "Database",<br>&nbsp;&nbsp;SUM(data_length + index_length) "Size"<br>FROM information_schema.tables GROUP BY table_schema;</code><button type="button" class="cp" data-c="SELECT table_schema 'Database',
-    SUM(data_length + index_length) 'Size'
-FROM information_schema.tables GROUP BY table_schema;">⧉</button></td></tr>
+                SUM(data_length + index_length) 'Size'
+                FROM information_schema.tables GROUP BY table_schema;">⧉</button></td></tr>
                 <tr><td class="desc">Flush privileges</td><td class="code"><code>FLUSH PRIVILEGES;</code><button type="button" class="cp" data-c="FLUSH PRIVILEGES;">⧉</button></td></tr>
                 <tr><td class="desc">Reset root password</td><td class="code"><code>ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpassword';</code><button type="button" class="cp" data-c="ALTER USER 'root'@'localhost' IDENTIFIED BY 'newpassword';">⧉</button></td></tr>
               </table>
             </div>
-
           </div>
         </div>
       </section>
-
-    </main><!-- /content -->
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">ERROR 1045: Access denied for user</td><td class="err-cause" data-label="Causa">Usuário, senha ou host não conferem: no MySQL, <code>'app'@'localhost'</code> e <code>'app'@'%'</code> são usuários diferentes.</td><td class="err-fix" data-label="Correção">Confira com <code>SELECT user, host FROM mysql.user;</code> e crie ou ajuste o usuário para o host certo com <code>CREATE USER</code> e <code>GRANT</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">ERROR 1040: Too many connections</td><td class="err-cause" data-label="Causa">A aplicação abriu mais conexões que <code>max_connections</code>, geralmente por falta de pool ou por conexões que não são fechadas.</td><td class="err-fix" data-label="Correção">Use pool de conexões na aplicação, feche as conexões e, se necessário, aumente <code>max_connections</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Emojis viram ???? ou erro 1366</td><td class="err-cause" data-label="Causa">A tabela usa <code>utf8</code> (utf8mb3), que só guarda até 3 bytes por caractere.</td><td class="err-fix" data-label="Correção">Use <code>utf8mb4</code>: <code>ALTER TABLE t CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</code>, e o mesmo charset na conexão.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://dev.mysql.com/doc/" target="_blank" rel="noopener">Documentação do MySQL</a></li>
+            <li><a href="https://dev.mysql.com/doc/refman/8.4/en/" target="_blank" rel="noopener">Manual de referência (8.4 LTS)</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
       <span class="footer-brand">BR ByteRef</span>
       <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
       <span class="footer-count" id="cmdCount">— comandos</span>
     </footer>
+  </div>
+</div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /app-shell -->
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

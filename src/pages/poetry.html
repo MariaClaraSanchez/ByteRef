@@ -3,85 +3,132 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — Poetry Reference</title>
+  <title>ByteRef — Poetry</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="poetry">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link active" href="#"              data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ POETRY ══ -->
-      <section class="tech-section" id="poetry" data-tech="Poetry">
-        <div class="section-head" data-toggle="poetry">
-          <div class="sh-left">
-            <span class="tech-icon">📝</span>
-            <h2>Poetry <em>gerenciamento de dependências Python</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">python</span><span class="tag">packaging</span><span class="tag">dependencies</span>
-            <button class="collapse-btn" aria-label="colapsar">▾</button>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">📝</div>
+        <h1>Poetry</h1>
+        <p class="hero-tagline">gerenciamento de dependências Python</p>
+        <div class="hero-meta"><span class="tag">python</span><span class="tag">packaging</span><span class="tag">dependencies</span><span class="hero-stat">40 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Poetry</strong> gerencia dependências, ambientes virtuais e empacotamento de projetos Python a partir de um único arquivo, o <code>pyproject.toml</code>.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> declarar dependências, resolver versões compatíveis, travar tudo num lock file e fazer build e publish de pacotes.</li>
+            <li><strong>Quando usar:</strong> aplicações e bibliotecas Python em equipe, em que todos (e o CI) precisam instalar exatamente as mesmas versões.</li>
+            <li><strong>Quando evitar:</strong> scripts avulsos sem dependências, ou projetos que já padronizaram outra ferramenta (uv, pip-tools, conda) e não ganham nada com a troca.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>pyproject.toml</h3>
+              <p>Arquivo padrão do Python que descreve o projeto: nome, versão, dependências com faixas de versão e configurações de ferramentas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>poetry.lock</h3>
+              <p>Registra a versão exata de cada pacote resolvido, inclusive as dependências indiretas. Deve ir para o Git.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Ambiente virtual</h3>
+              <p>Pasta isolada com o interpretador e os pacotes do projeto. O Poetry cria e usa um ambiente por projeto.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Grupos de dependências</h3>
+              <p>Separam dependências por uso, como <code>dev</code> ou <code>test</code>, instaladas ou não com <code>--with</code> e <code>--without</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Build e publish</h3>
+              <p><code>poetry build</code> gera wheel e sdist em <code>dist/</code>; <code>poetry publish</code> envia para o PyPI ou para um repositório privado.</p>
+            </article>
           </div>
         </div>
-        <div class="section-body">
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  PY[pyproject.toml] -->|poetry lock| LK[poetry.lock]
+  LK -->|poetry install| VENV[(Ambiente virtual)]
+  PY -->|poetry build| DIST[dist/: wheel + sdist]
+  DIST -->|poetry publish| PYPI[(PyPI)]
+</script>
+              <p class="diagram-fallback">O pyproject.toml declara as dependências; poetry lock resolve as versões e grava o poetry.lock, que o poetry install usa para montar o ambiente virtual. Para distribuir, poetry build gera os pacotes em dist e poetry publish envia ao PyPI.</p>
+            </div>
+            <figcaption>Do pyproject ao ambiente instalado, e do pyproject ao pacote publicado.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
           <div class="ref-grid">
-
             <div class="ref-block">
-              <div class="ref-block-title">🚀 Setup & Instalação</div>
+              <h3 class="ref-block-title">🚀 Setup & Instalação</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Instalar Poetry</td><td class="code"><code>curl -sSL https://install.python-poetry.org | python3 -</code><button type="button" class="cp" data-c="curl -sSL https://install.python-poetry.org | python3 -">⧉</button></td></tr>
                 <tr><td class="desc">Ver versão</td><td class="code"><code>poetry --version</code><button type="button" class="cp" data-c="poetry --version">⧉</button></td></tr>
@@ -92,9 +139,8 @@
                 <tr><td class="desc">Ver configuração</td><td class="code"><code>poetry config --list</code><button type="button" class="cp" data-c="poetry config --list">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📦 Gerenciamento de Dependências</div>
+              <h3 class="ref-block-title">📦 Gerenciamento de Dependências</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Adicionar dependência</td><td class="code"><code>poetry add requests</code><button type="button" class="cp" data-c="poetry add requests">⧉</button></td></tr>
                 <tr><td class="desc">Adicionar dev dependency</td><td class="code"><code>poetry add --group dev pytest</code><button type="button" class="cp" data-c="poetry add --group dev pytest">⧉</button></td></tr>
@@ -106,9 +152,8 @@
                 <tr><td class="desc">Ver árvore de dependências</td><td class="code"><code>poetry show --tree</code><button type="button" class="cp" data-c="poetry show --tree">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🐍 Ambientes Virtuais</div>
+              <h3 class="ref-block-title">🐍 Ambientes Virtuais</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Instalar dependências</td><td class="code"><code>poetry install</code><button type="button" class="cp" data-c="poetry install">⧉</button></td></tr>
                 <tr><td class="desc">Criar ambiente virtual</td><td class="code"><code>poetry env use python3.9</code><button type="button" class="cp" data-c="poetry env use python3.9">⧉</button></td></tr>
@@ -119,36 +164,31 @@
                 <tr><td class="desc">Remover ambiente</td><td class="code"><code>poetry env remove python3.9</code><button type="button" class="cp" data-c="poetry env remove python3.9">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📋 Arquivos de Configuração</div>
+              <h3 class="ref-block-title">📋 Arquivos de Configuração</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Estrutura pyproject.toml</td><td class="code"><code">[tool.poetry]<br>name = "my-project"<br>version = "0.1.0"<br>description = ""<br>authors = ["Your Name &lt;email@example.com&gt;"]<br><br>[tool.poetry.dependencies]<br>python = "^3.9"<br>requests = "^2.25.0"<br><br>[tool.poetry.group.dev.dependencies]<br>pytest = "^6.2.0"<br><br>[build-system]<br>requires = ["poetry-core"]<br>build-backend = "poetry.core.masonry.api"</code><button type="button" class="cp" data-c="[tool.poetry]
-name = 'my-project'
-version = '0.1.0'
-description = ''
-authors = ['Your Name <email@example.com>']
-
-[tool.poetry.dependencies]
-python = '^3.9'
-requests = '^2.25.0'
-
-[tool.poetry.group.dev.dependencies]
-pytest = '^6.2.0'
-
-[build-system]
-requires = ['poetry-core']
-build-backend = 'poetry.core.masonry.api'">⧉</button></td></tr>
+                name = 'my-project'
+                version = '0.1.0'
+                description = ''
+                authors = ['Your Name <email@example.com>']
+                [tool.poetry.dependencies]
+                python = '^3.9'
+                requests = '^2.25.0'
+                [tool.poetry.group.dev.dependencies]
+                pytest = '^6.2.0'
+                [build-system]
+                requires = ['poetry-core']
+                build-backend = 'poetry.core.masonry.api'">⧉</button></td></tr>
                 <tr><td class="desc">Adicionar script</td><td class="code"><code>[tool.poetry.scripts]<br>my-command = "my_package:main"</code><button type="button" class="cp" data-c="[tool.poetry.scripts]
-my-command = 'my_package:main'">⧉</button></td></tr>
+                my-command = 'my_package:main'">⧉</button></td></tr>
                 <tr><td class="desc">Configurar repositório</td><td class="code"><code>poetry config repositories.my-repo https://my-repo.com/simple</code><button type="button" class="cp" data-c="poetry config repositories.my-repo https://my-repo.com/simple">⧉</button></td></tr>
                 <tr><td class="desc">Configurar PyPI token</td><td class="code"><code>poetry config pypi-token.pypi my-token</code><button type="button" class="cp" data-c="poetry config pypi-token.pypi my-token">⧉</button></td></tr>
                 <tr><td class="desc">Verificar pyproject.toml</td><td class="code"><code>poetry check</code><button type="button" class="cp" data-c="poetry check">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📦 Build & Publish</div>
+              <h3 class="ref-block-title">📦 Build & Publish</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Build package</td><td class="code"><code>poetry build</code><button type="button" class="cp" data-c="poetry build">⧉</button></td></tr>
                 <tr><td class="desc">Publish no PyPI</td><td class="code"><code>poetry publish</code><button type="button" class="cp" data-c="poetry publish">⧉</button></td></tr>
@@ -158,9 +198,8 @@ my-command = 'my_package:main'">⧉</button></td></tr>
                 <tr><td class="desc">Exportar requirements.txt</td><td class="code"><code>poetry export -f requirements.txt --output requirements.txt</code><button type="button" class="cp" data-c="poetry export -f requirements.txt --output requirements.txt">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔧 Configurações Avançadas</div>
+              <h3 class="ref-block-title">🔧 Configurações Avançadas</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Configurar cache</td><td class="code"><code>poetry config cache-dir ~/.cache/poetry</code><button type="button" class="cp" data-c="poetry config cache-dir ~/.cache/poetry">⧉</button></td></tr>
                 <tr><td class="desc">Configurar virtualenvs.in-project</td><td class="code"><code>poetry config virtualenvs.in-project true</code><button type="button" class="cp" data-c="poetry config virtualenvs.in-project true">⧉</button></td></tr>
@@ -171,28 +210,52 @@ my-command = 'my_package:main'">⧉</button></td></tr>
                 <tr><td class="desc">Configurar Python mínimo</td><td class="code"><code>poetry env use python3.8</code><button type="button" class="cp" data-c="poetry env use python3.8">⧉</button></td></tr>
               </table>
             </div>
-
           </div>
         </div>
       </section>
-
-    </main><!-- /content -->
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">pyproject.toml changed significantly since poetry.lock was last generated</td><td class="err-cause" data-label="Causa">Alguém editou as dependências no <code>pyproject.toml</code> sem atualizar o lock.</td><td class="err-fix" data-label="Correção">Rode <code>poetry lock</code> e faça commit dos dois arquivos juntos.</td></tr>
+              <tr><td class="err-label" data-label="Erro">SolverProblemError: version solving failed</td><td class="err-cause" data-label="Causa">Duas dependências exigem faixas de versão incompatíveis de um mesmo pacote, ou a versão do Python do projeto não é suportada.</td><td class="err-fix" data-label="Correção">Leia a cadeia de conflito na mensagem, relaxe a restrição com <code>poetry add pacote@^X</code> ou ajuste <code>python</code> no <code>pyproject.toml</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">ModuleNotFoundError no editor ou no terminal</td><td class="err-cause" data-label="Causa">O editor ou o shell está usando outro interpretador, não o ambiente virtual do Poetry.</td><td class="err-fix" data-label="Correção">Veja o caminho com <code>poetry env info --path</code> e selecione esse interpretador no editor, ou rode o comando com <code>poetry run</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://python-poetry.org/docs/" target="_blank" rel="noopener">Documentação</a></li>
+            <li><a href="https://python-poetry.org/docs/cli/" target="_blank" rel="noopener">Referência da CLI</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
       <span class="footer-brand">BR ByteRef</span>
       <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
       <span class="footer-count" id="cmdCount">— comandos</span>
     </footer>
+  </div>
+</div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /app-shell -->
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

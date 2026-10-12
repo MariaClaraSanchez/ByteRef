@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>ByteRef — LLMs & APIs</title>
+  <script src="../js/theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../css/style.css"/>
+</head>
+<body data-tech-id="llm-apis">
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../../index.html">
+      <div class="brand-mark">BR</div>
+      <div>
+        <div class="brand-name">ByteRef</div>
+        <div class="brand-tagline">DevOps · Backend</div>
+      </div>
+    </a>
+    <div class="search-box">
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
+    </div>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
+    </nav>
+    <div class="sidebar-meta">
+      <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-brand">ByteRef</div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
+      <div class="topbar-right">
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
+      </div>
+    </header>
+
+    <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
+
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🤖</div>
+        <h1>LLMs & APIs</h1>
+        <p class="hero-tagline">tokens, contexto e chamadas de API</p>
+        <div class="hero-meta"><span class="tag">llm</span><span class="tag">api</span><span class="tag">tokens</span><span class="hero-stat">13 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p>Um <strong>LLM</strong> (large language model) gera texto prevendo o próximo <strong>token</strong> a partir de tudo que está na janela de contexto. Você o usa por uma API HTTP: envia um system prompt e mensagens, recebe a resposta e o uso de tokens, que define o custo.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> resumir, extrair dados, classificar, responder perguntas, gerar e revisar código dentro da sua aplicação.</li>
+            <li><strong>Quando usar:</strong> tarefas de linguagem difíceis de resolver com regras fixas; quando um erro ocasional pode ser detectado e corrigido.</li>
+            <li><strong>Quando evitar:</strong> cálculos exatos, decisões que exigem 100% de precisão sem revisão e dados sensíveis sem política de privacidade aprovada.</li>
+          </ul>
+          <aside class="callout" data-kind="info">
+            <p class="callout-title">Referência: out/2026</p>
+            <p>Os exemplos usam a API do Claude com o modelo <code>claude-opus-5-5</code>. Modelos, preços e limites mudam: confira sempre a página oficial de modelos. Outros provedores seguem o mesmo formato de mensagens.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Token</h3>
+              <p>Pedaço de texto (parte de uma palavra, pontuação, espaço) que o modelo lê e gera. Entrada e saída são cobradas por token.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Janela de contexto</h3>
+              <p>Quantidade máxima de tokens que o modelo enxerga numa chamada: system prompt, histórico, documentos e a própria resposta.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Mensagens e papéis</h3>
+              <p>A conversa é uma lista alternando <code>user</code> e <code>assistant</code>. A API não guarda estado: você reenvia o histórico a cada chamada.</p>
+            </article>
+            <article class="concept-card">
+              <h3>System prompt</h3>
+              <p>Instruções fixas de comportamento (papel, tom, regras), enviadas no parâmetro <code>system</code>, separadas das mensagens.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Effort e temperatura</h3>
+              <p>Nos modelos Claude atuais, o <code>effort</code> controla quanto o modelo raciocina. <code>temperature</code> foi removido; em outros provedores ainda ajusta a aleatoriedade.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Streaming</h3>
+              <p>Recebe a resposta em pedaços (eventos SSE) enquanto é gerada, para mostrar texto aos poucos e evitar timeouts em respostas longas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Prompt caching</h3>
+              <p>Reaproveita um prefixo idêntico (system prompt, documentos) entre chamadas, reduzindo custo e latência. Qualquer mudança no prefixo invalida o cache.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+sequenceDiagram
+  participant App as Sua aplicação
+  participant API as API do Claude
+  participant M as Modelo
+  App->>API: POST /v1/messages (system, messages, max_tokens)
+  API->>M: tokens de entrada
+  M-->>API: tokens gerados
+  API-->>App: content + stop_reason + usage
+  Note over App,API: usage.input_tokens e output_tokens definem o custo
+</script>
+              <p class="diagram-fallback">A aplicação envia o system prompt, as mensagens e o max_tokens para a API. O modelo lê os tokens de entrada e gera a resposta, que volta com o motivo da parada (stop_reason) e o uso de tokens, base do custo.</p>
+            </div>
+            <figcaption>Uma chamada é sem estado: tudo que o modelo precisa saber vai na requisição.</figcaption>
+          </figure>
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  S[System prompt] --> H[Histórico de mensagens]
+  H --> D[Documentos e resultados de ferramentas]
+  D --> R[Resposta gerada]
+  R -. limitada por max_tokens .-> R
+</script>
+              <p class="diagram-fallback">A janela de contexto é ocupada, nesta ordem, pelo system prompt, pelo histórico de mensagens, por documentos e resultados de ferramentas e, por fim, pela resposta, cujo tamanho máximo é o max_tokens.</p>
+            </div>
+            <figcaption>Tudo compete pelo mesmo espaço: histórico longo deixa menos lugar para documentos e resposta.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos & Snippets</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
+          <div class="ref-grid">
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">⚙️ Setup & HTTP</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar o SDK Python</td><td class="code"><code>pip install anthropic</code><button type="button" class="cp" data-c="pip install anthropic">⧉</button></td></tr>
+                <tr><td class="desc">Definir a chave no shell (nunca no código)</td><td class="code"><code>export ANTHROPIC_API_KEY="sua-chave"</code><button type="button" class="cp" data-c="export ANTHROPIC_API_KEY=&quot;sua-chave&quot;">⧉</button></td></tr>
+                <tr><td class="desc">Listar modelos disponíveis</td><td class="code"><code>curl -s https://api.anthropic.com/v1/models -H "x-api-key: $ANTHROPIC_API_KEY" -H "anthropic-version: 2023-06-01" | jq -r '.data[].id'</code><button type="button" class="cp" data-c="curl -s https://api.anthropic.com/v1/models -H &quot;x-api-key: $ANTHROPIC_API_KEY&quot; -H &quot;anthropic-version: 2023-06-01&quot; | jq -r &#x27;.data[].id&#x27;">⧉</button></td></tr>
+                <tr><td class="desc">Extrair só o texto de uma resposta JSON</td><td class="code"><code>jq -r '.content[] | select(.type == "text") | .text'</code><button type="button" class="cp" data-c="jq -r &#x27;.content[] | select(.type == &quot;text&quot;) | .text&#x27;">⧉</button></td></tr>
+              </table>
+              <div class="code-block">
+                <div class="code-block-head"><span>curl · chamada básica</span><button type="button" class="cp" data-c="curl https://api.anthropic.com/v1/messages \
+  -H &quot;content-type: application/json&quot; \
+  -H &quot;x-api-key: $ANTHROPIC_API_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -d &#x27;{
+    &quot;model&quot;: &quot;claude-opus-5-5&quot;,
+    &quot;max_tokens&quot;: 16000,
+    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;O que é um token?&quot;}]
+  }&#x27; | jq -r &#x27;.content[] | select(.type == &quot;text&quot;) | .text&#x27;">⧉</button></div>
+                <pre><code>curl https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 16000,
+    "messages": [{"role": "user", "content": "O que é um token?"}]
+  }' | jq -r '.content[] | select(.type == "text") | .text'</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>curl · streaming (SSE)</span><button type="button" class="cp" data-c="curl -N https://api.anthropic.com/v1/messages \
+  -H &quot;content-type: application/json&quot; \
+  -H &quot;x-api-key: $ANTHROPIC_API_KEY&quot; \
+  -H &quot;anthropic-version: 2023-06-01&quot; \
+  -d &#x27;{
+    &quot;model&quot;: &quot;claude-opus-5-5&quot;,
+    &quot;max_tokens&quot;: 64000,
+    &quot;stream&quot;: true,
+    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Escreva um haicai sobre deploy&quot;}]
+  }&#x27;">⧉</button></div>
+                <pre><code>curl -N https://api.anthropic.com/v1/messages \
+  -H "content-type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-5-5",
+    "max_tokens": 64000,
+    "stream": true,
+    "messages": [{"role": "user", "content": "Escreva um haicai sobre deploy"}]
+  }'</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">🐍 Python SDK · básico</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · chamada básica</span><button type="button" class="cp" data-c="import anthropic
+
+client = anthropic.Anthropic()  # lê ANTHROPIC_API_KEY do ambiente
+
+response = client.messages.create(
+    model=&quot;claude-opus-5-5&quot;,  # referência: out/2026
+    max_tokens=16000,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Explique um índice B-tree em 3 frases.&quot;}],
+)
+
+if response.stop_reason == &quot;max_tokens&quot;:
+    print(&quot;Resposta cortada: aumente max_tokens ou use streaming.&quot;)
+
+for block in response.content:
+    if block.type == &quot;text&quot;:
+        print(block.text)
+
+print(response.usage.input_tokens, response.usage.output_tokens)">⧉</button></div>
+                <pre><code>import anthropic
+
+client = anthropic.Anthropic()  # lê ANTHROPIC_API_KEY do ambiente
+
+response = client.messages.create(
+    model="claude-opus-5-5",  # referência: out/2026
+    max_tokens=16000,
+    messages=[{"role": "user", "content": "Explique um índice B-tree em 3 frases."}],
+)
+
+if response.stop_reason == "max_tokens":
+    print("Resposta cortada: aumente max_tokens ou use streaming.")
+
+for block in response.content:
+    if block.type == "text":
+        print(block.text)
+
+print(response.usage.input_tokens, response.usage.output_tokens)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · system prompt, histórico e effort</span><button type="button" class="cp" data-c="response = client.messages.create(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=16000,
+    system=&quot;Você revisa código Python. Responda em português, com exemplos.&quot;,
+    output_config={&quot;effort&quot;: &quot;low&quot;},  # low | medium | high | xhigh | max
+    messages=[
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;O que acha de: def soma(a, b): return a + b&quot;},
+        {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Está correta; faltam type hints e docstring.&quot;},
+        {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Reescreva com type hints.&quot;},
+    ],
+)">⧉</button></div>
+                <pre><code>response = client.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    system="Você revisa código Python. Responda em português, com exemplos.",
+    output_config={"effort": "low"},  # low | medium | high | xhigh | max
+    messages=[
+        {"role": "user", "content": "O que acha de: def soma(a, b): return a + b"},
+        {"role": "assistant", "content": "Está correta; faltam type hints e docstring."},
+        {"role": "user", "content": "Reescreva com type hints."},
+    ],
+)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · streaming</span><button type="button" class="cp" data-c="with client.messages.stream(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=64000,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Escreva um README para uma API Flask.&quot;}],
+) as stream:
+    for text in stream.text_stream:
+        print(text, end=&quot;&quot;, flush=True)
+    final = stream.get_final_message()
+
+print(&quot;\n&quot;, final.usage.output_tokens, &quot;tokens gerados&quot;)">⧉</button></div>
+                <pre><code>with client.messages.stream(
+    model="claude-opus-5-5",
+    max_tokens=64000,
+    messages=[{"role": "user", "content": "Escreva um README para uma API Flask."}],
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
+    final = stream.get_final_message()
+
+print("\n", final.usage.output_tokens, "tokens gerados")</code></pre>
+              </div>
+            </div>
+            <div class="ref-block ref-block--wide">
+              <h3 class="ref-block-title">📏 Tokens, custo e erros</h3>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · contar tokens antes de enviar</span><button type="button" class="cp" data-c="count = client.messages.count_tokens(
+    model=&quot;claude-opus-5-5&quot;,
+    system=&quot;Você é um assistente de suporte.&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: open(&quot;manual.md&quot;).read()}],
+)
+print(count.input_tokens)  # não use tiktoken: é o tokenizer de outro provedor">⧉</button></div>
+                <pre><code>count = client.messages.count_tokens(
+    model="claude-opus-5-5",
+    system="Você é um assistente de suporte.",
+    messages=[{"role": "user", "content": open("manual.md").read()}],
+)
+print(count.input_tokens)  # não use tiktoken: é o tokenizer de outro provedor</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · retries e tratamento de 429</span><button type="button" class="cp" data-c="import anthropic
+
+client = anthropic.Anthropic(max_retries=5)  # retry com backoff em 408/409/429/5xx
+
+try:
+    response = client.messages.create(
+        model=&quot;claude-opus-5-5&quot;,
+        max_tokens=16000,
+        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Olá&quot;}],
+    )
+except anthropic.RateLimitError as e:  # 429 mesmo depois dos retries
+    print(&quot;Limite atingido; tente após&quot;, e.response.headers.get(&quot;retry-after&quot;), &quot;s&quot;)
+except anthropic.APIStatusError as e:  # outros erros HTTP (400, 401, 500...)
+    print(e.status_code, e.message)
+except anthropic.APIConnectionError:  # a rede caiu antes da resposta
+    print(&quot;Falha de conexão&quot;)">⧉</button></div>
+                <pre><code>import anthropic
+
+client = anthropic.Anthropic(max_retries=5)  # retry com backoff em 408/409/429/5xx
+
+try:
+    response = client.messages.create(
+        model="claude-opus-5-5",
+        max_tokens=16000,
+        messages=[{"role": "user", "content": "Olá"}],
+    )
+except anthropic.RateLimitError as e:  # 429 mesmo depois dos retries
+    print("Limite atingido; tente após", e.response.headers.get("retry-after"), "s")
+except anthropic.APIStatusError as e:  # outros erros HTTP (400, 401, 500...)
+    print(e.status_code, e.message)
+except anthropic.APIConnectionError:  # a rede caiu antes da resposta
+    print("Falha de conexão")</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · prompt caching</span><button type="button" class="cp" data-c="MANUAL = open(&quot;manual.md&quot;).read()  # conteúdo grande e estável
+
+response = client.messages.create(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=16000,
+    system=[{
+        &quot;type&quot;: &quot;text&quot;,
+        &quot;text&quot;: &quot;Responda só com base no manual abaixo.\n\n&quot; + MANUAL,
+        &quot;cache_control&quot;: {&quot;type&quot;: &quot;ephemeral&quot;},  # TTL padrão: 5 minutos
+    }],
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Como redefino a senha?&quot;}],
+)
+# &gt; 0 nas chamadas seguintes = cache funcionando
+print(response.usage.cache_read_input_tokens)">⧉</button></div>
+                <pre><code>MANUAL = open("manual.md").read()  # conteúdo grande e estável
+
+response = client.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    system=[{
+        "type": "text",
+        "text": "Responda só com base no manual abaixo.\n\n" + MANUAL,
+        "cache_control": {"type": "ephemeral"},  # TTL padrão: 5 minutos
+    }],
+    messages=[{"role": "user", "content": "Como redefino a senha?"}],
+)
+# &gt; 0 nas chamadas seguintes = cache funcionando
+print(response.usage.cache_read_input_tokens)</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-block-head"><span>Python · recusas e fallback (beta)</span><button type="button" class="cp" data-c="response = client.beta.messages.create(
+    model=&quot;claude-opus-5-5&quot;,
+    max_tokens=16000,
+    betas=[&quot;server-side-fallback-2026-07-01&quot;],
+    fallbacks=&quot;default&quot;,  # reexecuta em outro modelo se houver recusa
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Analise este log de segurança: ...&quot;}],
+)
+
+if response.stop_reason == &quot;refusal&quot;:  # confira antes de ler content
+    print(&quot;Recusado:&quot;, response.stop_details.category if response.stop_details else None)">⧉</button></div>
+                <pre><code>response = client.beta.messages.create(
+    model="claude-opus-5-5",
+    max_tokens=16000,
+    betas=["server-side-fallback-2026-07-01"],
+    fallbacks="default",  # reexecuta em outro modelo se houver recusa
+    messages=[{"role": "user", "content": "Analise este log de segurança: ..."}],
+)
+
+if response.stop_reason == "refusal":  # confira antes de ler content
+    print("Recusado:", response.stop_details.category if response.stop_details else None)</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">429 rate_limit_error</td><td class="err-cause" data-label="Causa">Você passou do limite de requisições ou de tokens por minuto do seu nível de uso.</td><td class="err-fix" data-label="Correção">O SDK já tenta de novo com backoff; aumente <code>max_retries</code>, respeite o header <code>retry-after</code>, reduza a concorrência e use prompt caching ou Batch.</td></tr>
+              <tr><td class="err-label" data-label="Erro">stop_reason: "max_tokens"</td><td class="err-cause" data-label="Causa">O <code>max_tokens</code> é menor do que a resposta precisa; o texto é cortado no meio.</td><td class="err-fix" data-label="Correção">Aumente <code>max_tokens</code> e, para respostas longas, use streaming para não estourar o timeout HTTP.</td></tr>
+              <tr><td class="err-label" data-label="Erro">400 ao enviar temperature</td><td class="err-cause" data-label="Causa">Os modelos Claude atuais removeram os parâmetros de amostragem (<code>temperature</code>, <code>top_p</code>, <code>top_k</code>). Referência: out/2026.</td><td class="err-fix" data-label="Correção">Remova esses parâmetros e controle profundidade e custo com <code>output_config={"effort": ...}</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">400: entrada maior que a janela de contexto</td><td class="err-cause" data-label="Causa">System prompt, histórico e documentos somam mais tokens do que o modelo aceita.</td><td class="err-fix" data-label="Correção">Meça com <code>count_tokens</code>, resuma ou corte o histórico antigo e envie só os trechos relevantes (RAG).</td></tr>
+              <tr><td class="err-label" data-label="Erro">Chave de API vazou</td><td class="err-cause" data-label="Causa">A chave foi escrita no código, num <code>.env</code> commitado ou usada no front-end.</td><td class="err-fix" data-label="Correção">Revogue a chave no Console na hora, use variável de ambiente ou gerenciador de segredos e chame a API só do backend.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Resposta confiante e errada (alucinação)</td><td class="err-cause" data-label="Causa">O modelo gera texto plausível mesmo quando não tem a informação.</td><td class="err-fix" data-label="Correção">Forneça o contexto na chamada (RAG), peça para citar a fonte e para responder "não sei", e valide saídas críticas.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="warn">
+            <p class="callout-title">Nunca exponha a chave no navegador</p>
+            <p>Qualquer chamada feita do front-end revela a chave para quem abrir o DevTools. Coloque a chamada num endpoint do seu backend e aplique autenticação e limite de uso por usuário.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">Modelos</a></li>
+            <li><a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">Preços</a></li>
+            <li><a href="https://platform.claude.com/docs/en/api/rate-limits" target="_blank" rel="noopener">Rate limits</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="../js/registry.js"></script>
+<script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
+</body>
+</html>

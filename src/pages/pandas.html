@@ -3,85 +3,142 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — Pandas Reference</title>
+  <title>ByteRef — Pandas</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="pandas">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link"        href="./flask.html"      data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link active" href="#"              data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ PANDAS ══ -->
-      <section class="tech-section" id="pandas" data-tech="Pandas">
-        <div class="section-head" data-toggle="pandas">
-          <div class="sh-left">
-            <span class="tech-icon">🐼</span>
-            <h2>Pandas <em>análise de dados Python</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">python</span><span class="tag">data</span><span class="tag">analysis</span>
-            <button class="collapse-btn" aria-label="colapsar">▾</button>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🐼</div>
+        <h1>Pandas</h1>
+        <p class="hero-tagline">análise de dados Python</p>
+        <div class="hero-meta"><span class="tag">python</span><span class="tag">data</span><span class="tag">analysis</span><span class="hero-stat">47 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Pandas</strong> é a biblioteca Python para dados tabulares: o <strong>DataFrame</strong> organiza linhas e colunas com rótulos e tipos, como uma planilha programável.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> ler dados de CSV, Excel, SQL e Parquet, fazer limpeza, seleção e filtro, agregação com <code>groupby</code>, junções e exportação.</li>
+            <li><strong>Quando usar:</strong> análise exploratória, relatórios, preparação de dados para modelos e ETLs que cabem na memória de uma máquina.</li>
+            <li><strong>Quando evitar:</strong> volumes maiores que a memória (use Polars, DuckDB ou Spark), processamento linha a linha em laços Python e cálculos numéricos puros, em que o NumPy é mais direto.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Series</h3>
+              <p>Coluna unidimensional com um índice e um único tipo de dado. Cada coluna de um DataFrame é uma Series.</p>
+            </article>
+            <article class="concept-card">
+              <h3>DataFrame</h3>
+              <p>Tabela bidimensional com colunas nomeadas, possivelmente de tipos diferentes, e um índice para as linhas.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Índice</h3>
+              <p>Rótulos das linhas. <code>.loc</code> seleciona por rótulo e <code>.iloc</code> por posição; joins e alinhamentos usam o índice.</p>
+            </article>
+            <article class="concept-card">
+              <h3>dtype</h3>
+              <p>Tipo de cada coluna (<code>int64</code>, <code>float64</code>, <code>object</code>, <code>datetime64</code>, <code>category</code>). O tipo certo economiza memória e evita erros.</p>
+            </article>
+            <article class="concept-card">
+              <h3>groupby</h3>
+              <p>Divide o DataFrame em grupos por uma ou mais chaves, aplica uma agregação em cada grupo e combina o resultado.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Merge e join</h3>
+              <p>Combina DataFrames por colunas-chave, como um JOIN de SQL, com <code>how='inner'</code>, <code>'left'</code>, <code>'right'</code> ou <code>'outer'</code>.</p>
+            </article>
           </div>
         </div>
-        <div class="section-body">
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+flowchart LR
+  DF[DataFrame: vendas] --> S{split por região}
+  S --> G1[Sul]
+  S --> G2[Sudeste]
+  S --> G3[Norte]
+  G1 -->|sum| A1[Sul: 120]
+  G2 -->|sum| A2[Sudeste: 340]
+  G3 -->|sum| A3[Norte: 80]
+  A1 --> R[(Resultado combinado)]
+  A2 --> R
+  A3 --> R
+</script>
+              <p class="diagram-fallback">O groupby divide o DataFrame de vendas em grupos por região (split), aplica a soma em cada grupo (apply) e junta os totais numa nova tabela (combine).</p>
+            </div>
+            <figcaption>Split-apply-combine: o modelo mental por trás do df.groupby('regiao')['valor'].sum().</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
           <div class="ref-grid">
-
             <div class="ref-block">
-              <div class="ref-block-title">📊 Criação & Leitura</div>
+              <h3 class="ref-block-title">📊 Criação & Leitura</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Importar pandas</td><td class="code"><code>import pandas as pd</code><button type="button" class="cp" data-c="import pandas as pd">⧉</button></td></tr>
                 <tr><td class="desc">Criar DataFrame</td><td class="code"><code>df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})</code><button type="button" class="cp" data-c="df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})">⧉</button></td></tr>
@@ -93,9 +150,8 @@
                 <tr><td class="desc">Ler parquet</td><td class="code"><code>df = pd.read_parquet('file.parquet')</code><button type="button" class="cp" data-c="df = pd.read_parquet('file.parquet')">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔍 Exploração de Dados</div>
+              <h3 class="ref-block-title">🔍 Exploração de Dados</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Ver primeiras linhas</td><td class="code"><code>df.head()</code><button type="button" class="cp" data-c="df.head()">⧉</button></td></tr>
                 <tr><td class="desc">Ver últimas linhas</td><td class="code"><code>df.tail()</code><button type="button" class="cp" data-c="df.tail()">⧉</button></td></tr>
@@ -108,9 +164,8 @@
                 <tr><td class="desc">Contar valores únicos</td><td class="code"><code>df['column'].value_counts()</code><button type="button" class="cp" data-c="df['column'].value_counts()">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">✂️ Seleção & Filtros</div>
+              <h3 class="ref-block-title">✂️ Seleção & Filtros</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Selecionar coluna</td><td class="code"><code>df['column']</code><button type="button" class="cp" data-c="df['column']">⧉</button></td></tr>
                 <tr><td class="desc">Selecionar múltiplas colunas</td><td class="code"><code>df[['col1', 'col2']]</code><button type="button" class="cp" data-c="df[['col1', 'col2']]">⧉</button></td></tr>
@@ -122,9 +177,8 @@
                 <tr><td class="desc">Preencher valores nulos</td><td class="code"><code>df.fillna(0)</code><button type="button" class="cp" data-c="df.fillna(0)">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">🔧 Manipulação de Dados</div>
+              <h3 class="ref-block-title">🔧 Manipulação de Dados</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Adicionar coluna</td><td class="code"><code>df['new_col'] = df['col1'] + df['col2']</code><button type="button" class="cp" data-c="df['new_col'] = df['col1'] + df['col2']">⧉</button></td></tr>
                 <tr><td class="desc">Renomear colunas</td><td class="code"><code>df.rename(columns={'old': 'new'})</code><button type="button" class="cp" data-c="df.rename(columns={'old': 'new'})">⧉</button></td></tr>
@@ -136,9 +190,8 @@
                 <tr><td class="desc">Concatenar</td><td class="code"><code>pd.concat([df1, df2], axis=0)</code><button type="button" class="cp" data-c="pd.concat([df1, df2], axis=0)">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📈 Análise & Estatísticas</div>
+              <h3 class="ref-block-title">📈 Análise & Estatísticas</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Média por grupo</td><td class="code"><code>df.groupby('group')['value'].mean()</code><button type="button" class="cp" data-c="df.groupby('group')['value'].mean()">⧉</button></td></tr>
                 <tr><td class="desc">Correlação</td><td class="code"><code>df.corr()</code><button type="button" class="cp" data-c="df.corr()">⧉</button></td></tr>
@@ -149,9 +202,8 @@
                 <tr><td class="desc">Apply function</td><td class="code"><code>df['new_col'] = df['col'].apply(lambda x: x**2)</code><button type="button" class="cp" data-c="df['new_col'] = df['col'].apply(lambda x: x**2)">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">💾 Export & I/O</div>
+              <h3 class="ref-block-title">💾 Export & I/O</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Salvar CSV</td><td class="code"><code>df.to_csv('file.csv', index=False)</code><button type="button" class="cp" data-c="df.to_csv('file.csv', index=False)">⧉</button></td></tr>
                 <tr><td class="desc">Salvar Excel</td><td class="code"><code>df.to_excel('file.xlsx', sheet_name='Sheet1')</code><button type="button" class="cp" data-c="df.to_excel('file.xlsx', sheet_name='Sheet1')">⧉</button></td></tr>
@@ -162,28 +214,52 @@
                 <tr><td class="desc">Ler Pickle</td><td class="code"><code>df = pd.read_pickle('file.pkl')</code><button type="button" class="cp" data-c="df = pd.read_pickle('file.pkl')">⧉</button></td></tr>
               </table>
             </div>
-
           </div>
         </div>
       </section>
-
-    </main><!-- /content -->
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">SettingWithCopyWarning</td><td class="err-cause" data-label="Causa">Você atribuiu valores num recorte que pode ser uma cópia (<code>df[df.x &gt; 0]['y'] = 1</code>), e a alteração pode não chegar ao DataFrame original.</td><td class="err-fix" data-label="Correção">Use uma única operação com <code>.loc</code>: <code>df.loc[df.x &gt; 0, 'y'] = 1</code>, ou faça <code>.copy()</code> se quiser mesmo um novo DataFrame.</td></tr>
+              <tr><td class="err-label" data-label="Erro">KeyError: 'coluna'</td><td class="err-cause" data-label="Causa">A coluna não existe com esse nome exato: espaços, maiúsculas ou cabeçalho lido como dado.</td><td class="err-fix" data-label="Correção">Confira <code>df.columns.tolist()</code> e normalize com <code>df.columns = df.columns.str.strip().str.lower()</code>.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Merge multiplicou as linhas</td><td class="err-cause" data-label="Causa">A chave de junção se repete nos dois lados, e o merge gera uma linha para cada combinação.</td><td class="err-fix" data-label="Correção">Verifique duplicatas com <code>df.duplicated('chave').sum()</code> e use <code>validate='one_to_one'</code> ou <code>'many_to_one'</code> no <code>merge</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://pandas.pydata.org/docs/user_guide/index.html" target="_blank" rel="noopener">User Guide</a></li>
+            <li><a href="https://pandas.pydata.org/docs/reference/index.html" target="_blank" rel="noopener">Referência da API</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
       <span class="footer-brand">BR ByteRef</span>
       <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
       <span class="footer-count" id="cmdCount">— comandos</span>
     </footer>
+  </div>
+</div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /app-shell -->
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

@@ -3,233 +3,318 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — Flask Reference</title>
+  <title>ByteRef — Flask</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="flask">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link"        href="./gcp.html"        data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link"        href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link"        href="./docker.html"     data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link"        href="./bash.html"      data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link active" href="#"              data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link"        href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link"        href="./mysql.html"      data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link"        href="./redis.html"      data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link"        href="./poetry.html"     data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link"        href="./pandas.html"     data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ FLASK ══ -->
-      <section class="tech-section" id="flask" data-tech="Flask">
-        <div class="section-head" data-toggle="flask">
-          <div class="sh-left">
-            <span class="tech-icon">🧪</span>
-            <h2>Flask <em>microframework web Python</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">python</span><span class="tag">web</span><span class="tag">api</span>
-            <button class="collapse-btn" aria-label="colapsar">▾</button>
-          </div>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">🧪</div>
+        <h1>Flask</h1>
+        <p class="hero-tagline">microframework web Python</p>
+        <div class="hero-meta"><span class="tag">python</span><span class="tag">web</span><span class="tag">api</span><span class="hero-stat">30 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
         </div>
-        <div class="section-body">
-          <div class="ref-grid">
-
-            <div class="ref-block">
-              <div class="ref-block-title">🚀 Setup Básico</div>
-              <table class="cmd-table">
-                <tr><td class="desc">Instalar Flask</td><td class="code"><code>pip install flask</code><button type="button" class="cp" data-c="pip install flask">⧉</button></td></tr>
-                <tr><td class="desc">App mínimo</td><td class="code"><code>from flask import Flask<br>app = Flask(__name__)<br>@app.route('/')<br>def hello():<br>&nbsp;&nbsp;return 'Hello World!'<br>if __name__ == '__main__':<br>&nbsp;&nbsp;app.run()</code><button type="button" class="cp" data-c="from flask import Flask
-app = Flask(__name__)
-@app.route('/')
-def hello():
-    return 'Hello World!'
-if __name__ == '__main__':
-    app.run()">⧉</button></td></tr>
-                <tr><td class="desc">Executar em modo debug</td><td class="code"><code>export FLASK_ENV=development<br>flask run</code><button type="button" class="cp" data-c="export FLASK_ENV=development
-flask run">⧉</button></td></tr>
-                <tr><td class="desc">Configurar host/porta</td><td class="code"><code>app.run(host='0.0.0.0', port=5000, debug=True)</code><button type="button" class="cp" data-c="app.run(host='0.0.0.0', port=5000, debug=True)">⧉</button></td></tr>
-                <tr><td class="desc">Blueprint básico</td><td class="code"><code>from flask import Blueprint<br>bp = Blueprint('api', __name__)<br>@bp.route('/health')<br>def health():<br>&nbsp;&nbsp;return {'status': 'ok'}</code><button type="button" class="cp" data-c="from flask import Blueprint
-bp = Blueprint('api', __name__)
-@bp.route('/health')
-def health():
-    return {'status': 'ok'}">⧉</button></td></tr>
-                <tr><td class="desc">Registrar blueprint</td><td class="code"><code>from routes.api import bp<br>app.register_blueprint(bp, url_prefix='/api')</code><button type="button" class="cp" data-c="from routes.api import bp
-app.register_blueprint(bp, url_prefix='/api')">⧉</button></td></tr>
-              </table>
-            </div>
-
-            <div class="ref-block">
-              <div class="ref-block-title">📡 Rotas & Métodos HTTP</div>
-              <table class="cmd-table">
-                <tr><td class="desc">Rota com parâmetro</td><td class="code"><code>@app.route('/user/&lt;int:user_id&gt;')<br>def get_user(user_id):<br>&nbsp;&nbsp;return f'User {user_id}'</code><button type="button" class="cp" data-c="@app.route('/user/<int:user_id>')
-def get_user(user_id):
-    return f'User {user_id}'">⧉</button></td></tr>
-                <tr><td class="desc">Rota POST com JSON</td><td class="code"><code>from flask import request, jsonify<br>@app.route('/api/data', methods=['POST'])<br>def create_data():<br>&nbsp;&nbsp;data = request.get_json()<br>&nbsp;&nbsp;return jsonify({'id': 1, **data})</code><button type="button" class="cp" data-c="from flask import request, jsonify
-@app.route('/api/data', methods=['POST'])
-def create_data():
-    data = request.get_json()
-    return jsonify({'id': 1, **data})">⧉</button></td></tr>
-                <tr><td class="desc">Upload de arquivo</td><td class="code"><code>@app.route('/upload', methods=['POST'])<br>def upload_file():<br>&nbsp;&nbsp;file = request.files['file']<br>&nbsp;&nbsp;file.save(f'uploads/{file.filename}')<br>&nbsp;&nbsp;return 'File uploaded'</code><button type="button" class="cp" data-c="@app.route('/upload', methods=['POST'])
-def upload_file():
-    file = request.files['file']
-    file.save(f'uploads/{file.filename}')
-    return 'File uploaded'">⧉</button></td></tr>
-                <tr><td class="desc">Redirecionamento</td><td class="code"><code>from flask import redirect, url_for<br>@app.route('/old-url')<br>def old_url():<br>&nbsp;&nbsp;return redirect(url_for('new_url'))</code><button type="button" class="cp" data-c="from flask import redirect, url_for
-@app.route('/old-url')
-def old_url():
-    return redirect(url_for('new_url'))">⧉</button></td></tr>
-                <tr><td class="desc">Página 404 customizada</td><td class="code"><code>@app.errorhandler(404)<br>def not_found(error):<br>&nbsp;&nbsp;return 'Página não encontrada', 404</code><button type="button" class="cp" data-c="@app.errorhandler(404)
-def not_found(error):
-    return 'Página não encontrada', 404">⧉</button></td></tr>
-                <tr><td class="desc">Middleware básico</td><td class="code"><code>@app.before_request<br>def before_request():<br>&nbsp;&nbsp;print('Antes da requisição')</code><button type="button" class="cp" data-c="@app.before_request
-def before_request():
-    print('Antes da requisição')">⧉</button></td></tr>
-              </table>
-            </div>
-
-            <div class="ref-block">
-              <div class="ref-block-title">🗄️ Banco de Dados</div>
-              <table class="cmd-table">
-                <tr><td class="desc">SQLAlchemy setup</td><td class="code"><code>from flask_sqlalchemy import SQLAlchemy<br>app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'<br>db = SQLAlchemy(app)</code><button type="button" class="cp" data-c="from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-db = SQLAlchemy(app)">⧉</button></td></tr>
-                <tr><td class="desc">Modelo User</td><td class="code"><code>class User(db.Model):<br>&nbsp;&nbsp;id = db.Column(db.Integer, primary_key=True)<br>&nbsp;&nbsp;name = db.Column(db.String(80), nullable=False)<br>&nbsp;&nbsp;email = db.Column(db.String(120), unique=True)</code><button type="button" class="cp" data-c="class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
-    email = db.Column(db.String(120), unique=True)">⧉</button></td></tr>
-                <tr><td class="desc">Criar tabelas</td><td class="code"><code>with app.app_context():<br>&nbsp;&nbsp;db.create_all()</code><button type="button" class="cp" data-c="with app.app_context():
-    db.create_all()">⧉</button></td></tr>
-                <tr><td class="desc">Inserir registro</td><td class="code"><code>user = User(name='João', email='joao@email.com')<br>db.session.add(user)<br>db.session.commit()</code><button type="button" class="cp" data-c="user = User(name='João', email='joao@email.com')
-db.session.add(user)
-db.session.commit()">⧉</button></td></tr>
-                <tr><td class="desc">Consultar registros</td><td class="code"><code>users = User.query.all()<br>user = User.query.filter_by(email='joao@email.com').first()</code><button type="button" class="cp" data-c="users = User.query.all()
-user = User.query.filter_by(email='joao@email.com').first()">⧉</button></td></tr>
-                <tr><td class="desc">Flask-Migrate</td><td class="code"><code>flask db init<br>flask db migrate -m "Initial migration"<br>flask db upgrade</code><button type="button" class="cp" data-c="flask db init
-flask db migrate -m 'Initial migration'
-flask db upgrade">⧉</button></td></tr>
-              </table>
-            </div>
-
-            <div class="ref-block">
-              <div class="ref-block-title">🔐 Autenticação & Segurança</div>
-              <table class="cmd-table">
-                <tr><td class="desc">Flask-Login setup</td><td class="code"><code>from flask_login import LoginManager, UserMixin, login_user<br>login_manager = LoginManager(app)</code><button type="button" class="cp" data-c="from flask_login import LoginManager, UserMixin, login_user
-login_manager = LoginManager(app)">⧉</button></td></tr>
-                <tr><td class="desc">Classe User com Login</td><td class="code"><code>class User(UserMixin, db.Model):<br>&nbsp;&nbsp;def get_id(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;return str(self.id)</code><button type="button" class="cp" data-c="class User(UserMixin, db.Model):
-    def get_id(self):
-        return str(self.id)">⧉</button></td></tr>
-                <tr><td class="desc">JWT com Flask-JWT-Extended</td><td class="code"><code>from flask_jwt_extended import JWTManager, create_access_token<br>app.config['JWT_SECRET_KEY'] = 'super-secret'<br>jwt = JWTManager(app)<br>token = create_access_token(identity=user.id)</code><button type="button" class="cp" data-c="from flask_jwt_extended import JWTManager, create_access_token
-app.config['JWT_SECRET_KEY'] = 'super-secret'
-jwt = JWTManager(app)
-token = create_access_token(identity=user.id)">⧉</button></td></tr>
-                <tr><td class="desc">CORS setup</td><td class="code"><code>from flask_cors import CORS<br>CORS(app, origins=['http://localhost:3000'])</code><button type="button" class="cp" data-c="from flask_cors import CORS
-CORS(app, origins=['http://localhost:3000'])">⧉</button></td></tr>
-                <tr><td class="desc">Rate limiting</td><td class="code"><code>from flask_limiter import Limiter<br>limiter = Limiter(app, key_func=lambda: request.remote_addr)<br>@app.route('/api')<br>@limiter.limit('10 per minute')<br>def api(): pass</code><button type="button" class="cp" data-c="from flask_limiter import Limiter
-limiter = Limiter(app, key_func=lambda: request.remote_addr)
-@app.route('/api')
-@limiter.limit('10 per minute')
-def api(): pass">⧉</button></td></tr>
-                <tr><td class="desc">Validar entrada com WTForms</td><td class="code"><code>from wtforms import Form, StringField, validators<br>class ContactForm(Form):<br>&nbsp;&nbsp;name = StringField('Name', [validators.Length(min=1, max=25)])</code><button type="button" class="cp" data-c="from wtforms import Form, StringField, validators
-class ContactForm(Form):
-    name = StringField('Name', [validators.Length(min=1, max=25)])">⧉</button></td></tr>
-              </table>
-            </div>
-
-            <div class="ref-block">
-              <div class="ref-block-title">🧪 Testes & Deploy</div>
-              <table class="cmd-table">
-                <tr><td class="desc">Teste básico com pytest</td><td class="code"><code>def test_home(client):<br>&nbsp;&nbsp;response = client.get('/')<br>&nbsp;&nbsp;assert response.status_code == 200</code><button type="button" class="cp" data-c="def test_home(client):
-    response = client.get('/')
-    assert response.status_code == 200">⧉</button></td></tr>
-                <tr><td class="desc">Fixture para app de teste</td><td class="code"><code>@pytest.fixture<br>def client():<br>&nbsp;&nbsp;app.config['TESTING'] = True<br>&nbsp;&nbsp;return app.test_client()</code><button type="button" class="cp" data-c="@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    return app.test_client()">⧉</button></td></tr>
-                <tr><td class="desc">Deploy com Gunicorn</td><td class="code"><code>gunicorn --bind 0.0.0.0:8000 wsgi:app</code><button type="button" class="cp" data-c="gunicorn --bind 0.0.0.0:8000 wsgi:app">⧉</button></td></tr>
-                <tr><td class="desc">Dockerfile básico</td><td class="code"><code>FROM python:3.9-slim<br>COPY . /app<br>WORKDIR /app<br>RUN pip install -r requirements.txt<br>EXPOSE 5000<br>CMD ["flask", "run", "--host=0.0.0.0"]</code><button type="button" class="cp" data-c="FROM python:3.9-slim
-COPY . /app
-WORKDIR /app
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD ['flask', 'run', '--host=0.0.0.0']">⧉</button></td></tr>
-                <tr><td class="desc">Configuração por ambiente</td><td class="code"><code>class Config:<br>&nbsp;&nbsp;DEBUG = False<br>class DevelopmentConfig(Config):<br>&nbsp;&nbsp;DEBUG = True<br>app.config.from_object('config.DevelopmentConfig')</code><button type="button" class="cp" data-c="class Config:
-    DEBUG = False
-class DevelopmentConfig(Config):
-    DEBUG = True
-app.config.from_object('config.DevelopmentConfig')">⧉</button></td></tr>
-                <tr><td class="desc">Logging básico</td><td class="code"><code>import logging<br>logging.basicConfig(level=logging.INFO)<br>app.logger.info('App started')</code><button type="button" class="cp" data-c="import logging
-logging.basicConfig(level=logging.INFO)
-app.logger.info('App started')">⧉</button></td></tr>
-              </table>
-            </div>
-
+        <div class="area-body" id="area-summary">
+          <p><strong>Flask</strong> é um microframework web em Python: entrega roteamento, requisição/resposta e templates, e deixa o resto (banco de dados, autenticação, validação) para extensões que você escolhe.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> criar APIs e aplicações web pequenas e médias com pouco código e controle total sobre as dependências.</li>
+            <li><strong>Quando usar:</strong> APIs REST, microsserviços, protótipos e painéis internos; projetos em que você quer escolher cada peça.</li>
+            <li><strong>Quando evitar:</strong> quando você quer tudo pronto (admin, ORM, autenticação) como no Django, ou quando a API é fortemente assíncrona e tipada, cenário em que o FastAPI se encaixa melhor. Para deploy, use um servidor WSGI como Gunicorn, nunca o servidor de desenvolvimento.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>App e factory</h3>
+              <p>O objeto <code>Flask(__name__)</code> é a aplicação. A função factory <code>create_app()</code> cria e configura a app, facilitando testes e múltiplos ambientes.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Rota e view</h3>
+              <p><code>@app.route('/users/&lt;int:id&gt;')</code> liga uma URL e métodos HTTP a uma função (view) que devolve a resposta.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Blueprint</h3>
+              <p>Agrupa rotas, templates e arquivos estáticos de uma parte da aplicação, registrados na app com um prefixo de URL.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Request e Response</h3>
+              <p><code>request</code> traz dados da requisição (args, JSON, form, headers); a view devolve texto, JSON, template ou um objeto <code>Response</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Contexto de aplicação</h3>
+              <p><code>current_app</code>, <code>g</code> e <code>request</code> só existem durante uma requisição ou dentro de <code>app.app_context()</code>.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Extensões</h3>
+              <p>Pacotes como Flask-SQLAlchemy (banco), Flask-Login (autenticação) e Flask-Migrate somam recursos sem acoplar o núcleo.</p>
+            </article>
           </div>
         </div>
       </section>
-
-    </main><!-- /content -->
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+sequenceDiagram
+  participant C as Cliente
+  participant W as Gunicorn (WSGI)
+  participant F as Flask
+  participant V as View
+  participant DB as Banco
+  C->>W: GET /users/42
+  W->>F: chama a app WSGI
+  F->>F: casa a URL com a rota
+  F->>V: user_detail(id=42)
+  V->>DB: SELECT * FROM users WHERE id = 42
+  DB-->>V: linha
+  V-->>F: jsonify(user)
+  F-->>W: Response 200
+  W-->>C: JSON
+</script>
+              <p class="diagram-fallback">O cliente faz a requisição ao servidor WSGI (Gunicorn), que chama a aplicação Flask. O Flask encontra a rota correspondente e executa a view, que consulta o banco e devolve um JSON, enviado de volta ao cliente como resposta 200.</p>
+            </div>
+            <figcaption>O caminho de uma requisição: servidor WSGI, roteamento, view e resposta.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
+          <div class="ref-grid">
+            <div class="ref-block">
+              <h3 class="ref-block-title">🚀 Setup Básico</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Instalar Flask</td><td class="code"><code>pip install flask</code><button type="button" class="cp" data-c="pip install flask">⧉</button></td></tr>
+                <tr><td class="desc">App mínimo</td><td class="code"><code>from flask import Flask<br>app = Flask(__name__)<br>@app.route('/')<br>def hello():<br>&nbsp;&nbsp;return 'Hello World!'<br>if __name__ == '__main__':<br>&nbsp;&nbsp;app.run()</code><button type="button" class="cp" data-c="from flask import Flask
+                app = Flask(__name__)
+                @app.route('/')
+                def hello():
+                return 'Hello World!'
+                if __name__ == '__main__':
+                app.run()">⧉</button></td></tr>
+                <tr><td class="desc">Executar em modo debug</td><td class="code"><code>export FLASK_ENV=development<br>flask run</code><button type="button" class="cp" data-c="export FLASK_ENV=development
+                flask run">⧉</button></td></tr>
+                <tr><td class="desc">Configurar host/porta</td><td class="code"><code>app.run(host='0.0.0.0', port=5000, debug=True)</code><button type="button" class="cp" data-c="app.run(host='0.0.0.0', port=5000, debug=True)">⧉</button></td></tr>
+                <tr><td class="desc">Blueprint básico</td><td class="code"><code>from flask import Blueprint<br>bp = Blueprint('api', __name__)<br>@bp.route('/health')<br>def health():<br>&nbsp;&nbsp;return {'status': 'ok'}</code><button type="button" class="cp" data-c="from flask import Blueprint
+                bp = Blueprint('api', __name__)
+                @bp.route('/health')
+                def health():
+                return {'status': 'ok'}">⧉</button></td></tr>
+                <tr><td class="desc">Registrar blueprint</td><td class="code"><code>from routes.api import bp<br>app.register_blueprint(bp, url_prefix='/api')</code><button type="button" class="cp" data-c="from routes.api import bp
+                app.register_blueprint(bp, url_prefix='/api')">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block">
+              <h3 class="ref-block-title">📡 Rotas & Métodos HTTP</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Rota com parâmetro</td><td class="code"><code>@app.route('/user/&lt;int:user_id&gt;')<br>def get_user(user_id):<br>&nbsp;&nbsp;return f'User {user_id}'</code><button type="button" class="cp" data-c="@app.route('/user/<int:user_id>')
+                def get_user(user_id):
+                return f'User {user_id}'">⧉</button></td></tr>
+                <tr><td class="desc">Rota POST com JSON</td><td class="code"><code>from flask import request, jsonify<br>@app.route('/api/data', methods=['POST'])<br>def create_data():<br>&nbsp;&nbsp;data = request.get_json()<br>&nbsp;&nbsp;return jsonify({'id': 1, **data})</code><button type="button" class="cp" data-c="from flask import request, jsonify
+                @app.route('/api/data', methods=['POST'])
+                def create_data():
+                data = request.get_json()
+                return jsonify({'id': 1, **data})">⧉</button></td></tr>
+                <tr><td class="desc">Upload de arquivo</td><td class="code"><code>@app.route('/upload', methods=['POST'])<br>def upload_file():<br>&nbsp;&nbsp;file = request.files['file']<br>&nbsp;&nbsp;file.save(f'uploads/{file.filename}')<br>&nbsp;&nbsp;return 'File uploaded'</code><button type="button" class="cp" data-c="@app.route('/upload', methods=['POST'])
+                def upload_file():
+                file = request.files['file']
+                file.save(f'uploads/{file.filename}')
+                return 'File uploaded'">⧉</button></td></tr>
+                <tr><td class="desc">Redirecionamento</td><td class="code"><code>from flask import redirect, url_for<br>@app.route('/old-url')<br>def old_url():<br>&nbsp;&nbsp;return redirect(url_for('new_url'))</code><button type="button" class="cp" data-c="from flask import redirect, url_for
+                @app.route('/old-url')
+                def old_url():
+                return redirect(url_for('new_url'))">⧉</button></td></tr>
+                <tr><td class="desc">Página 404 customizada</td><td class="code"><code>@app.errorhandler(404)<br>def not_found(error):<br>&nbsp;&nbsp;return 'Página não encontrada', 404</code><button type="button" class="cp" data-c="@app.errorhandler(404)
+                def not_found(error):
+                return 'Página não encontrada', 404">⧉</button></td></tr>
+                <tr><td class="desc">Middleware básico</td><td class="code"><code>@app.before_request<br>def before_request():<br>&nbsp;&nbsp;print('Antes da requisição')</code><button type="button" class="cp" data-c="@app.before_request
+                def before_request():
+                print('Antes da requisição')">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block">
+              <h3 class="ref-block-title">🗄️ Banco de Dados</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">SQLAlchemy setup</td><td class="code"><code>from flask_sqlalchemy import SQLAlchemy<br>app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'<br>db = SQLAlchemy(app)</code><button type="button" class="cp" data-c="from flask_sqlalchemy import SQLAlchemy
+                app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+                db = SQLAlchemy(app)">⧉</button></td></tr>
+                <tr><td class="desc">Modelo User</td><td class="code"><code>class User(db.Model):<br>&nbsp;&nbsp;id = db.Column(db.Integer, primary_key=True)<br>&nbsp;&nbsp;name = db.Column(db.String(80), nullable=False)<br>&nbsp;&nbsp;email = db.Column(db.String(120), unique=True)</code><button type="button" class="cp" data-c="class User(db.Model):
+                id = db.Column(db.Integer, primary_key=True)
+                name = db.Column(db.String(80), nullable=False)
+                email = db.Column(db.String(120), unique=True)">⧉</button></td></tr>
+                <tr><td class="desc">Criar tabelas</td><td class="code"><code>with app.app_context():<br>&nbsp;&nbsp;db.create_all()</code><button type="button" class="cp" data-c="with app.app_context():
+                db.create_all()">⧉</button></td></tr>
+                <tr><td class="desc">Inserir registro</td><td class="code"><code>user = User(name='João', email='joao@email.com')<br>db.session.add(user)<br>db.session.commit()</code><button type="button" class="cp" data-c="user = User(name='João', email='joao@email.com')
+                db.session.add(user)
+                db.session.commit()">⧉</button></td></tr>
+                <tr><td class="desc">Consultar registros</td><td class="code"><code>users = User.query.all()<br>user = User.query.filter_by(email='joao@email.com').first()</code><button type="button" class="cp" data-c="users = User.query.all()
+                user = User.query.filter_by(email='joao@email.com').first()">⧉</button></td></tr>
+                <tr><td class="desc">Flask-Migrate</td><td class="code"><code>flask db init<br>flask db migrate -m "Initial migration"<br>flask db upgrade</code><button type="button" class="cp" data-c="flask db init
+                flask db migrate -m 'Initial migration'
+                flask db upgrade">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block">
+              <h3 class="ref-block-title">🔐 Autenticação & Segurança</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Flask-Login setup</td><td class="code"><code>from flask_login import LoginManager, UserMixin, login_user<br>login_manager = LoginManager(app)</code><button type="button" class="cp" data-c="from flask_login import LoginManager, UserMixin, login_user
+                login_manager = LoginManager(app)">⧉</button></td></tr>
+                <tr><td class="desc">Classe User com Login</td><td class="code"><code>class User(UserMixin, db.Model):<br>&nbsp;&nbsp;def get_id(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;return str(self.id)</code><button type="button" class="cp" data-c="class User(UserMixin, db.Model):
+                def get_id(self):
+                return str(self.id)">⧉</button></td></tr>
+                <tr><td class="desc">JWT com Flask-JWT-Extended</td><td class="code"><code>from flask_jwt_extended import JWTManager, create_access_token<br>app.config['JWT_SECRET_KEY'] = 'super-secret'<br>jwt = JWTManager(app)<br>token = create_access_token(identity=user.id)</code><button type="button" class="cp" data-c="from flask_jwt_extended import JWTManager, create_access_token
+                app.config['JWT_SECRET_KEY'] = 'super-secret'
+                jwt = JWTManager(app)
+                token = create_access_token(identity=user.id)">⧉</button></td></tr>
+                <tr><td class="desc">CORS setup</td><td class="code"><code>from flask_cors import CORS<br>CORS(app, origins=['http://localhost:3000'])</code><button type="button" class="cp" data-c="from flask_cors import CORS
+                CORS(app, origins=['http://localhost:3000'])">⧉</button></td></tr>
+                <tr><td class="desc">Rate limiting</td><td class="code"><code>from flask_limiter import Limiter<br>limiter = Limiter(app, key_func=lambda: request.remote_addr)<br>@app.route('/api')<br>@limiter.limit('10 per minute')<br>def api(): pass</code><button type="button" class="cp" data-c="from flask_limiter import Limiter
+                limiter = Limiter(app, key_func=lambda: request.remote_addr)
+                @app.route('/api')
+                @limiter.limit('10 per minute')
+                def api(): pass">⧉</button></td></tr>
+                <tr><td class="desc">Validar entrada com WTForms</td><td class="code"><code>from wtforms import Form, StringField, validators<br>class ContactForm(Form):<br>&nbsp;&nbsp;name = StringField('Name', [validators.Length(min=1, max=25)])</code><button type="button" class="cp" data-c="from wtforms import Form, StringField, validators
+                class ContactForm(Form):
+                name = StringField('Name', [validators.Length(min=1, max=25)])">⧉</button></td></tr>
+              </table>
+            </div>
+            <div class="ref-block">
+              <h3 class="ref-block-title">🧪 Testes & Deploy</h3>
+              <table class="cmd-table">
+                <tr><td class="desc">Teste básico com pytest</td><td class="code"><code>def test_home(client):<br>&nbsp;&nbsp;response = client.get('/')<br>&nbsp;&nbsp;assert response.status_code == 200</code><button type="button" class="cp" data-c="def test_home(client):
+                response = client.get('/')
+                assert response.status_code == 200">⧉</button></td></tr>
+                <tr><td class="desc">Fixture para app de teste</td><td class="code"><code>@pytest.fixture<br>def client():<br>&nbsp;&nbsp;app.config['TESTING'] = True<br>&nbsp;&nbsp;return app.test_client()</code><button type="button" class="cp" data-c="@pytest.fixture
+                def client():
+                app.config['TESTING'] = True
+                return app.test_client()">⧉</button></td></tr>
+                <tr><td class="desc">Deploy com Gunicorn</td><td class="code"><code>gunicorn --bind 0.0.0.0:8000 wsgi:app</code><button type="button" class="cp" data-c="gunicorn --bind 0.0.0.0:8000 wsgi:app">⧉</button></td></tr>
+                <tr><td class="desc">Dockerfile básico</td><td class="code"><code>FROM python:3.9-slim<br>COPY . /app<br>WORKDIR /app<br>RUN pip install -r requirements.txt<br>EXPOSE 5000<br>CMD ["flask", "run", "--host=0.0.0.0"]</code><button type="button" class="cp" data-c="FROM python:3.9-slim
+                COPY . /app
+                WORKDIR /app
+                RUN pip install -r requirements.txt
+                EXPOSE 5000
+                CMD ['flask', 'run', '--host=0.0.0.0']">⧉</button></td></tr>
+                <tr><td class="desc">Configuração por ambiente</td><td class="code"><code>class Config:<br>&nbsp;&nbsp;DEBUG = False<br>class DevelopmentConfig(Config):<br>&nbsp;&nbsp;DEBUG = True<br>app.config.from_object('config.DevelopmentConfig')</code><button type="button" class="cp" data-c="class Config:
+                DEBUG = False
+                class DevelopmentConfig(Config):
+                DEBUG = True
+                app.config.from_object('config.DevelopmentConfig')">⧉</button></td></tr>
+                <tr><td class="desc">Logging básico</td><td class="code"><code>import logging<br>logging.basicConfig(level=logging.INFO)<br>app.logger.info('App started')</code><button type="button" class="cp" data-c="import logging
+                logging.basicConfig(level=logging.INFO)
+                app.logger.info('App started')">⧉</button></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">RuntimeError: Working outside of application context</td><td class="err-cause" data-label="Causa">Código usa <code>current_app</code>, <code>db</code> ou <code>g</code> fora de uma requisição, por exemplo num script ou no shell.</td><td class="err-fix" data-label="Correção">Envolva o código em <code>with app.app_context():</code> ou use <code>flask shell</code>, que já cria o contexto.</td></tr>
+              <tr><td class="err-label" data-label="Erro">404 em rota que existe</td><td class="err-cause" data-label="Causa">A barra final não bate: <code>/users</code> e <code>/users/</code> são rotas diferentes, ou o blueprint foi registrado com outro <code>url_prefix</code>.</td><td class="err-fix" data-label="Correção">Liste as rotas com <code>flask routes</code> e padronize a barra final na definição.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Debugger exposto em produção</td><td class="err-cause" data-label="Causa">A app rodou com <code>debug=True</code> ou <code>flask run --debug</code> num servidor público; o debugger permite executar código remotamente.</td><td class="err-fix" data-label="Correção">Em produção, rode com <code>gunicorn 'app:create_app()'</code> e sem modo debug.</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">Debug em produção é execução remota de código</p>
+            <p>O debugger interativo do Werkzeug executa Python enviado pelo navegador. Nunca ative o modo debug fora da sua máquina.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://flask.palletsprojects.com/en/stable/quickstart/" target="_blank" rel="noopener">Quickstart</a></li>
+            <li><a href="https://flask.palletsprojects.com/en/stable/patterns/" target="_blank" rel="noopener">Patterns</a></li>
+          </ul>
+        </div>
+      </section>
+    </main>
 
     <footer class="footer">
       <span class="footer-brand">BR ByteRef</span>
       <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
       <span class="footer-count" id="cmdCount">— comandos</span>
     </footer>
+  </div>
+</div>
 
-  </div><!-- /main-wrap -->
-</div><!-- /app-shell -->
-
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>

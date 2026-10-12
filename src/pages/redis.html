@@ -3,85 +3,139 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ByteRef — Redis Reference</title>
+  <title>ByteRef — Redis</title>
+  <script src="../js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Epilogue:wght@400;500;700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="../css/style.css"/>
 </head>
-<body>
+<body data-tech-id="redis">
 
 <div class="app-shell">
-
-  <!-- ══════════════ SIDEBAR ══════════════ -->
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
+    <a class="brand" href="../../index.html">
       <div class="brand-mark">BR</div>
       <div>
         <div class="brand-name">ByteRef</div>
         <div class="brand-tagline">DevOps · Backend</div>
       </div>
-    </div>
-
+    </a>
     <div class="search-box">
-      <svg class="search-ico" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input id="searchInput" type="text" placeholder="Buscar… ( / )" autocomplete="off" spellcheck="false"/>
-      <button id="searchClear" class="search-clear" hidden>✕</button>
+      <svg class="search-ico" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="search" placeholder="Buscar… ( / )" aria-label="Buscar nesta página" autocomplete="off" spellcheck="false"/>
+      <button type="button" id="searchClear" class="search-clear" aria-label="Limpar busca" hidden>✕</button>
     </div>
-
-    <nav class="nav">
-      <span class="nav-group-label">Tecnologias</span>
-      <a class="nav-link" href="./gcp.html" data-s="gcp">        <i class="dot"></i> GCP</a>
-      <a class="nav-link" href="./kubernetes.html" data-s="kubernetes">  <i class="dot"></i> Kubernetes</a>
-      <a class="nav-link" href="./docker.html" data-s="docker">      <i class="dot"></i> Docker</a>
-      <a class="nav-link" href="./bash.html" data-s="bash">        <i class="dot"></i> CLI / Bash</a>
-      <a class="nav-link" href="./flask.html" data-s="flask">       <i class="dot"></i> Flask</a>
-      <a class="nav-link" href="./postgresql.html" data-s="postgresql">  <i class="dot"></i> PostgreSQL</a>
-      <a class="nav-link" href="./mysql.html" data-s="mysql">       <i class="dot"></i> MySQL</a>
-      <a class="nav-link active" href="#" data-s="redis">       <i class="dot"></i> Redis</a>
-      <a class="nav-link" href="./git.html" data-s="git">       <i class="dot"></i> Git / GitHub</a>
-      <a class="nav-link" href="./poetry.html" data-s="poetry">      <i class="dot"></i> Poetry</a>
-      <a class="nav-link" href="./pandas.html" data-s="pandas">      <i class="dot"></i> Pandas</a>
+    <nav class="nav" id="nav" aria-label="Tecnologias">
+      <noscript><a href="../../index.html">← Home</a></noscript>
     </nav>
-
     <div class="sidebar-meta">
       <span class="kbd-hint"><kbd>/</kbd> busca · <kbd>Esc</kbd> limpa</span>
     </div>
   </aside>
 
-  <!-- ══════════════ MAIN ══════════════ -->
   <div class="main-wrap">
-
     <header class="topbar">
-      <button class="hamburger" id="hamburger">
+      <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu">
         <span></span><span></span><span></span>
       </button>
       <div class="topbar-brand">ByteRef</div>
-      <div id="searchResultBadge" class="result-badge" hidden></div>
+      <div id="searchResultBadge" class="result-badge" role="status" hidden></div>
       <div class="topbar-right">
-        <a href="../../index.html"  class="nav-home">← Home</a>
-        <button class="theme-toggle" id="themeToggle" title="Alternar tema">◑</button>
+        <a href="../../index.html" class="nav-home">← Home</a>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro/escuro">◑</button>
       </div>
     </header>
 
     <main class="content" id="content">
+      <p class="search-empty" hidden>Nenhum resultado para a busca.</p>
 
-      <!-- ══ REDIS ══ -->
-      <section class="tech-section" id="redis" data-tech="Redis">
-        <div class="section-head" data-toggle="redis">
-          <div class="sh-left">
-            <span class="tech-icon">⚡</span>
-            <h2>Redis <em>cache, filas e pub/sub</em></h2>
-          </div>
-          <div class="sh-right">
-            <span class="tag">redis-cli</span><span class="tag">cache</span><span class="tag">pub/sub</span>
-            <button class="collapse-btn">▾</button>
+      <section class="page-area page-hero" data-area="hero">
+        <div class="hero-icon" aria-hidden="true">⚡</div>
+        <h1>Redis</h1>
+        <p class="hero-tagline">cache, filas e pub/sub</p>
+        <div class="hero-meta"><span class="tag">redis-cli</span><span class="tag">cache</span><span class="tag">pub/sub</span><span class="hero-stat">23 comandos</span></div>
+      </section>
+      <section class="page-area" data-area="summary">
+        <div class="area-head">
+          <h2>Resumo</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-summary">▾</button>
+        </div>
+        <div class="area-body" id="area-summary">
+          <p><strong>Redis</strong> é um banco em memória de chave e valor, com estruturas de dados nativas (string, hash, list, set, sorted set) e mensagens pub/sub.</p>
+          <ul class="summary-list">
+            <li><strong>Para que serve:</strong> cache de baixa latência, sessões, filas simples, rate limiting, rankings e contadores.</li>
+            <li><strong>Quando usar:</strong> dados acessados com muita frequência que podem ser recalculados ou têm validade (TTL), e coordenação rápida entre serviços.</li>
+            <li><strong>Quando evitar:</strong> como única fonte de dados críticos sem persistência configurada, para dados maiores que a memória disponível ou para consultas relacionais complexas.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="page-area" data-area="concepts">
+        <div class="area-head">
+          <h2>Conceitos-chave</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-concepts">▾</button>
+        </div>
+        <div class="area-body" id="area-concepts">
+          <div class="concept-grid">
+            <article class="concept-card">
+              <h3>Chave e TTL</h3>
+              <p>Todo valor vive numa chave (ex.: <code>sessao:abc123</code>). O TTL define quando a chave expira e é removida automaticamente.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Tipos de dados</h3>
+              <p>String, Hash (objeto com campos), List (fila), Set (conjunto sem repetição) e Sorted Set (conjunto ordenado por score).</p>
+            </article>
+            <article class="concept-card">
+              <h3>Pub/Sub</h3>
+              <p>Publicadores enviam mensagens a canais e todos os inscritos recebem na hora; mensagens não ficam guardadas para quem se conectar depois.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Persistência RDB e AOF</h3>
+              <p>RDB salva snapshots periódicos; AOF registra cada escrita. Sem persistência, os dados somem ao reiniciar.</p>
+            </article>
+            <article class="concept-card">
+              <h3>Single-thread</h3>
+              <p>Os comandos são executados um de cada vez, o que os torna atômicos, mas um comando lento bloqueia todos os outros clientes.</p>
+            </article>
           </div>
         </div>
-        <div class="section-body">
+      </section>
+      <section class="page-area" data-area="diagrams">
+        <div class="area-head">
+          <h2>Como funciona</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-diagrams">▾</button>
+        </div>
+        <div class="area-body" id="area-diagrams">
+          <figure class="diagram" data-diagram>
+            <div class="diagram-body">
+              <script type="text/plain" class="diagram-src">
+sequenceDiagram
+  participant A as Aplicação
+  participant R as Redis
+  participant D as Banco
+  A->>R: GET user:42
+  R-->>A: nil (cache miss)
+  A->>D: SELECT * FROM users WHERE id = 42
+  D-->>A: dados do usuário
+  A->>R: SET user:42 dados EX 300
+  Note over A,R: próximas leituras por 5 min
+  A->>R: GET user:42
+  R-->>A: dados (cache hit)
+</script>
+              <p class="diagram-fallback">No padrão cache-aside, a aplicação procura primeiro no Redis. Se não encontra (cache miss), busca no banco e grava o resultado no Redis com TTL. As próximas leituras são atendidas pelo cache até a chave expirar.</p>
+            </div>
+            <figcaption>Cache-aside: a aplicação consulta o cache primeiro e o preenche quando não encontra.</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="page-area" data-area="commands">
+        <div class="area-head">
+          <h2>Comandos</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-commands">▾</button>
+        </div>
+        <div class="area-body" id="area-commands">
           <div class="ref-grid">
-
             <div class="ref-block">
-              <div class="ref-block-title">🔑 Keys & Strings</div>
+              <h3 class="ref-block-title">🔑 Keys & Strings</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Conectar</td><td class="code"><code>redis-cli -h localhost -p 6379 -a senha</code><button type="button" class="cp" data-c="redis-cli -h localhost -p 6379 -a senha">⧉</button></td></tr>
                 <tr><td class="desc">Set com expiração (TTL)</td><td class="code"><code>SET sessao:abc123 "dados" EX 3600</code><button type="button" class="cp" data-c='SET sessao:abc123 "dados" EX 3600'>⧉</button></td></tr>
@@ -94,9 +148,8 @@
                 <tr><td class="desc">Definir expiração em chave existente</td><td class="code"><code>EXPIRE minha_chave 600</code><button type="button" class="cp" data-c="EXPIRE minha_chave 600">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📦 Hash · List · Set</div>
+              <h3 class="ref-block-title">📦 Hash · List · Set</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Hash — set múltiplos campos</td><td class="code"><code>HSET user:123 nome "João" email "j@x.com" plano "pro"</code><button type="button" class="cp" data-c='HSET user:123 nome "João" email "j@x.com" plano "pro"'>⧉</button></td></tr>
                 <tr><td class="desc">Hash — obter campo</td><td class="code"><code>HGET user:123 email</code><button type="button" class="cp" data-c="HGET user:123 email">⧉</button></td></tr>
@@ -107,9 +160,8 @@
                 <tr><td class="desc">Sorted Set — top 10</td><td class="code"><code>ZREVRANGE ranking 0 9 WITHSCORES</code><button type="button" class="cp" data-c="ZREVRANGE ranking 0 9 WITHSCORES">⧉</button></td></tr>
               </table>
             </div>
-
             <div class="ref-block">
-              <div class="ref-block-title">📡 Pub/Sub & Monitoramento</div>
+              <h3 class="ref-block-title">📡 Pub/Sub & Monitoramento</h3>
               <table class="cmd-table">
                 <tr><td class="desc">Publicar mensagem</td><td class="code"><code>PUBLISH canal:notif '{"tipo":"email","para":"user@x.com"}'</code><button type="button" class="cp" data-c='PUBLISH canal:notif {"tipo":"email","para":"user@x.com"}'>⧉</button></td></tr>
                 <tr><td class="desc">Inscrever em canal</td><td class="code"><code>SUBSCRIBE canal:notif</code><button type="button" class="cp" data-c="SUBSCRIBE canal:notif">⧉</button></td></tr>
@@ -120,20 +172,56 @@
                 <tr><td class="desc">Total de chaves</td><td class="code"><code>DBSIZE</code><button type="button" class="cp" data-c="DBSIZE">⧉</button></td></tr>
               </table>
             </div>
-
           </div>
         </div>
       </section>
-
+      <section class="page-area" data-area="pitfalls">
+        <div class="area-head">
+          <h2>Armadilhas & Fixes</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-pitfalls">▾</button>
+        </div>
+        <div class="area-body" id="area-pitfalls">
+          <table class="pitfalls">
+            <thead><tr><th>Erro</th><th>Causa</th><th>Correção</th></tr></thead>
+            <tbody>
+              <tr><td class="err-label" data-label="Erro">Redis travou após KEYS *</td><td class="err-cause" data-label="Causa"><code>KEYS</code> percorre todas as chaves de uma vez e, como o Redis é single-thread, bloqueia os outros clientes.</td><td class="err-fix" data-label="Correção">Use <code>SCAN 0 MATCH 'sessao:*' COUNT 100</code>, que itera em lotes sem bloquear.</td></tr>
+              <tr><td class="err-label" data-label="Erro">OOM command not allowed when used memory > 'maxmemory'</td><td class="err-cause" data-label="Causa">A memória chegou ao limite de <code>maxmemory</code> e a política de remoção é <code>noeviction</code>.</td><td class="err-fix" data-label="Correção">Para cache, configure <code>maxmemory-policy allkeys-lru</code>; revise TTLs e o tamanho dos valores.</td></tr>
+              <tr><td class="err-label" data-label="Erro">Memória cresce sem parar</td><td class="err-cause" data-label="Causa">Chaves de cache ou sessão gravadas sem TTL nunca expiram.</td><td class="err-fix" data-label="Correção">Grave sempre com expiração (<code>SET chave valor EX 3600</code>) e procure chaves sem TTL com <code>TTL chave</code> (retorna -1).</td></tr>
+            </tbody>
+          </table>
+          <aside class="callout" data-kind="danger">
+            <p class="callout-title">FLUSHDB apaga tudo</p>
+            <p><code>FLUSHDB</code> remove todas as chaves do banco atual (e <code>FLUSHALL</code>, de todos os bancos) sem confirmação. Em produção, considere desabilitar esses comandos com <code>rename-command</code>.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="page-area" data-area="links">
+        <div class="area-head">
+          <h2>Links oficiais</h2>
+          <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="area-links">▾</button>
+        </div>
+        <div class="area-body" id="area-links">
+          <ul class="official-links">
+            <li><a href="https://redis.io/docs/latest/commands/" target="_blank" rel="noopener">Comandos</a></li>
+            <li><a href="https://redis.io/docs/latest/develop/data-types/" target="_blank" rel="noopener">Tipos de dados</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <span class="footer-brand">BR ByteRef</span>
+      <span class="footer-copy">DevOps &amp; Backend Reference · 2026</span>
+      <span class="footer-count" id="cmdCount">— comandos</span>
+    </footer>
   </div>
+</div>
 
-<!-- Overlay mobile -->
 <div class="overlay" id="overlay"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
+<script src="../js/registry.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/diagrams.js"></script>
 </body>
 </html>
